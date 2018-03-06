@@ -238,5 +238,4 @@ class LogIn extends Component {
         )
     }
 }
-
 export default App;
