@@ -9,6 +9,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
 import 'jquery/dist/jquery.js';
 import './App.css';
+import { Chat } from './Chat.js';
 import { StartPage } from './StartPage';
 import { About } from './About';
 import firebase from 'firebase';
@@ -153,7 +154,6 @@ class LogIn extends Component {
             modal: !this.state.modal
         });
     }
-
 
     loginG() {
         let provider = new firebase.auth.GoogleAuthProvider();
