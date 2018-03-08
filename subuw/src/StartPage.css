@@ -1,0 +1,44 @@
+.All {
+   background-image: url("testing2.png");
+   height: 100vh;
+   background-size: cover;
+   background-repeat: none;
+}
+
+.search {
+    position: absolute !important;
+    width: 60% !important;
+    top: 35% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    text-align: center !important;
+    margin: auto !important;
+    border-radius: 5px !important;
+    padding: 1rem !important;
+    border: none !important;
+    background: rgba(0,0,0,0.3);
+    font-size: 2rem;
+    border-bottom: 3px solid white;
+    color: white;
+    border-radius: 5px 5px 0 0;
+}
+
+.search::placeholder {
+    color: white;
+}
+
+.search-input {
+    position: absolute !important;
+    width: 60% !important;
+    top: 35% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    margin: auto !important;
+    border-radius: 5px 5px 0 0 !important;
+    padding: 1rem !important;
+    border: none !important;
+    border-radius: 5px !important; 
+}
+button {
+    font-size: 2rem;
+}
