@@ -11,10 +11,10 @@ export class StartPage extends Component {
         return (
             <div className="All">
                 <div className="search-input" >
-                    <InputGroup className="search-input-tag">
-                        <Input placeholder="Enter city or zip code..." />
+                    <InputGroup>
+                        <Input className="search-input-tag" placeholder="Enter city or zip code..." />
                         <InputGroupAddon addonType="append">
-                            <InputGroupText>Search!</InputGroupText>
+                            <InputGroupText><i class="fas fa-search"></i></InputGroupText>
                         </InputGroupAddon>
                     </InputGroup>
 
