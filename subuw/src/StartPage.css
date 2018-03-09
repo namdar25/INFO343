@@ -5,40 +5,42 @@
    background-repeat: none;
 }
 
-.search {
-    position: absolute !important;
-    width: 60% !important;
-    top: 35% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) !important;
-    text-align: center !important;
-    margin: auto !important;
-    border-radius: 5px !important;
-    padding: 1rem !important;
-    border: none !important;
+/* .search-input-tag {
+    position: absolute;
+    width: 60%;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    margin: auto;
+    border-radius: 5px;
+    padding: 1rem;
+    border: none;
     background: rgba(0,0,0,0.3);
     font-size: 2rem;
     border-bottom: 3px solid white;
     color: white;
     border-radius: 5px 5px 0 0;
+    position: center !important;
 }
 
-.search::placeholder {
+.search-input-tag::placeholder {
     color: white;
-}
+} */
 
 .search-input {
-    position: absolute !important;
-    width: 60% !important;
-    top: 35% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) !important;
-    margin: auto !important;
-    border-radius: 5px 5px 0 0 !important;
-    padding: 1rem !important;
-    border: none !important;
-    border-radius: 5px !important; 
+    position: absolute;
+    width: 60% ;
+    top: 35% ;
+    left: 50% ;
+    transform: translate(-50%, -50%) ;
+    margin: auto ;
+    border-radius: 5px 5px 0 0;
+    padding: 1rem ;
+    border: none;
+    border-radius: 5px ; 
 }
 button {
     font-size: 2rem;
+    float: right;
 }

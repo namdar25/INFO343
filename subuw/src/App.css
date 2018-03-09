@@ -30,8 +30,28 @@
     
 }
 
+.navbarBrand {
+    font-size: 2rem;
+    padding: 1rem;
+}
+
 .navbar > .container, .navbar > .container-fluid {
     flex-wrap: nowrap !important;
+}
+
+.wrapper {
+    text-align: center;
+    font-size: 2.5rem;
+    color: green;
+}
+
+.logIn {
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.mainAppDiv {
+    transition: opacity 100ms;
 }
 
 @keyframes App-logo-spin {
