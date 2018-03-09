@@ -69,25 +69,32 @@ class App extends Component {
                                 <Nav className="ml-auto" navbar>
                                     <NavItem>
                                         {!this.state.user && <LogIn />}
+                                    </NavItem>
+
+                                    <NavItem>
+                                        {this.state.user &&
+                                            <NavLink className="logIn" >
+                                                Profile
+                                            </NavLink>
+                                        }
+                                    </NavItem>
+                                    <NavItem>
+                                        {this.state.user &&
+                                            <NavLink className="logIn" >
+                                                Host
+                                        </NavLink>
+                                        }
+                                    </NavItem>
+                                    <NavItem>
+                                        {this.state.user &&
+                                            <NavLink className="logIn" >
+                                                Contact Us
+                                        </NavLink>
+                                        }
+                                    </NavItem>
+                                    <NavItem>
                                         {this.state.user &&
                                             <NavLink className="logIn" onClick={() => { this.logout() }}>Log Out</NavLink>}
-                                    </NavItem>
-
-
-                                    <NavItem>
-                                        <NavLink>
-                                            Profile
-                                                </NavLink>
-                                    </NavItem>
-                                    <NavItem>
-                                        <NavLink>
-                                            Become a Host
-                                                </NavLink>
-                                    </NavItem>
-                                    <NavItem>
-                                        <NavLink>
-                                            contact Us
-                                                </NavLink>
                                     </NavItem>
 
 
