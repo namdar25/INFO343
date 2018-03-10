@@ -5,6 +5,8 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import firebase from 'firebase'
 import 'bootstrap/dist/css/bootstrap.css'
+import 'firebase/auth';
+import 'firebase/database';
 
 let config = {
     apiKey: "AIzaSyCg0NK0JvgjlU8pHF_kNxLnx_To1NhogNg",
@@ -15,7 +17,8 @@ let config = {
     messagingSenderId: "525275022235"
 };
 firebase.initializeApp(config);
-
-
+// export const provider = new firebase.auth.GoogleAuthProvider();
+// export const auth = firebase.auth();
+export default firebase;
 ReactDOM.render(<App />, document.getElementById('root'));
 registerServiceWorker();

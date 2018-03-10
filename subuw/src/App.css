@@ -1,0 +1,60 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+.navbar {
+    width: 90% !important;
+    margin-left: 5% !important;
+    margin-top: 2% !important;
+    position: absolute !important;
+    
+}
+
+.navbarBrand {
+    font-size: 2rem;
+    padding: 1rem;
+}
+
+.navbar > .container, .navbar > .container-fluid {
+    flex-wrap: nowrap !important;
+}
+
+.wrapper {
+    text-align: center;
+    font-size: 2.5rem;
+    color: green;
+}
+
+.logIn {
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.mainAppDiv {
+    transition: opacity 100ms;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
