@@ -117,6 +117,7 @@ class App extends Component {
                         </Navbar>
                     </div>
                 }
+
                 {this.state.user &&
                     <Router>
                         <div>
