@@ -18,7 +18,9 @@
     "react-scripts": "1.1.1",
     "react-split-pane": "^0.1.77",
     "reactstrap": "^5.0.0-beta.2",
-    "recompose": "^0.26.0"
+    "recompose": "^0.26.0",
+    "jquery.terminal": "^1.12.1"
+
   },
   "scripts": {
     "start": "react-scripts start",

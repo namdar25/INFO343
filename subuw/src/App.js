@@ -17,10 +17,15 @@ import 'firebase/auth';
 import 'firebase/database';
 import './Main.css';
 import { Main } from './Main';
+import { Conversation } from './Conversation.js';
+
 class App extends Component {
     constructor(props) {
         super(props);
-        this.state = {
+		this.getMyConversations = this.getMyConversations.bind(this);
+		this.state = ({
+			uid: "me",
+			allConversations: {}
             currentItem: '',
             username: '',
             items: [],
@@ -49,7 +54,34 @@ class App extends Component {
                 this.setState({ opacity: 1 });
             }
         });
+		firebase.database().ref('conversations/').on('value', (snapshot) => {
+		  const allConversations = snapshot.val()
+		  if (allConversations != null) {
+			this.setState({
+			  allConversations: allConversations,
+			})
+		  }
+		})
+		let myConversations = this.getMyConversations();
+		this.setState({
+		  myConversations: myConversations
+		})
     }
+
+	getMyConversations() {
+		let uid = this.state.uid;
+		let myConversations = [];
+		var allConversations = this.state.allConversations;
+		console.log(allConversations)
+		Object.values(allConversations).forEach(function (conversation) {
+		  let pair = conversation.contributors; //the array of the two users in conversation
+		  if (pair.includes(uid)) { //If current user is in this conversation
+			myConversations.push(conversation);
+		  }
+		})
+		return myConversations;
+		// this.state.myConversations = myConversations;
+	}
 
     logout() {
         firebase.auth().signOut()
@@ -67,6 +99,7 @@ class App extends Component {
     }
 
     render() {
+	let uid = this.state.uid;
         return (
             <div className="mainAppDiv" style={{ opacity: this.state.opacity }}>
                 {!this.state.user &&
@@ -104,6 +137,9 @@ class App extends Component {
                                         <NavItem>
                                             <NavLink className="logIn" to="/about">About</NavLink>
                                         </NavItem>
+										<NavItem>
+                                            <NavLink className="logIn" to="/chat"> Chat </NavLink>
+                                        </NavItem>
                                         <NavItem>
                                             <NavLink className="logIn" onClick={() => { this.logout() }}>Log Out</NavLink>
                                         </NavItem>
@@ -117,6 +153,9 @@ class App extends Component {
                             {<Route path="/Main" component={(props) => (
                                 <Main search={this.state.search} />
                             )} />}
+							<Route path="/chat" render={(props) => (
+							<Chat /*props*/ />
+							)} />
                         </div>
                     </Router>}
             </div >
