@@ -3,7 +3,6 @@ import firebase from 'firebase';
 import 'firebase/auth';
 import 'firebase/database';
 import $ from 'jquery';
-import { HashRouter as Router, Route, Link } from 'react-router-dom';
 
 
 class Conversation extends Component {
@@ -121,7 +120,9 @@ class Conversation extends Component {
                 <form className="messageForm" onSubmit={this.submitMessage}>
                     <input id="messageBox" className="messageBox" onChange={this.updateMessage} maxlength='34' name="input" type="text" placeholder="Message" />
                 </form>
+                <a href="#" class="open-btn" id="addClass"><i class="fa fa-whatsapp" aria-hidden="true"></i> Click Here</a>
             </div>
+
 
         )
     }

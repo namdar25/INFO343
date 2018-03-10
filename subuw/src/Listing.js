@@ -9,31 +9,72 @@ class Listing extends Component {
         super(props)
         this.addListing = this.addListing.bind(this);
         this.state = ({
-            address: '',
-            city: '',
-            state: '',
-            zip: '',
-            type: 'apartment',
-            rent: '',
-            startDate: '',
-            endDate: '',
-            bedrooms: '',
-            bathrooms: '',
-            handicap: 'no',
-            laundry: 'not available',
-            description: '',
-            lat: '',
-            long: '',
-            newListing: {}
+            address: props.address || '',
+            city: props.city || '',
+            state: props.state || '',
+            zip: props.zip || '',
+            type: props.type || 'apartment',
+            rent: props.rent || '',
+            startDate: props.startDate || '',
+            endDate: props.endDate || '',
+            bedrooms: props.bedrooms || '',
+            bathrooms: props.bathrooms || '',
+            handicap: props.handicap || 'no',
+            laundry: props.laundry || 'not available',
+            description: props.description || '',
+            lat: props.lat || '',
+            long: props.long || '',
+            sqrft: props.sqrft || '',
+            smoking: props.smoking || 'no',
+            pets: props.pets || 'None allowed',
+            newListing: {},
+            imgs: []
         })
+    }
+
+    componentDidMount() {
+        this.dataRef = firebase.database().ref('imgs/')
+        this.storageRef = firebase.storage().ref('imgs/')
+
+        // When the database 'value' changes, change the state of `imgs`
+        // this.dataRef.on('value', (snapshot) => {
+        //     console.log('snapshot', snapshot.val())
+        //     this.setState({
+        //         imgs: snapshot.val() || {}
+        //     })
+        // })
+    }
+
+    fileChange(event) {
+        let name = event.target.files[0].name;
+        let file = event.target.files[0];
+        let imgs = this.state.imgs;
+        console.log(name, file)
+        let imgRef = this.storageRef.child(name);
+        imgRef.put(file).then((snapshot) => {
+            let url = snapshot.downloadURL;
+            imgs.push(url);
+            this.setState({
+                imgs: imgs
+            })
+            this.dataRef.push({
+                imageurl: url
+            }).catch(err => {
+                this.setState({
+                    errorMessage: err.message
+                })
+            })
+        });
+
     }
 
     handleChange(propertyName, event) {
         var change = {};
         change[propertyName] = event.target.value;
+        console.log(event.target.value, propertyName)
         this.setState(change)
+        console.log(this.state.sqrft)
     }
-
 
     addListing(event) {
         event.preventDefault();
@@ -51,11 +92,15 @@ class Listing extends Component {
         let handicap = this.state.handicap;
         let laundry = this.state.laundry;
         let description = this.state.description;
-        // this.getLatLong(address, city, state, zip);
+        let smoking = this.state.smoking;
+        let pets = this.state.pets;
+        let sqrft = this.state.sqrft;
+        let imgs = this.state.imgs;
         let baseURL = "https://maps.googleapis.com/maps/api/geocode/json?address=";
         let apiKey = "AIzaSyDOMxiv80oiceTHg7NerU2705RKh13ryY8";
         let newAdd = ""
         let altAddress = address.split(' ');
+
         altAddress.map((x) => {
             if (x.includes(".")) {
                 x = x.slice(0, -1);
@@ -93,9 +138,14 @@ class Listing extends Component {
                 bathrooms: bathrooms,
                 handicap: handicap,
                 laundry: laundry,
+                smoking: smoking,
+                pets: pets,
+                sqrft: sqrft,
+                imgs: imgs,
                 description: description,
                 lat: lat,
-                long: lng
+                long: lng,
+                imgs: imgs
             }
             listingsRef.push(listing);
         }).catch(err => {
@@ -104,95 +154,93 @@ class Listing extends Component {
     }
 
     render() {
-
+        console.log(this.state.imgs)
         return (
-            <div>
-                {/*this.state.errorMessage &&
-                    <p className="alert alert-danger">{this.state.errorMessage}</p>
-                */}
-                {/* <Form>
-                    <FormGroup>
-                        <Label for="address">Address</Label>
-                        <Input type="textarea" name="address" id="address" placeholder="Enter Address" />
-                    </FormGroup>
-                </Form> */}
-                <div className='addListing' >
-                    <form>
-                        <div className="column">
-                            < div className="form-group">
-                                <label>Address: </label>
-                                <input type="text" className="form-control" id="address" placeholder="Enter Address" onChange={this.handleChange.bind(this, 'address')} />
-                            </div>
-                            < div className="form-group">
-                                <label>City: </label>
-                                <input type="text" className="form-control" id="city" placeholder="Enter City" onChange={this.handleChange.bind(this, 'city')} />
-                            </div>
-                            < div className="form-group">
-                                <label>State: </label>
-                                <input type="text" className="form-control" id="state" placeholder="Enter State" onChange={this.handleChange.bind(this, 'state')} />
-                            </div>
-                            < div className="form-group">
-                                <label>Zip Code: </label>
-                                <input type="text" className="form-control" id="zipCode" placeholder="Enter Zip Code" onChange={this.handleChange.bind(this, 'zip')} />
-                            </div>
-                            <div className="form-group">
-                                <label>Type</label>
-                                <select className="type" placeholder="Type" onChange={this.handleChange.bind(this, 'type')}>
-                                    <option value='apartment'>Apartment </option>
-                                    <option value='house'>House</option>
-                                    <option value='condo'>Condo</option>
-                                </select>
-                            </div>
-                            < div className="form-group">
-                                <label>(Average) Rent / month: </label>
-                                <input type="text" className="form-control" id="rent" placeholder="Enter rent / month" onChange={this.handleChange.bind(this, 'rent')} />
-                            </div>
+            <div className='addListing' >
+                <div className="row">
+                    <div className="column">
+                        <label>Address: </label>
+                        <input type="text" className="form-control" id="address" placeholder="Enter Address" onChange={this.handleChange.bind(this, 'address')} />
+
+                        <label>City: </label>
+                        <input type="text" className="form-control" id="city" placeholder="Enter City" onChange={this.handleChange.bind(this, 'city')} />
+
+                        <label>State: </label>
+                        <input type="text" className="form-control" id="state" placeholder="Enter State" onChange={this.handleChange.bind(this, 'state')} />
+
+                        <label>Zip Code: </label>
+                        <input type="text" className="form-control" id="zipCode" placeholder="Enter Zip Code" onChange={this.handleChange.bind(this, 'zip')} />
+
+                        <label>(Average) Rent / month: </label>
+                        <input type="text" className="form-control" id="rent" placeholder="Enter rent / month" onChange={this.handleChange.bind(this, 'rent')} />
+
+                        <label>Square feet: </label>
+                        <input type="text" className="form-control" id="sqrft" placeholder="Enter square feet" onChange={this.handleChange.bind(this, 'sqrft')} />
+                    </div >
+                    <div className="column">
+
+                        <label>Start Date: </label>
+                        <input className="form-control" type="date" id="startDate" name="startDate" onChange={this.handleChange.bind(this, 'startDate')} />
+
+                        <label>End Date: </label>
+                        <input className="form-control" type="date" id="endDate" name="endDate" onChange={this.handleChange.bind(this, 'endDate')} />
+
+                        <label>Bedrooms: </label>
+                        <input type="text" className="form-control" id='bedrooms' placeholder="Enter number of bedrooms" onChange={this.handleChange.bind(this, 'bedrooms')} />
+
+                        <label>Bathrooms: </label>
+                        <input type="text" className="form-control" id='bathrooms' placeholder="Enter number of bathrooms" onChange={this.handleChange.bind(this, 'bathrooms')} />
+                        <label>Description: </label>
+                        <input type="text" className="form-control desc" id="description" placeholder="Enter Description" onChange={this.handleChange.bind(this, 'description')} />
+                        <label>Images: </label>
+                        <input type="file" onChange={(e) => this.fileChange(e)} multiple />
+                    </div>
+                    <div className="row">
+                        <div className="small">
+                            <label>Type</label>
+                            <select className="type" placeholder="Type" onChange={this.handleChange.bind(this, 'type')}>
+                                <option value='apartment'>Apartment </option>
+                                <option value='house'>House</option>
+                                <option value='condo'>Condo</option>
+                            </select>
                         </div>
-                        <div className="column">
-                            <div className="form-group">
-                                <label>Start Date: </label>
-                                <input className="form-control" type="date" id="startDate" name="startDate" onChange={this.handleChange.bind(this, 'startDate')} />
-                            </div>
-                            <div className="form-group">
-                                <label>End Date: </label>
-                                <input className="form-control" type="date" id="endDate" name="endDate" onChange={this.handleChange.bind(this, 'endDate')} />
-                            </div>
-                            <div className="form-group">
-                                <label>Bedrooms: </label>
-                                <input type="text" className="form-control" id='bedrooms' placeholder="Enter number of bedrooms" onChange={this.handleChange.bind(this, 'bedrooms')} />
-                            </div>
-                            <div className="form-group">
-                                <label>Bathrooms: </label>
-                                <input type="text" className="form-control" id='bathrooms' placeholder="Enter number of bathrooms" onChange={this.handleChange.bind(this, 'bathrooms')} />
-                            </div>
-                            <div className="form-group">
-                                <label>Handicap Accessible:</label>
-                                <select className="handicap" placeholder="Handicap" onChange={this.handleChange.bind(this, 'handicap')}>
-                                    <option value='no'>No</option>
-                                    <option value='yes'>Yes</option>
-                                </select>
-                            </div>
-                            <div className="form-group">
-                                <label>Laundry:</label>
-                                <select className="laundry" placeholder="Laundry" onChange={this.handleChange.bind(this, 'laundry')}>
-                                    <option value='not_available'>Not Available</option>
-                                    <option value='in_building'>In Building</option>
-                                    <option value='in_unit'>In Unit</option>
-                                </select>
-                            </div>
-                            < div className="form-group">
-                                <label>Description: </label>
-                                <input type="text" className="form-control desc" id="description" placeholder="Enter Description" onChange={this.handleChange.bind(this, 'description')} />
-                            </div>
+                        <div className="column small">
+                            <label>Handicap</label>
+                            <select className="handicap" placeholder="Handicap" onChange={this.handleChange.bind(this, 'handicap')}>
+                                <option value='yes'>Yes </option>
+                                <option value='no'>No</option>
+                            </select>
                         </div>
-                        <input onClick={this.addListing} type="submit" value="apply" />
+                        <div className="column small">
+                            <label>Laundry</label>
+                            <select className="laundry" placeholder="laundry" onChange={this.handleChange.bind(this, 'laundry')}>
+                                <option value='not available'>Not Available </option>
+                                <option value='in unit'>In Unit</option>
+                                <option value='in building'>In Building</option>
+                            </select>
+                        </div>
+                        <div className="column small">
+                            <label>Smoking Allowed</label>
+                            <select className="smoking" placeholder="smoking" onChange={this.handleChange.bind(this, 'smoking')}>
+                                <option value='yes'>Yes </option>
+                                <option value='no'>No</option>
+                            </select>
+                        </div>
+                        <div className="column small">
+                            <label>Pets</label>
+                            <select className="pets" placeholder="pets" onChange={this.handleChange.bind(this, 'pets')}>
+                                <option value='all'>All allowed</option>
+                                <option value='none'>None allowed</option>
+                                <option value='no large pets'>No Large Pets</option>
+                            </select>
+                        </div>
+                    </div >
+                    <input onClick={this.addListing} type="submit" value="Submit Listing" />
 
-                    </form>
-
-                </div>
-
-
+                </div >
             </div>
+
+
         )
     }
 }
