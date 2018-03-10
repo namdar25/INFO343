@@ -1,5 +1,5 @@
 import _ from "lodash";
-import React from "react";
+import React, { Component } from 'react';
 import { compose, withProps } from "recompose";
 import {
     withScriptjs,
@@ -9,7 +9,6 @@ import {
 } from "react-google-maps";
 import GitHubForkRibbon from "react-github-fork-ribbon";
 import test from './testlisting.json';
-
 
 const MyMapComponent = compose(
     withProps({
@@ -22,8 +21,8 @@ const MyMapComponent = compose(
     withScriptjs,
     withGoogleMap
 )(props => (
-    <GoogleMap defaultZoom={8} defaultCenter={{ lat: 47.6062095, lng: -122.3320708 }}>
-        {test.map((d) => {
+    <GoogleMap defaultZoom={10} defaultCenter={{ lat: 47.6062095, lng: -122.3320708 }}>
+        {props.listings.map((d) => {
             return (
                 <Marker position={{ lat: d.lat, lng: d.lng }} />
             )
@@ -34,8 +33,15 @@ const MyMapComponent = compose(
 
 const enhance = _.identity;
 
-const ReactGoogleMaps = () => [
-    <MyMapComponent key="map" />
-];
 
-export default enhance(ReactGoogleMaps);
+export default class Maps extends Component {
+    constructor(props) {
+        super(props)
+    }
+
+    render() {
+        return (
+            <MyMapComponent key="map" listings={this.props.listings} />
+        )
+    }
+}

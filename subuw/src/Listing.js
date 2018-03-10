@@ -23,7 +23,7 @@ export class Listing extends Component {
     getLatLong() {
         let baseURL = "https://maps.googleapis.com/maps/api/geocode/json?address=";
         let apiKey = "AIzaSyDOMxiv80oiceTHg7NerU2705RKh13ryY8";
-        let address = this.props.test.address.split(' ');
+        let address = this.props.listings.address.split(' ');
         let newAdd = ""
         address.map((x) => {
             if (x.includes(".")) {
@@ -32,14 +32,14 @@ export class Listing extends Component {
             newAdd += x + "+"
         })
         newAdd = newAdd.slice(0, -1) + ',';
-        let city = this.props.test.city.replace(' ', '+');
+        let city = this.props.listings.city.replace(' ', '+');
         if (city.includes('+')) {
             city = city.slice(0, -1) + ',';
         } else {
             city += ','
         }
-        let state = this.props.test.state;
-        let zip = this.props.test.zip;
+        let state = this.props.listings.state;
+        let zip = this.props.listings.zip;
         let url = baseURL + newAdd + '+' + city + '+' + state + '&key=' + apiKey;
         let coordinates = {};
         fetch(url).then(function (response) {
@@ -55,11 +55,11 @@ export class Listing extends Component {
         return (
             <div>
                 <div className="card card-inverse" onClick={this.toggle}>
-                    <img className="card-img" src={this.props.test.images.one} alt="Listing Cover" />
+                    <img className="card-img" src={this.props.listings.images.one} alt="Listing Cover" />
                     <div className="card-img-overlay" id='listing-card'>
-                        <h4 className="card-title">{"$" + this.props.test.rent + '/mo'}</h4>
-                        <p className="card-text">{this.props.test.bedrooms + "bd . " + this.props.test.bathrooms + "ba . " + this.props.test.sqft + "sqft"} <br />
-                            {this.props.test.address + ', ' + this.props.test.city + ', ' + this.props.test.state}
+                        <h4 className="card-title">{"$" + this.props.listings.rent + '/mo'}</h4>
+                        <p className="card-text">{this.props.listings.beds + "bd . " + this.props.listings.baths + "ba . " + this.props.listings.sqft + "sqft"} <br />
+                            {this.props.listings.address + ', ' + this.props.listings.city + ', ' + this.props.listings.state}
                         </p>
                     </div>
                 </div>
@@ -68,7 +68,7 @@ export class Listing extends Component {
                         <div>
                             <div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel">
                                 <div className="carousel-inner" role="listbox">
-                                    <Carousel images={this.props.test.images} />
+                                    <Carousel images={this.props.listings.images} />
                                 </div>
                                 <a className="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                                     <span className="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -79,17 +79,17 @@ export class Listing extends Component {
                                     <span className="sr-only">Next</span>
                                 </a>
                             </div>
-                            <h2>{this.props.test.address + ', ' + this.props.test.city + ', ' + this.props.test.state + ' ' + this.props.test.zip}</h2>
-                            <h3>{this.props.test.bedrooms + "bd . " + this.props.test.bathrooms + "ba . " + this.props.test.sqft + "sqft"}</h3>
-                            <h5>{"Availability: " + this.props.test.startDate + " to " + this.props.test.endDate}</h5>
-                            <p>{this.props.test.description}</p>
+                            <h2>{this.props.listings.address + ', ' + this.props.listings.city + ', ' + this.props.listings.state + ' ' + this.props.listings.zip}</h2>
+                            <h3>{this.props.listings.beds + "bd . " + this.props.listings.baths + "ba . " + this.props.listings.sqft + "sqft"}</h3>
+                            <h5>{"Availability: " + this.props.listings.startDate + " to " + this.props.listings.endDate}</h5>
+                            <p>{this.props.listings.description}</p>
                             <h5>Information:</h5>
                             <ul>
-                                <li>{"Laundry: " + this.props.test.laundry}</li>
-                                <li>{"Parking: " + this.props.test.parking}</li>
-                                <li>{"Pets: " + this.props.test.pets}</li>
-                                <li>{"Smoking: " + this.props.test.smoking}</li>
-                                <li>{"Handicap Accessibility: " + this.props.test.handicap}</li>
+                                <li>{"Laundry: " + this.props.listings.laundry}</li>
+                                <li>{"Parking: " + this.props.listings.parking}</li>
+                                <li>{"Pets: " + this.props.listings.pets}</li>
+                                <li>{"Smoking: " + this.props.listings.smoking}</li>
+                                <li>{"Handicap Accessibility: " + this.props.listings.handicap}</li>
                             </ul>
                         </div>
                     </ModalBody>

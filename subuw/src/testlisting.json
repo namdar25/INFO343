@@ -1,5 +1,5 @@
 [{
-        "bathrooms": 1,
+        "baths": 1,
         "description": "This is a great place to live. Really close to a bunch of fun and cool things. A lot of stuff in the building that makes it good",
         "startDate": "2018-06-07",
         "endDate": "2018-09-15",
@@ -13,7 +13,7 @@
         "parking": "Street",
         "pets": "all",
         "uid": "test",
-        "bedrooms": 1,
+        "beds": 1,
         "sqft": 700,
         "smoking": "no",
         "type": "apartment",
@@ -26,7 +26,7 @@
         "lng": -122.3200445
     },
     {
-        "bathrooms": 2,
+        "baths": 2,
         "description": "This is a great place to live. Really close to a bunch of fun and cool things. A lot of stuff in the building that makes it good",
         "startDate": "2018-06-07",
         "endDate": "2018-09-15",
@@ -41,7 +41,7 @@
         "parking": "Street",
         "pets": "all",
         "uid": "test",
-        "bedrooms": 2,
+        "beds": 2,
         "sqft": 600,
         "smoking": "yes",
         "type": "house",
@@ -54,7 +54,7 @@
         "lng": -122.3117669
     },
     {
-        "bathrooms": 2,
+        "baths": 2,
         "description": "This is a great place to live. Really close to a bunch of fun and cool things. A lot of stuff in the building that makes it good",
         "startDate": "2018-06-07",
         "endDate": "2018-09-15",
@@ -69,7 +69,7 @@
         "parking": "Street",
         "pets": "all",
         "uid": "test",
-        "bedrooms": 2,
+        "beds": 2,
         "sqft": 600,
         "smoking": "yes",
         "type": "house",
@@ -82,7 +82,7 @@
         "lng": -122.3117669
     },
     {
-        "bathrooms": 2,
+        "baths": 2,
         "description": "This is a great place to live. Really close to a bunch of fun and cool things. A lot of stuff in the building that makes it good",
         "startDate": "2018-06-07",
         "endDate": "2018-09-15",
@@ -97,7 +97,7 @@
         "parking": "Street",
         "pets": "all",
         "uid": "test",
-        "bedrooms": 2,
+        "beds": 2,
         "sqft": 600,
         "smoking": "yes",
         "type": "house",
@@ -110,7 +110,7 @@
         "lng": -122.3117669
     },
     {
-        "bathrooms": 1,
+        "baths": 1,
         "description": "This is a great place to live. Really close to a bunch of fun and cool things. A lot of stuff in the building that makes it good",
         "startDate": "2018-06-07",
         "endDate": "2018-09-15",
@@ -124,7 +124,7 @@
         "parking": "Street",
         "pets": "all",
         "uid": "test",
-        "bedrooms": 1,
+        "beds": 1,
         "sqft": 700,
         "smoking": "no",
         "type": "apartment",
