@@ -9,17 +9,20 @@ import { InputGroup, InputGroupText, InputGroupAddon, Input } from 'reactstrap';
 export class StartPage extends Component {
     render() {
         return (
-            <div className="All">
-                <div className="search-input" >
-                    <InputGroup>
-                        <Input className="search-input-tag" placeholder="Enter city or zip code..." />
-                        <InputGroupAddon addonType="append">
-                            <InputGroupText><i className="fas fa-search"></i></InputGroupText>
-                        </InputGroupAddon>
-                    </InputGroup>
+            <div>
+                <div className="startPageBackground"></div>
+                <div className="All">
+                    <div className="search-input" >
+                        <InputGroup>
+                            <Input className="search-input-tag" placeholder="Enter city or zip code..." />
+                            <InputGroupAddon addonType="append">
+                                <InputGroupText><i className="fas fa-search"></i></InputGroupText>
+                            </InputGroupAddon>
+                        </InputGroup>
 
+                    </div>
                 </div>
-            </div >
+            </div>
         )
 
     }
