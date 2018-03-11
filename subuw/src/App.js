@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Chat from './Chat.js';
-import Listing from './Listing.js';
+import AddListing from './AddListing.js';
 import Conversation from './Conversation.js';
 import { HashRouter as Router, Route, Link } from 'react-router-dom';
 import firebase from 'firebase';
@@ -15,9 +15,14 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.getMyConversations = this.getMyConversations.bind(this);
+    this.showConvo = this.showConvo.bind(this);
+    this.setReciever = this.setReciever.bind(this);
+
     this.state = ({
-      uid: "me",
-      allConversations: {}
+      uid: "jon",
+      recieverUid: "doreen",
+      allConversations: {},
+      showConvo: false
     })
   }
 
@@ -51,8 +56,47 @@ class App extends Component {
     // this.state.myConversations = myConversations;
   }
 
+  showConvo() {
+    this.setState({
+      showConvo: true
+    })
+  }
+
+  setReciever(recieverUid) {
+    console.log("ok")
+    this.setState({
+      recieverUid: recieverUid
+    })
+  }
+
   render() {
+    let routedConvos = <div></div>;
+    let myConversations = this.getMyConversations();
+    console.log(myConversations)
+    if (myConversations !== null && myConversations !== undefined) {
+      routedConvos = Object.values(myConversations).map((conversation, i) => {
+        let path = '/Conversation' + (i + 1);
+        let recieverUid;
+        conversation.contributors.forEach(function (curUid) {
+          if (curUid !== uid) {
+            recieverUid = curUid;
+          }
+        })
+        if (recieverUid !== uid) {
+          return (
+            <div>
+              <Route path={path} render={(props) => (
+                <Conversation modal={true} uid={this.state.uid} recieverUid={this.state.recieverUid} />
+              )} />
+            </div>
+
+          )
+        }
+      })
+    }
+
     let uid = this.state.uid;
+    console.log(this.state.showConvo)
     return (
       <div className="App">
         <Router>
@@ -60,35 +104,15 @@ class App extends Component {
             <Link to="/chat"> Chat </Link>
 
             <Route path="/chat" render={(props) => (
-              <Chat /*props*/ />
+              <Chat myConversations={myConversations} setReciever={this.setReciever} />
             )} />
-
-            {/*
-              if (myConversations !== null && myConversations !== undefined){
-              Object.values(this.state.myConversations).map((conversation, i) => {
-                let path = '/Conversation' + (i + 1);
-                let recieverUid;
-                conversation.contributors.forEach(function (curUid) {
-                  if (curUid !== uid) {
-                    recieverUid = curUid;
-                  }
-                })
-                if (recieverUid !== uid) {
-                  return (
-                    <div>
-                      <Route path={path} render={(props) => (
-                        <Conversation uid={uid} recieverUid={recieverUid} />
-                      )} />
-                    </div>
-
-                  )
-                }
-              })
-            }
-          */}
+            {routedConvos}
           </div>
         </Router>
-        <Listing />
+        <AddListing />
+
+
+
       </div>
     )
   }

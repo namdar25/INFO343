@@ -4,7 +4,7 @@ import firebase from 'firebase';
 import 'firebase/auth';
 import 'firebase/database';
 
-class Listing extends Component {
+class AddListing extends Component {
     constructor(props) {
         super(props)
         this.addListing = this.addListing.bind(this);
@@ -27,6 +27,7 @@ class Listing extends Component {
             sqrft: props.sqrft || '',
             smoking: props.smoking || 'no',
             pets: props.pets || 'None allowed',
+            parking: props.parking || 'none',
             newListing: {},
             imgs: []
         })
@@ -214,6 +215,10 @@ class Listing extends Component {
                             <label>Image 5:</label>
                             <input type="file" onChange={(e) => this.fileChange(e)} multiple />
                         </div>
+                        <div className="column small">
+                            <label>Image 6:</label>
+                            <input type="file" onChange={(e) => this.fileChange(e)} multiple />
+                        </div>
                     </div>
                     <div className="row">
                         <div className="column small">
@@ -254,6 +259,14 @@ class Listing extends Component {
                                 <option value='no large pets'>No Large Pets</option>
                             </select>
                         </div>
+                        <div className="column small">
+                            <label>Parking</label>
+                            <select className="parking" placeholder="parking" onChange={this.handleChange.bind(this, 'parking')}>
+                                <option value='none'>None</option>
+                                <option value='paid'>Paid</option>
+                                <option value='free'>Free</option>
+                            </select>
+                        </div>
                     </div >
                     <input onClick={this.addListing} type="submit" value="Submit Listing" />
 
@@ -265,4 +278,4 @@ class Listing extends Component {
     }
 }
 
-export default Listing;
+export default AddListing;
