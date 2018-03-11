@@ -18,6 +18,7 @@ import '../node_modules/popper.js/dist/popper.js';
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
 import '../node_modules/bootstrap/dist/js/bootstrap.js';
 import { StartPage } from './StartPage';
+import { About } from './About';
 import firebase from 'firebase';
 import 'firebase/auth';
 import 'firebase/database';
@@ -65,51 +66,62 @@ class App extends Component {
     render() {
         return (
             <div className="mainAppDiv" style={{ opacity: this.state.opacity }}>
-                <div>
+                {!this.state.user && <div><Navbar color="white" light expand="md">
+                    <NavbarBrand href="/" className="navbarBrand">SUBUW</NavbarBrand>
+                    <NavbarToggler onClick={this.toggle} />
+                    <Collapse isOpen={this.state.isOpen} navbar>
+                        <Nav className="ml-auto" navbar>
+                            <NavItem>
+                                <LogIn />
+                            </NavItem>
+                        </Nav>
+                    </Collapse>
+                </Navbar>
+                    <StartPage />
+                </div>
+                }
+                {this.state.user &&
                     <Router>
-                        <Navbar color="white" light expand="md">
-                            <NavbarBrand href="/" className="navbarBrand">SUBUW</NavbarBrand>
-                            <NavbarToggler onClick={this.toggle} />
-                            <Collapse isOpen={this.state.isOpen} navbar>
-                                <Nav className="ml-auto" navbar>
-                                    <NavItem>
-                                        {!this.state.user && <LogIn />}
-                                    </NavItem>
+                        <div>
+                            <Navbar color="white" light expand="md">
+                                <NavbarBrand className="navbarBrand">SUBUW</NavbarBrand>
+                                <NavbarToggler onClick={this.toggle} />
+                                <Collapse isOpen={this.state.isOpen} navbar>
+                                    <Nav className="ml-auto" navbar>
+                                        <NavItem>
+                                            <NavLink className="logIn" >
+                                                <Link to="/">Home</Link>
 
-                                    <NavItem>
-                                        {this.state.user &&
+                                            </NavLink>
+
+                                        </NavItem>
+                                        <NavItem>
                                             <NavLink className="logIn" >
                                                 Profile
                                             </NavLink>
-                                        }
-                                    </NavItem>
-                                    <NavItem>
-                                        {this.state.user &&
+
+                                        </NavItem>
+                                        <NavItem>
                                             <NavLink className="logIn" >
                                                 Host
                                         </NavLink>
-                                        }
-                                    </NavItem>
-                                    <NavItem>
-                                        {this.state.user &&
-                                            <NavLink className="logIn" >
-                                                Contact Us
-                                        </NavLink>
-                                        }
-                                    </NavItem>
-                                    <NavItem>
-                                        {this.state.user &&
-                                            <NavLink className="logIn" onClick={() => { this.logout() }}>Log Out</NavLink>}
-                                    </NavItem>
+                                        </NavItem>
+                                        <NavItem>
+                                            <NavLink className="logIn">
+                                                <Link to="about">About</Link>
+                                            </NavLink>
 
-
-                                </Nav>
-                            </Collapse>
-                        </Navbar>
-                    </Router>
-                </div>
-                <StartPage />
-
+                                        </NavItem>
+                                        <NavItem>
+                                            <NavLink className="logIn" onClick={() => { this.logout() }}>Log Out</NavLink>
+                                        </NavItem>
+                                    </Nav>
+                                </Collapse>
+                            </Navbar>
+                            <Route exact path="/" component={StartPage} />
+                            <Route path="about" component={About} />
+                        </div>
+                    </Router>}
             </div >
         );
     }
@@ -136,7 +148,8 @@ class LogIn extends Component {
         this.userRef = firebase.database().ref('Users');
 
         this.toggle = this.toggle.bind(this);
-        this.login = this.login.bind(this);
+        this.loginFB = this.loginFB.bind(this);
+        this.loginG = this.loginG.bind(this);
     }
 
     toggle() {
@@ -145,17 +158,39 @@ class LogIn extends Component {
         });
     }
 
-    // handleChange(e) {
-    //     /* ... */
-    // }
 
-    login() {
+    loginG() {
         let provider = new firebase.auth.GoogleAuthProvider();
-        // let provider = new firebase.auth.FacebookAuthProvider();
         firebase.auth().signInWithPopup(provider)
             .then((result) => {
                 const user = result.user;
-                console.log("result.user: ", result.user);
+                console.log("result.user google: ", result.user);
+                if (user && user.uid) {
+                    this.setState({
+                        user: result.user,
+                        modal: false
+                    });
+
+                    let newUser = {
+                        userID: user.uid,
+                        displayName: user.displayName,
+                        email: user.email
+                    };
+
+                    let update = {};
+                    update[user.uid] = newUser;
+
+                    this.userRef.update(update);
+                }
+            });
+    }
+
+    loginFB() {
+        let provider = new firebase.auth.FacebookAuthProvider();
+        firebase.auth().signInWithPopup(provider)
+            .then((result) => {
+                const user = result.user;
+                console.log("result.user fb: ", result.user);
                 if (user && user.uid) {
                     this.setState({
                         user: result.user,
@@ -177,7 +212,6 @@ class LogIn extends Component {
     }
 
 
-
     // <span onClick={this.logout}>Log Out</span>
     render() {
         console.log("user: ", this.state.user);
@@ -189,9 +223,12 @@ class LogIn extends Component {
                         <ModalHeader toggle={this.toggle}>Log In options:</ModalHeader>
                         <ModalBody>
                             <div className="wrapper">
-                                {!this.state.user && <i onClick={this.login} className="fab fa-google"></i>
+                                {!this.state.user && <i onClick={this.loginG} className="fab fa-google"></i>
                                 }
-
+                            </div>
+                            <div className="wrapper">
+                                {!this.state.user && <i onClick={this.loginFB} className="fab fa-facebook-square"></i>
+                                }
                             </div>
                         </ModalBody>
                         <ModalFooter>

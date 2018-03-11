@@ -33,6 +33,7 @@
 .navbarBrand {
     font-size: 2rem;
     padding: 1rem;
+    cursor: context-menu;
 }
 
 .navbar > .container, .navbar > .container-fluid {
@@ -41,8 +42,18 @@
 
 .wrapper {
     text-align: center;
-    font-size: 2.5rem;
-    color: green;
+    
+}
+
+.fa-google {
+    color:#3cba54;
+    font-size: 3rem;
+    padding-bottom: 2rem;
+}
+
+.fa-facebook-square {
+    color: #3b5998;
+    font-size: 3rem;
 }
 
 .logIn {
