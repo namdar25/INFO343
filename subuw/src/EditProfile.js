@@ -17,15 +17,15 @@ export default class EditProfile extends Component {
 
     }
 
-		componentDidMount() {
-		this.setState(
-			displayName : this.props.user.displayName,
-			photo: this.props.user.photo,
-            email: this.props.user.email,
-            phoneNumber: this.props.user.phoneNumber,
-			userID : this.props.user.userID
-			)
-		}
+	componentDidMount() {
+	this.setState(
+		displayName : this.props.user.displayName,
+		photo: this.props.user.photo,
+        email: this.props.user.email,
+        phoneNumber: this.props.user.phoneNumber,
+		userID : this.props.user.userID
+		)
+	}
 
     handleChange(propertyName, event) {
         var change = {};

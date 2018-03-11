@@ -25,7 +25,7 @@ export default class AddListing extends Component {
             description: '',
             lat: '',
             long: '',
-            newListing: {}
+			uid: ''
         })
     }
 
