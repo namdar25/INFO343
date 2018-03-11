@@ -42,7 +42,7 @@ export class StartPage extends Component {
                         </InputGroup>
                     </Router>
                 </div>
-            </div >
+            </div>
         )
 
     }
