@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 //import { Nav, NavItem, MenuItem, Navbar, NavDropdown } from 'react-bootstrap';
-import { HashRouter as Router, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
     Button, Modal, ModalHeader, ModalBody, ModalFooter, Collapse,
     Navbar,
@@ -61,66 +61,58 @@ class App extends Component {
     render() {
         return (
             <div className="mainAppDiv" style={{ opacity: this.state.opacity }}>
-                {!this.state.user && <div><Navbar color="white" light expand="md">
+                <Navbar color="white" light expand="md">
                     <NavbarBrand href="/" className="navbarBrand">SUBUW</NavbarBrand>
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="ml-auto" navbar>
                             <NavItem>
-                                <LogIn />
+                                {!this.state.user && <LogIn />}
+                            </NavItem>
+                            <NavItem>
+                                {this.state.user &&
+                                    <NavLink className="logIn" >
+                                        <Link to="/">Home</Link>
+
+                                    </NavLink>
+                                }
+                            </NavItem>
+                            <NavItem>
+                                {this.state.user &&
+                                    <NavLink className="logIn" >
+                                        Profile
+                                        </NavLink>
+                                }
+                            </NavItem>
+                            <NavItem>
+                                {this.state.user &&
+                                    <NavLink className="logIn" >
+                                        Host
+                                    </NavLink>
+                                }
+                            </NavItem>
+                            <NavItem>
+                                {this.state.user &&
+                                    <NavLink className="logIn">
+                                        <Link to="about">About</Link>
+                                    </NavLink>
+                                }
+                            </NavItem>
+                            <NavItem>
+                                {this.state.user &&
+                                    <NavLink className="logIn" onClick={() => { this.logout() }}>Log Out</NavLink>}
                             </NavItem>
                         </Nav>
                     </Collapse>
                 </Navbar>
-                    <StartPage />
+                <div className="container">
+                    {this.props.children}
                 </div>
-                }
-                {this.state.user &&
-                    <Router>
-                        <div>
-                            <Navbar color="white" light expand="md">
-                                <NavbarBrand className="navbarBrand">SUBUW</NavbarBrand>
-                                <NavbarToggler onClick={this.toggle} />
-                                <Collapse isOpen={this.state.isOpen} navbar>
-                                    <Nav className="ml-auto" navbar>
-                                        <NavItem>
-                                            <NavLink className="logIn" >
-                                                <Link to="/">Home</Link>
-
-                                            </NavLink>
-
-                                        </NavItem>
-                                        <NavItem>
-                                            <NavLink className="logIn" >
-                                                Profile
-                                            </NavLink>
-
-                                        </NavItem>
-                                        <NavItem>
-                                            <NavLink className="logIn" >
-                                                Host
-                                        </NavLink>
-                                        </NavItem>
-                                        <NavItem>
-                                            <NavLink className="logIn">
-                                                <Link to="about">About</Link>
-                                            </NavLink>
-
-                                        </NavItem>
-                                        <NavItem>
-                                            <NavLink className="logIn" onClick={() => { this.logout() }}>Log Out</NavLink>
-                                        </NavItem>
-                                    </Nav>
-                                </Collapse>
-                            </Navbar>
-                            <Route exact path="/" component={StartPage} />
-                            <Route path="about" component={About} />
-                        </div>
-                    </Router>}
             </div >
         );
     }
 }
+
 
 class LogInPop extends Component {
     render() {
@@ -213,25 +205,38 @@ class LogIn extends Component {
         return (
             <div>
                 <div>
-                    <Button className="logIn" onClick={this.toggle}>Log In</Button>
-                    <Modal isOpen={this.state.modal} toggle={this.toggle} >
-                        <ModalHeader toggle={this.toggle}>Log In options:</ModalHeader>
-                        <ModalBody>
-                            <div className="wrapper">
-                                {!this.state.user && <i onClick={this.loginG} className="fab fa-google"></i>
-                                }
-                            </div>
-                            <div className="wrapper">
-                                {!this.state.user && <i onClick={this.loginFB} className="fab fa-facebook-square"></i>
-                                }
-                            </div>
-                        </ModalBody>
-                        <ModalFooter>
-                            {/* <Button color="primary" onClick={this.toggle}>Do Something</Button> */}
-                            <Button color="secondary" onClick={this.toggle}>Cancel</Button>
-                        </ModalFooter>
-                    </Modal>
+                    <div>
+                        <Button className="logIn" onClick={this.toggle}>Log In</Button>
+                        <Modal isOpen={this.state.modal} toggle={this.toggle} >
+                            <ModalHeader toggle={this.toggle}>Log In options:</ModalHeader>
+                            <ModalBody>
+                                <div className="wrapper">
+                                    {!this.state.user && <i onClick={this.loginG} className="fab fa-google"></i>
+                                    }
+                                </div>
+                                <div className="wrapper">
+                                    {!this.state.user && <i onClick={this.loginFB} className="fab fa-facebook-square"></i>
+                                    }
+                                </div>
+                            </ModalBody>
+                            <ModalFooter>
+                                {/* <Button color="primary" onClick={this.toggle}>Do Something</Button> */}
+                                <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+                            </ModalFooter>
+                        </Modal>
+                    </div>
                 </div>
+                {/* <div className="All">
+                    <div className="search-input" >
+                        <InputGroup>
+                            <Input className="search-input-tag" placeholder="Enter city or zip code..." />
+                            <InputGroupAddon addonType="append">
+                                <InputGroupText><i className="fas fa-search"></i></InputGroupText>
+                            </InputGroupAddon>
+                        </InputGroup>
+
+                    </div>
+                </div > */}
             </div>
 
         )

@@ -6,6 +6,9 @@ import registerServiceWorker from './registerServiceWorker';
 import firebase from 'firebase';
 import 'firebase/auth';
 import 'firebase/database';
+import { HashRouter, Route, Link } from "react-router-dom";
+import { StartPage } from './StartPage';
+import { About } from './About';
 
 var config = {
     apiKey: "AIzaSyCg0NK0JvgjlU8pHF_kNxLnx_To1NhogNg",
@@ -15,9 +18,18 @@ var config = {
     storageBucket: "subuw-j420m.appspot.com",
     messagingSenderId: "525275022235"
 };
+
 firebase.initializeApp(config);
 // export const provider = new firebase.auth.GoogleAuthProvider();
 // export const auth = firebase.auth();
-export default firebase;
-ReactDOM.render(<App />, document.getElementById('root'));
+
+
+ReactDOM.render(
+    <HashRouter>
+        <App>
+            <Route exact path="/" component={StartPage} />
+            <Route path="/about" component={About} />
+        </App>
+    </HashRouter>
+    , document.getElementById('root'));
 registerServiceWorker();

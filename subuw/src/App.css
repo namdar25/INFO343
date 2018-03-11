@@ -22,12 +22,18 @@
   font-size: large;
 }
 
+body {
+    background: none;
+}
+
 .navbar {
     width: 90% !important;
-    margin-left: 5% !important;
+    margin: auto;
+    margin-top: 2%;
+    /* margin-left: 5% !important;
     margin-top: 2% !important;
     position: absolute !important;
-    
+     */
 }
 
 .navbarBrand {
@@ -63,6 +69,7 @@
 
 .mainAppDiv {
     transition: opacity 100ms;
+
 }
 
 @keyframes App-logo-spin {

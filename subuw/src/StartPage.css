@@ -1,6 +1,7 @@
 .All {
    background-image: url("testing2.png");
    height: 100vh;
+   background-position: 0;
    background-size: cover;
    background-repeat: none;
 }
