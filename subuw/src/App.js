@@ -6,6 +6,8 @@ import {
     Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink
 } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/js/bootstrap.js';
+import 'jquery/dist/jquery.js';
 import './App.css';
 import { StartPage } from './StartPage';
 import { About } from './About';
@@ -22,9 +24,11 @@ class App extends Component {
             username: '',
             items: [],
             user: null,
-            opacity: 0
+            opacity: 0,
+            search: null
         }
         this.toggle = this.toggle.bind(this);
+        this.getSearch = this.getSearch.bind(this);
         this.state = {
             isOpen: false
         };
@@ -55,22 +59,29 @@ class App extends Component {
             });
     }
 
+    getSearch(val) {
+        this.setState({
+            search: val
+        })
+    }
+
     render() {
         return (
             <div className="mainAppDiv" style={{ opacity: this.state.opacity }}>
-                {!this.state.user && <div><Navbar color="white" light expand="md">
-                    <NavbarBrand href="/" className="navbarBrand">SUBUW</NavbarBrand>
-                    <NavbarToggler onClick={this.toggle} />
-                    <Collapse isOpen={this.state.isOpen} navbar>
-                        <Nav className="ml-auto" navbar>
-                            <NavItem>
-                                <LogIn />
-                            </NavItem>
-                        </Nav>
-                    </Collapse>
-                </Navbar>
-                    <StartPage />
-                </div>
+                {!this.state.user &&
+                    <div>
+                        <Navbar color="white" light expand="md">
+                            <NavbarBrand href="/" className="navbarBrand">SUBUW</NavbarBrand>
+                            <NavbarToggler onClick={this.toggle} />
+                            <Collapse isOpen={this.state.isOpen} navbar>
+                                <Nav className="ml-auto" navbar>
+                                    <NavItem>
+                                        <LogIn />
+                                    </NavItem>
+                                </Nav>
+                            </Collapse>
+                        </Navbar>
+                    </div>
                 }
                 {this.state.user &&
                     <Router>
@@ -81,28 +92,16 @@ class App extends Component {
                                 <Collapse isOpen={this.state.isOpen} navbar>
                                     <Nav className="ml-auto" navbar>
                                         <NavItem>
-                                            <NavLink className="logIn" >
-                                                <Link to="/">Home</Link>
-
-                                            </NavLink>
-
+                                            <NavLink className="logIn" to="/">Home</NavLink>
                                         </NavItem>
                                         <NavItem>
-                                            <NavLink className="logIn" >
-                                                Profile
-                                            </NavLink>
-
+                                            <NavLink className="logIn" >Profile</NavLink>
                                         </NavItem>
                                         <NavItem>
-                                            <NavLink className="logIn" >
-                                                Host
-                                        </NavLink>
+                                            <NavLink className="logIn" >Host</NavLink>
                                         </NavItem>
                                         <NavItem>
-                                            <NavLink className="logIn">
-                                                <Link to="about">About</Link>
-                                            </NavLink>
-
+                                            <NavLink className="logIn" to="/about">About</NavLink>
                                         </NavItem>
                                         <NavItem>
                                             <NavLink className="logIn" onClick={() => { this.logout() }}>Log Out</NavLink>
@@ -110,8 +109,13 @@ class App extends Component {
                                     </Nav>
                                 </Collapse>
                             </Navbar>
-                            <Route exact path="/" component={StartPage} />
-                            <Route path="about" component={About} />
+                            <Route exact path="/" component={(props) => (
+                                <StartPage sendSearch={this.getSearch} />
+                            )} />
+                            <Route path="/about" component={About} />
+                            {<Route path="/Main" component={(props) => (
+                                <Main search={this.state.search} />
+                            )} />}
                         </div>
                     </Router>}
             </div >

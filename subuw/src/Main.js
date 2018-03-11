@@ -31,12 +31,14 @@ export class Main extends Component {
         listingsRef.on('value', (snapshot) => {
             let listings = snapshot.val()
             listings = Object.values(listings)
+            // listings = listings.filter((x) => {
+            //     x.zip === this.props.search
+            // })
             this.setState({
                 listings: listings,
                 filteredListings: listings
             });
         })
-        console.log(this.state.filteredListings)
     }
 
     toggle() {
@@ -58,8 +60,6 @@ export class Main extends Component {
         let filteredListings = this.state.listings;
         filteredListings = filteredListings.filter(function (item) {
             for (var key in params) {
-                console.log("item:" + item[key])
-                console.log("key:" + params[key])
                 if (key === 'rent' && item[key] > params[key]) {
                     return false;
                 } else if (item[key] === undefined || item[key] != params[key] && key !== "rent") {
@@ -83,124 +83,121 @@ export class Main extends Component {
     }
 
     render() {
+        console.log(this.props.search);
         return (
             <div>
                 {this.state.filteredListings &&
                     <div>
-                        <div>
-                            <Navbar color="white" light expand="md">
-                                <NavbarToggler onClick={this.toggle} />
-                                <Collapse isOpen={this.state.isOpen} navbar>
-                                    <Nav className="ml-auto" navbar>
-                                        <UncontrolledDropdown nav inNavbar>
-                                            <DropdownToggle nav caret>
-                                                Price
-                                    </DropdownToggle>
-                                            <DropdownMenu right>
-                                                <InputGroup>
-                                                    <InputGroupAddon addonType="prepend">$</InputGroupAddon>
-                                                    <Input placeholder="max" name="rent" value={this.state.filters.price} onChange={this.handleChange} />
-                                                </InputGroup>
-                                                <DropdownItem divider />
-                                                <DropdownItem value={this.state.filters.price} onClick={this.reset} name="rent">
-                                                    Reset
-                                        </DropdownItem>
-                                            </DropdownMenu>
-                                        </UncontrolledDropdown>
-                                        <InputGroup className="zip">
-                                            <Input placeholder="Zip Code" name="zip" value={this.state.filters.zip} onChange={this.handleChange} />
+                        {/* <button className="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Filters
+                                <span class="caret"></span>
+                            </button> */}
+                        <Navbar color="white" light expand="md" className="vertical-nav">
+                            <NavbarToggler onClick={this.toggle} />
+                            <Nav className="ml-auto" id="verticalNav" navbar>
+                                <UncontrolledDropdown nav inNavbar>
+                                    <DropdownToggle nav caret>
+                                        Price
+                                        </DropdownToggle>
+                                    <DropdownMenu right>
+                                        <InputGroup>
+                                            <InputGroupAddon addonType="prepend">$</InputGroupAddon>
+                                            <Input placeholder="max" name="rent" value={this.state.filters.price} onChange={this.handleChange} />
                                         </InputGroup>
-                                        <UncontrolledDropdown nav inNavbar>
-                                            <DropdownToggle nav caret>
-                                                Beds
-                                    </DropdownToggle>
-                                            <DropdownMenu right>
-                                                <FormGroup>
-                                                    <Input type="select" name="bedrooms" id="exampleSelect" value={this.state.filters.bedrooms} onChange={this.handleChange} >
-                                                        <option>1</option>
-                                                        <option>2</option>
-                                                        <option>3</option>
-                                                        <option>4</option>
-                                                        <option>5</option>
-                                                    </Input>
-                                                </FormGroup>
-                                                <DropdownItem name="bedrooms" value={this.state.filters.bedrooms} onClick={this.reset}>
-                                                    Reset
-                                        </DropdownItem>
-                                            </DropdownMenu>
-                                        </UncontrolledDropdown>
-                                        <UncontrolledDropdown nav inNavbar>
-                                            <DropdownToggle nav caret>
-                                                Baths
-                                    </DropdownToggle>
-                                            <DropdownMenu right>
-                                                <FormGroup>
-                                                    <Input type="select" name="bathrooms" id="exampleSelect" value={this.state.filters.bathrooms} onChange={this.handleChange} >
-                                                        <option>1</option>
-                                                        <option>2</option>
-                                                        <option>3</option>
-                                                        <option>4</option>
-                                                        <option>5</option>
-                                                    </Input>
-                                                </FormGroup>
-                                                <DropdownItem name="bathrooms" value={this.state.filters.bathrooms} onClick={this.reset}>
-                                                    Reset
-                                        </DropdownItem>
-                                            </DropdownMenu>
-                                        </UncontrolledDropdown>
-                                        <UncontrolledDropdown nav inNavbar>
-                                            <DropdownToggle nav caret>
-                                                Laundry
-                                    </DropdownToggle>
-                                            <DropdownMenu right>
-                                                <FormGroup>
-                                                    <Input type="select" name="laundry" id="exampleSelect" value={this.state.filters.laundry} onChange={this.handleChange} >
-                                                        <option>In-Unit</option>
-                                                        <option>In-Building</option>
-                                                        <option>Not Available</option>
-                                                    </Input>
-                                                </FormGroup>
-                                                <DropdownItem name="laundry" value={this.state.filters.laundry} onClick={this.reset}>
-                                                    Reset
-                                        </DropdownItem>
-                                            </DropdownMenu>
-                                        </UncontrolledDropdown>
-                                        <UncontrolledDropdown nav inNavbar>
-                                            <DropdownToggle nav caret>
-                                                Type
-                                    </DropdownToggle>
-                                            <DropdownMenu right>
-                                                <FormGroup>
-                                                    <Input type="select" name="type" id="exampleSelect" value={this.state.filters.type} onChange={this.handleChange} >
-                                                        <option>Apartment</option>
-                                                        <option>House</option>
-                                                        <option>Condo</option>
-                                                    </Input>
-                                                </FormGroup>
-                                                <DropdownItem name="type" value={this.state.filters.type} onClick={this.reset}>
-                                                    Reset
-                                        </DropdownItem>
-                                            </DropdownMenu>
-                                        </UncontrolledDropdown>
-                                        <UncontrolledDropdown nav inNavbar>
-                                            <DropdownToggle nav caret>
-                                                Date Range
-                                    </DropdownToggle>
-                                            <DropdownMenu right>
-                                                <InputGroup>
-                                                    <Input placeholder="start-date" name="startDate" value={this.state.filters.start} onChange={this.handleChange} />
-                                                </InputGroup>
-                                                <InputGroup>
-                                                    <Input placeholder="end-date" name="endDate" value={this.state.filters.end} />
-                                                </InputGroup>
-                                            </DropdownMenu>
-                                        </UncontrolledDropdown>
-                                        <Button color="primary" onClick={this.filter}>Filter</Button>
-                                        <Button color="primary" onClick={this.reset}>Reset</Button>
-                                    </Nav>
-                                </Collapse>
-                            </Navbar>
-                        </div>
+                                        <DropdownItem divider />
+                                        <DropdownItem value={this.state.filters.price} onClick={this.reset} name="rent">
+                                            Reset
+                                            </DropdownItem>
+                                    </DropdownMenu>
+                                </UncontrolledDropdown>
+                                <UncontrolledDropdown nav inNavbar>
+                                    <DropdownToggle nav caret>
+                                        Beds
+                                        </DropdownToggle>
+                                    <DropdownMenu right>
+                                        <FormGroup>
+                                            <Input type="select" name="bedrooms" id="exampleSelect" value={this.state.filters.bedrooms} onChange={this.handleChange} >
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                                <option>5</option>
+                                            </Input>
+                                        </FormGroup>
+                                        <DropdownItem name="bedrooms" value={this.state.filters.bedrooms} onClick={this.reset}>
+                                            Reset
+                                            </DropdownItem>
+                                    </DropdownMenu>
+                                </UncontrolledDropdown>
+                                <UncontrolledDropdown nav inNavbar>
+                                    <DropdownToggle nav caret>
+                                        Baths
+                                        </DropdownToggle>
+                                    <DropdownMenu right>
+                                        <FormGroup>
+                                            <Input type="select" name="bathrooms" id="exampleSelect" value={this.state.filters.bathrooms} onChange={this.handleChange} >
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                                <option>5</option>
+                                            </Input>
+                                        </FormGroup>
+                                        <DropdownItem name="bathrooms" value={this.state.filters.bathrooms} onClick={this.reset}>
+                                            Reset
+                                            </DropdownItem>
+                                    </DropdownMenu>
+                                </UncontrolledDropdown>
+                                <UncontrolledDropdown nav inNavbar>
+                                    <DropdownToggle nav caret>
+                                        Laundry
+                                        </DropdownToggle>
+                                    <DropdownMenu right>
+                                        <FormGroup>
+                                            <Input type="select" name="laundry" id="exampleSelect" value={this.state.filters.laundry} onChange={this.handleChange} >
+                                                <option>In-Unit</option>
+                                                <option>In-Building</option>
+                                                <option>Not Available</option>
+                                            </Input>
+                                        </FormGroup>
+                                        <DropdownItem name="laundry" value={this.state.filters.laundry} onClick={this.reset}>
+                                            Reset
+                                            </DropdownItem>
+                                    </DropdownMenu>
+                                </UncontrolledDropdown>
+                                <UncontrolledDropdown nav inNavbar>
+                                    <DropdownToggle nav caret>
+                                        Type
+                                        </DropdownToggle>
+                                    <DropdownMenu right>
+                                        <FormGroup>
+                                            <Input type="select" name="type" id="exampleSelect" value={this.state.filters.type} onChange={this.handleChange} >
+                                                <option>Apartment</option>
+                                                <option>House</option>
+                                                <option>Condo</option>
+                                            </Input>
+                                        </FormGroup>
+                                        <DropdownItem name="type" value={this.state.filters.type} onClick={this.reset}>
+                                            Reset
+                                            </DropdownItem>
+                                    </DropdownMenu>
+                                </UncontrolledDropdown>
+                                <UncontrolledDropdown nav inNavbar>
+                                    <DropdownToggle nav caret>
+                                        Date Range
+                                        </DropdownToggle>
+                                    <DropdownMenu right>
+                                        <InputGroup>
+                                            <Input placeholder="start-date" name="startDate" value={this.state.filters.start} onChange={this.handleChange} />
+                                        </InputGroup>
+                                        <InputGroup>
+                                            <Input placeholder="end-date" name="endDate" value={this.state.filters.end} />
+                                        </InputGroup>
+                                    </DropdownMenu>
+                                </UncontrolledDropdown>
+                                <Button color="primary" onClick={this.filter}>Filter</Button>
+                                <Button color="primary" onClick={this.reset}>Reset</Button>
+                            </Nav>
+                        </Navbar>
                         <SplitPane split="vertical" defaultSize={300} primary="first">
                             <div className="pane">
                                 <div>
