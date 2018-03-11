@@ -71,9 +71,8 @@ class App extends Component {
                             </NavItem>
                             <NavItem>
                                 {this.state.user &&
-                                    <NavLink className="logIn" >
+                                    <NavLink className="logIn">
                                         <Link to="/">Home</Link>
-
                                     </NavLink>
                                 }
                             </NavItem>
