@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import firebase from 'firebase'
@@ -19,6 +18,8 @@ let config = {
 firebase.initializeApp(config);
 // export const provider = new firebase.auth.GoogleAuthProvider();
 // export const auth = firebase.auth();
+
 export default firebase;
+
 ReactDOM.render(<App />, document.getElementById('root'));
 registerServiceWorker();

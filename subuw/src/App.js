@@ -9,23 +9,32 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
 import 'jquery/dist/jquery.js';
 import './App.css';
+import { Chat } from './Chat.js';
 import { StartPage } from './StartPage';
 import { About } from './About';
+import { AddListing } from './AddListing.js';
 import firebase from 'firebase';
 import 'firebase/auth';
 import 'firebase/database';
 import './Main.css';
 import { Main } from './Main';
+import { Conversation } from './Conversation.js';
+
 class App extends Component {
     constructor(props) {
         super(props);
-        this.state = {
+		this.getMyConversations = this.getMyConversations.bind(this);
+		this.showConvo = this.showConvo.bind(this);
+		this.state = ({
+			uid: "jon",
+			allConversations: {}
             currentItem: '',
             username: '',
             items: [],
             user: null,
             opacity: 0,
-            search: null
+            search: null,
+			showConvo: false
         }
         this.toggle = this.toggle.bind(this);
         this.getSearch = this.getSearch.bind(this);
@@ -48,7 +57,40 @@ class App extends Component {
                 this.setState({ opacity: 1 });
             }
         });
+		firebase.database().ref('conversations/').on('value', (snapshot) => {
+		  const allConversations = snapshot.val()
+		  if (allConversations != null) {
+			this.setState({
+			  allConversations: allConversations,
+			})
+		  }
+		})
+		let myConversations = this.getMyConversations();
+		this.setState({
+		  myConversations: myConversations
+		})
     }
+
+	getMyConversations() {
+		let uid = this.state.uid;
+		let myConversations = [];
+		var allConversations = this.state.allConversations;
+		console.log(allConversations)
+		Object.values(allConversations).forEach(function (conversation) {
+		  let pair = conversation.contributors; //the array of the two users in conversation
+		  if (pair.includes(uid)) { //If current user is in this conversation
+			myConversations.push(conversation);
+		  }
+		})
+		return myConversations;
+		// this.state.myConversations = myConversations;
+	}
+
+	showConvo() {
+		this.setState({
+      showConvo: true
+		})
+	}
 
     logout() {
         firebase.auth().signOut()
@@ -66,6 +108,10 @@ class App extends Component {
     }
 
     render() {
+	    let myConversations = this.getMyConversations();
+		console.log(myConversations)
+		let uid = this.state.uid;
+		console.log(this.state.showConvo)
         return (
             <div className="mainAppDiv" style={{ opacity: this.state.opacity }}>
                 {!this.state.user &&
@@ -103,6 +149,9 @@ class App extends Component {
                                         <NavItem>
                                             <NavLink className="logIn" to="/about">About</NavLink>
                                         </NavItem>
+										<NavItem>
+                                            <NavLink className="logIn" to="/chat"> Chat </NavLink>
+                                        </NavItem>
                                         <NavItem>
                                             <NavLink className="logIn" onClick={() => { this.logout() }}>Log Out</NavLink>
                                         </NavItem>
@@ -116,6 +165,29 @@ class App extends Component {
                             {<Route path="/Main" component={(props) => (
                                 <Main search={this.state.search} />
                             )} />}
+							<Route path="/chat" render={(props) => (
+							<Chat myConversations={myConversations} showConvo={this.showConvo} uid={this.state.uid} />
+							)} />
+							{this.state.showConvo &&
+							  myConversations.map((conversation, i) => {
+								let path = '/Conversation' + (i + 1);
+								let recieverUid;
+								conversation.contributors.forEach(function (curUid) {
+								  if (curUid !== uid) {
+									recieverUid = curUid;
+								  }
+								})
+								if (recieverUid !== uid) {
+								return (
+								<div>
+								<Route path={path} render={(props) => (
+								<Conversation modal={true} uid={this.state.uid} recieverUid={recieverUid} />
+						  )} />
+                    </div>
+                  )
+                }
+              })
+            }
                         </div>
                     </Router>}
             </div >
@@ -153,7 +225,6 @@ class LogIn extends Component {
             modal: !this.state.modal
         });
     }
-
 
     loginG() {
         let provider = new firebase.auth.GoogleAuthProvider();
@@ -238,5 +309,4 @@ class LogIn extends Component {
         )
     }
 }
-
 export default App;
