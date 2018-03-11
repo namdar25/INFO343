@@ -1,12 +1,13 @@
+
 import React, { Component } from 'react';
 import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
 import firebase from 'firebase';
 import 'firebase/auth';
 import 'firebase/database';
+
 import $ from 'jquery';
 
-
-class AddListing extends Component {
+export  class AddListing extends Component {
     constructor(props) {
         super(props)
         this.addListing = this.addListing.bind(this);
@@ -104,6 +105,7 @@ class AddListing extends Component {
         let sqrft = this.state.sqrft;
         let imgs = this.state.imgs;
         let uid = this.state.uid;
+
         let baseURL = "https://maps.googleapis.com/maps/api/geocode/json?address=";
         let apiKey = "AIzaSyDOMxiv80oiceTHg7NerU2705RKh13ryY8";
         let newAdd = ""
@@ -130,7 +132,7 @@ class AddListing extends Component {
         Promise.all([promise]).then((result) => {
             let lat = result[0].results[0].geometry.location.lat;
             let lng = result[0].results[0].geometry.location.lng;
-            let listingsRef = firebase.database().ref('Listings');
+            let listingsRef = firebase.database().ref('Listings/' + );
             console.log(lat)
             console.log(handicap)
             let listing = {
