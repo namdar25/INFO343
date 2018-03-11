@@ -4,7 +4,10 @@ export default class Carousel extends Component {
     render() {
         return (
             <div>
-                {Object.keys(this.props.images).map((key, i) => {
+                <div className="carousel-item active">
+                    <img className="d-block img-fluid" src={this.props.images} alt="First slide" />
+                </div>
+                {/* {Object.keys(this.props.imgs).map((key, i) => {
                     if (i === 0) {
                         return (
                             <div className="carousel-item active">
@@ -19,7 +22,7 @@ export default class Carousel extends Component {
                         )
                     }
                 })
-                }
+                } */}
             </div>
         )
     }
