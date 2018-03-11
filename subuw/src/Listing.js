@@ -68,8 +68,6 @@ export class Listing extends Component {
                     </ModalFooter>
                 </Modal>
             </div>
-
-
         )
     }
 }

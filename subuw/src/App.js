@@ -12,6 +12,7 @@ import './App.css';
 import { Chat } from './Chat.js';
 import { StartPage } from './StartPage';
 import { About } from './About';
+import { AddListing } from './AddListing.js';
 import firebase from 'firebase';
 import 'firebase/auth';
 import 'firebase/database';
@@ -23,15 +24,18 @@ class App extends Component {
     constructor(props) {
         super(props);
 		this.getMyConversations = this.getMyConversations.bind(this);
+		this.showConvo = this.showConvo.bind(this);
+		this.setReciever = this.setReciever.bind(this);
 		this.state = ({
-			uid: "me",
+			uid: "jon",
 			allConversations: {}
             currentItem: '',
             username: '',
             items: [],
             user: null,
             opacity: 0,
-            search: null
+            search: null,
+			showConvo: false
         }
         this.toggle = this.toggle.bind(this);
         this.getSearch = this.getSearch.bind(this);
@@ -83,6 +87,12 @@ class App extends Component {
 		// this.state.myConversations = myConversations;
 	}
 
+	showConvo() {
+		this.setState({
+      showConvo: true
+		})
+	}
+
     logout() {
         firebase.auth().signOut()
             .then(() => {
@@ -99,6 +109,30 @@ class App extends Component {
     }
 
     render() {
+	    let routedConvos = <div></div>;
+		let myConversations = this.getMyConversations();
+		console.log(myConversations)
+		if (myConversations !== null && myConversations !== undefined) {
+		routedConvos = Object.values(myConversations).map((conversation, i) => {
+		let path = '/Conversation' + (i + 1);
+        let recieverUid;
+        conversation.contributors.forEach(function (curUid) {
+          if (curUid !== uid) {
+            recieverUid = curUid;
+          }
+        })
+        if (recieverUid !== uid) {
+          return (
+            <div>
+              <Route path={path} render={(props) => (
+                <Conversation modal={true} uid={this.state.uid} recieverUid={this.state.recieverUid} />
+              )} />
+            </div>
+
+          )
+        }
+      })
+    }
 	let uid = this.state.uid;
         return (
             <div className="mainAppDiv" style={{ opacity: this.state.opacity }}>
@@ -154,8 +188,9 @@ class App extends Component {
                                 <Main search={this.state.search} />
                             )} />}
 							<Route path="/chat" render={(props) => (
-							<Chat /*props*/ />
+							<Chat myConversations={myConversations} setReciever={this.setReciever} />
 							)} />
+							{routedConvos}
                         </div>
                     </Router>}
             </div >

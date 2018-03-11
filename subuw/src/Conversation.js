@@ -3,6 +3,8 @@ import firebase from 'firebase';
 import 'firebase/auth';
 import 'firebase/database';
 import $ from 'jquery';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, UncontrolledCarousel } from 'reactstrap';
+
 
 
 class Conversation extends Component {
@@ -10,13 +12,23 @@ class Conversation extends Component {
         super(props)
         this.submitMessage = this.submitMessage.bind(this);
         this.updateMessage = this.updateMessage.bind(this);
+        this.toggle = this.toggle.bind(this);
         this.state = ({
-            uid: "me",
-            recieverUid: "them",
+            modal: props.modal,
+            uid: props.uid,
+            recieverUid: props.recieverUid,
             currentMessages: {}
 
         })
     }
+
+    toggle() {
+        this.setState({
+            modal: false
+        })
+    }
+
+
 
     componentDidMount() {
         let front;
@@ -26,24 +38,28 @@ class Conversation extends Component {
         let recieverUid = this.state.recieverUid;
         console.log(uid, recieverUid)
         if (uid !== recieverUid) {
-            chats.once('value', function (snapshot) {
+            chats.on('value', function (snapshot) { //only goes in here for first set up, I want to go in every time a messaged is added(seems to skip it)
                 front = snapshot.hasChild(uid + "-" + recieverUid);
                 back = snapshot.hasChild(recieverUid + "-" + uid);
                 console.log(front, back)
+                console.log(!front || !back)
                 if (!front && !back) {
                     console.log(snapshot)
                     chats.child(uid + '-' + recieverUid).set({
                         contributors: [uid, recieverUid]
                     })
                     front = true;
+                    console.log(front, back)
                 }
             });
+            console.log(front, back)
             let child;
             if (front) {
                 child = this.state.uid + "-" + this.state.recieverUid;
             } else {
                 child = this.state.recieverUid + "-" + this.state.uid;
             }
+            console.log(child)
             this.setState({
                 chatId: child
             })
@@ -55,8 +71,8 @@ class Conversation extends Component {
                     })
                 }
             })
-            console.log(firebase.database().ref('conversations/' + child))
         }
+        console.log(this.state.chatId)
     }
 
     updateMessage(event) {
@@ -66,8 +82,9 @@ class Conversation extends Component {
     }
 
     submitMessage(event) {
-        event.preventDefault()
+        event.preventDefault();
         const nextMessage = this.state.message;
+        console.log(this.state.chatId)
         if (nextMessage != '') {
             let message = {
                 sender: this.state.uid,
@@ -80,29 +97,32 @@ class Conversation extends Component {
         this.setState({
             message: ''
         })
-        $('#messageBox').val('');
+        $(".chatlogs").stop().animate({ scrollTop: $(".chatlogs")[0].scrollHeight }, 1000);
     }
 
     printMessages(currentMessages) {
         let output = Object.values(currentMessages).map((message, i) => {
             if (message.text !== undefined) {
-                let bubble;
+                let person;
                 if (message.sender === this.state.uid) {
-                    bubble = '';
+                    person = 'chat self';
                 } else {
-                    bubble = '';
+                    person = 'chat friend';
                 }
                 if (message.text !== null) {
                     return (
-                        <div>
+                        /*<div>
                             <div className={bubble}>
                                 <div class="talktext">
                                     <p>{message.text}</p>
                                 </div>
                             </div>
                             <br className="chat" />
-                        </div>
-                    )
+                        </div>*/
+                        <div class={person}>
+                            <div class="user-photo"></div>
+                            <p class='chat-message'>{message.text}</p>
+                        </div>)
                 }
             }
         })
@@ -111,18 +131,37 @@ class Conversation extends Component {
 
     render() {
         let currentMessages = this.state.currentMessages;
+        console.log(this.state.modal)
         return (
+            /* <div>
+                 <h2>Conversation</h2>
+                 <ul className="allMessages">
+                     {this.printMessages(currentMessages)}
+                 </ul>
+                 <form className="messageForm" onSubmit={this.submitMessage}>
+                     <input id="messageBox" className="messageBox" onChange={this.updateMessage} maxlength='34' name="input" type="text" placeholder="Message" />
+                 </form>
+                 <a href="#" class="open-btn" id="addClass"><i class="fa fa-whatsapp" aria-hidden="true"></i> Click Here</a>
+             </div>*/
             <div>
-                <h2>Conversation</h2>
-                <ul className="allMessages">
-                    {this.printMessages(currentMessages)}
-                </ul>
-                <form className="messageForm" onSubmit={this.submitMessage}>
-                    <input id="messageBox" className="messageBox" onChange={this.updateMessage} maxlength='34' name="input" type="text" placeholder="Message" />
-                </form>
-                <a href="#" class="open-btn" id="addClass"><i class="fa fa-whatsapp" aria-hidden="true"></i> Click Here</a>
-            </div>
 
+                <Modal isOpen={this.state.modal} toggle={this.toggle} autoFocus={false} >
+                    <ModalHeader>
+                        <Button color="secondary" onClick={this.toggle}>Close</Button>
+                    </ModalHeader>
+                    <ModalBody>
+                        <div class="chatbox">
+                            <div class="chatlogs">
+                                {this.printMessages(currentMessages)}
+                            </div>
+                            <div class="chat-form">
+                                <textarea id="messageBox" onChange={this.updateMessage}></textarea>
+                                <button onClick={this.submitMessage}>Send</button>
+                            </div>
+                        </div>
+                    </ModalBody>
+                </Modal>
+            </div>
 
         )
     }
