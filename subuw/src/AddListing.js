@@ -132,7 +132,7 @@ export  class AddListing extends Component {
         Promise.all([promise]).then((result) => {
             let lat = result[0].results[0].geometry.location.lat;
             let lng = result[0].results[0].geometry.location.lng;
-            let listingsRef = firebase.database().ref('Listings/' + );
+            let listingsRef = firebase.database().ref('Listings' );
             console.log(lat)
             console.log(handicap)
             let listing = {
