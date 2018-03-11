@@ -12,7 +12,7 @@ class Chat extends Component {
         super(props)
         this.state = ({
             allConversations: {},
-            uid: "me",
+            uid: props.uid,
         })
     }
 
@@ -27,43 +27,53 @@ class Chat extends Component {
         })
     }
 
-    getNameFromUid(uid) {
+    getNameFromUid(uid, type) {
         let users = this.props.users;
-        // reference either a list of all our user or something more efficient
+        /*let user = Object.values(users).filter(function (user) {
+            return user.uid === uid;
+        })
+        if (type === "name") {
+            return user.length === 1 ? user[0].displayName : undefined;
+        } */
     }
 
     render() {
+        console.log(this.props.myConversations)
         let myConversations = [];
         myConversations = this.props.myConversations;
         let uid = this.state.uid;
         return (
             <div>
-                <div class="dropdown">
+                {/* <div class="dropdown">
                     <button class="dropbtn">Dropdown
                 <i class="fa fa-caret-down"></i>
                     </button>
-                    <div class="dropdown-content">
+                    <div class="dropdown-content"> */}
 
-                        {Object.values(myConversations).map((conversation, i) => {
-                            let otherUid;
-                            conversation.contributors.forEach(function (d) {
-                                if (d !== uid) {
-                                    otherUid = d;
-                                }
-                            })
-                            let link = "/Conversation" + (i + 1);
-                            if (uid !== otherUid) {
-                                return (
-                                    <Link onClick={(otherUid) => this.props.setReciever(otherUid)} to={link}>
-                                        <h5 className="card-title">Conversation with {otherUid} </h5>
-                                    </Link>
-                                )
-                            }
-                        })}
-                    </div>
-                </div >
+                {myConversations.map((conversation, i) => {
+                    console.log(conversation)
+                    console.log(conversation.contributors)
 
-            </div >
+                    let otherUid;
+                    conversation.contributors.forEach(function (d) {
+                        if (d !== uid) {
+                            otherUid = d;
+                        }
+                    })
+                    console.log(uid, otherUid)
+                    let link = "/Conversation" + (i + 1);
+                    if (uid !== otherUid) {
+                        return (
+                            <Link onClick={() => this.props.showConvo()} to={link}>
+                                <h5>Conversation with {otherUid} </h5>
+                            </Link>
+                        )
+                    }
+                })}
+            </div>
+            //     </div >
+
+            // </div >
         )
     }
 
