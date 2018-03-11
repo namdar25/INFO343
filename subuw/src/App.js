@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 //import { Nav, NavItem, MenuItem, Navbar, NavDropdown } from 'react-bootstrap';
-import { HashRouter as Router, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
     Button, Modal, ModalHeader, ModalBody, ModalFooter, Collapse,
     Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink
@@ -195,6 +195,7 @@ class App extends Component {
     }
 }
 
+
 class LogInPop extends Component {
     render() {
         return (
@@ -285,25 +286,38 @@ class LogIn extends Component {
         return (
             <div>
                 <div>
-                    <Button className="logIn" onClick={this.toggle}>Log In</Button>
-                    <Modal isOpen={this.state.modal} toggle={this.toggle} >
-                        <ModalHeader toggle={this.toggle}>Log In options:</ModalHeader>
-                        <ModalBody>
-                            <div className="wrapper">
-                                {!this.state.user && <i onClick={this.loginG} className="fab fa-google"></i>
-                                }
-                            </div>
-                            <div className="wrapper">
-                                {!this.state.user && <i onClick={this.loginFB} className="fab fa-facebook-square"></i>
-                                }
-                            </div>
-                        </ModalBody>
-                        <ModalFooter>
-                            {/* <Button color="primary" onClick={this.toggle}>Do Something</Button> */}
-                            <Button color="secondary" onClick={this.toggle}>Cancel</Button>
-                        </ModalFooter>
-                    </Modal>
+                    <div>
+                        <Button className="logIn" onClick={this.toggle}>Log In</Button>
+                        <Modal isOpen={this.state.modal} toggle={this.toggle} >
+                            <ModalHeader toggle={this.toggle}>Log In options:</ModalHeader>
+                            <ModalBody>
+                                <div className="wrapper">
+                                    {!this.state.user && <i onClick={this.loginG} className="fab fa-google"></i>
+                                    }
+                                </div>
+                                <div className="wrapper">
+                                    {!this.state.user && <i onClick={this.loginFB} className="fab fa-facebook-square"></i>
+                                    }
+                                </div>
+                            </ModalBody>
+                            <ModalFooter>
+                                {/* <Button color="primary" onClick={this.toggle}>Do Something</Button> */}
+                                <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+                            </ModalFooter>
+                        </Modal>
+                    </div>
                 </div>
+                {/* <div className="All">
+                    <div className="search-input" >
+                        <InputGroup>
+                            <Input className="search-input-tag" placeholder="Enter city or zip code..." />
+                            <InputGroupAddon addonType="append">
+                                <InputGroupText><i className="fas fa-search"></i></InputGroupText>
+                            </InputGroupAddon>
+                        </InputGroup>
+
+                    </div>
+                </div > */}
             </div>
 
         )

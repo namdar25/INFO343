@@ -6,6 +6,9 @@ import firebase from 'firebase'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'firebase/auth';
 import 'firebase/database';
+import { HashRouter, Route, Link } from "react-router-dom";
+import { StartPage } from './StartPage';
+import { About } from './About';
 
 let config = {
     apiKey: "AIzaSyCg0NK0JvgjlU8pHF_kNxLnx_To1NhogNg",
@@ -15,6 +18,7 @@ let config = {
     storageBucket: "subuw-j420m.appspot.com",
     messagingSenderId: "525275022235"
 };
+
 firebase.initializeApp(config);
 // export const provider = new firebase.auth.GoogleAuthProvider();
 // export const auth = firebase.auth();
