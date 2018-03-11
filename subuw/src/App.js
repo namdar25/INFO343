@@ -3,16 +3,10 @@ import React, { Component } from 'react';
 import { HashRouter as Router, Route, Link } from "react-router-dom";
 import {
     Button, Modal, ModalHeader, ModalBody, ModalFooter, Collapse,
-    Navbar,
-    NavbarToggler,
-    NavbarBrand,
-    Nav,
-    NavItem,
-    NavLink
+    Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink
 } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.css';
-import './App.css';
-import Main from './Main';
+// import './App.css';
 import '../node_modules/jquery/dist/jquery.js';
 import '../node_modules/popper.js/dist/popper.js';
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
@@ -21,6 +15,8 @@ import { StartPage } from './StartPage';
 import firebase from 'firebase';
 import 'firebase/auth';
 import 'firebase/database';
+import './Main.css';
+import { Main } from './Main';
 class App extends Component {
     constructor(props) {
         super(props);
@@ -109,7 +105,6 @@ class App extends Component {
                     </Router>
                 </div>
                 <StartPage />
-
             </div >
         );
     }
