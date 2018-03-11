@@ -7,6 +7,7 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter, UncontrolledCarouse
 
 
 
+
 class Conversation extends Component {
     constructor(props) {
         super(props)
@@ -24,11 +25,9 @@ class Conversation extends Component {
 
     toggle() {
         this.setState({
-            modal: false
+            modal: !this.state.modal
         })
     }
-
-
 
     componentDidMount() {
         let front;
@@ -73,6 +72,7 @@ class Conversation extends Component {
             })
         }
         console.log(this.state.chatId)
+        //$(".chatlogs").stop().animate({ scrollTop: $(".chatlogs")[0].scrollHeight }, 1000);
     }
 
     updateMessage(event) {
@@ -98,6 +98,8 @@ class Conversation extends Component {
             message: ''
         })
         $(".chatlogs").stop().animate({ scrollTop: $(".chatlogs")[0].scrollHeight }, 1000);
+        $('#messageBox').val('');
+
     }
 
     printMessages(currentMessages) {
@@ -111,14 +113,6 @@ class Conversation extends Component {
                 }
                 if (message.text !== null) {
                     return (
-                        /*<div>
-                            <div className={bubble}>
-                                <div class="talktext">
-                                    <p>{message.text}</p>
-                                </div>
-                            </div>
-                            <br className="chat" />
-                        </div>*/
                         <div class={person}>
                             <div class="user-photo"></div>
                             <p class='chat-message'>{message.text}</p>
@@ -133,19 +127,17 @@ class Conversation extends Component {
         let currentMessages = this.state.currentMessages;
         console.log(this.state.modal)
         return (
-            /* <div>
-                 <h2>Conversation</h2>
-                 <ul className="allMessages">
-                     {this.printMessages(currentMessages)}
-                 </ul>
-                 <form className="messageForm" onSubmit={this.submitMessage}>
-                     <input id="messageBox" className="messageBox" onChange={this.updateMessage} maxlength='34' name="input" type="text" placeholder="Message" />
-                 </form>
-                 <a href="#" class="open-btn" id="addClass"><i class="fa fa-whatsapp" aria-hidden="true"></i> Click Here</a>
-             </div>*/
             <div>
-
-                <Modal isOpen={this.state.modal} toggle={this.toggle} autoFocus={false} >
+                <div class="chatbox">
+                    <div class="chatlogs">
+                        {this.printMessages(currentMessages)}
+                    </div>
+                    <div class="chat-form">
+                        <textarea id="messageBox" onChange={this.updateMessage}></textarea>
+                        <button onClick={this.submitMessage}>Send</button>
+                    </div>
+                </div>
+                {/* <Modal isOpen={this.state.modal} toggle={this.toggle} autoFocus={false} >
                     <ModalHeader>
                         <Button color="secondary" onClick={this.toggle}>Close</Button>
                     </ModalHeader>
@@ -160,9 +152,8 @@ class Conversation extends Component {
                             </div>
                         </div>
                     </ModalBody>
-                </Modal>
+                </Modal> */}
             </div>
-
         )
     }
 }

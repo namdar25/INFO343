@@ -16,11 +16,8 @@ class App extends Component {
     super(props)
     this.getMyConversations = this.getMyConversations.bind(this);
     this.showConvo = this.showConvo.bind(this);
-    this.setReciever = this.setReciever.bind(this);
-
     this.state = ({
       uid: "jon",
-      recieverUid: "doreen",
       allConversations: {},
       showConvo: false
     })
@@ -62,58 +59,46 @@ class App extends Component {
     })
   }
 
-  setReciever(recieverUid) {
-    console.log("ok")
-    this.setState({
-      recieverUid: recieverUid
-    })
-  }
-
   render() {
-    let routedConvos = <div></div>;
     let myConversations = this.getMyConversations();
     console.log(myConversations)
-    if (myConversations !== null && myConversations !== undefined) {
-      routedConvos = Object.values(myConversations).map((conversation, i) => {
-        let path = '/Conversation' + (i + 1);
-        let recieverUid;
-        conversation.contributors.forEach(function (curUid) {
-          if (curUid !== uid) {
-            recieverUid = curUid;
-          }
-        })
-        if (recieverUid !== uid) {
-          return (
-            <div>
-              <Route path={path} render={(props) => (
-                <Conversation modal={true} uid={this.state.uid} recieverUid={this.state.recieverUid} />
-              )} />
-            </div>
-
-          )
-        }
-      })
-    }
-
     let uid = this.state.uid;
     console.log(this.state.showConvo)
     return (
       <div className="App">
         <Router>
           <div>
-            <Link to="/chat"> Chat </Link>
-
-            <Route path="/chat" render={(props) => (
-              <Chat myConversations={myConversations} setReciever={this.setReciever} />
-            )} />
-            {routedConvos}
+            {!this.state.showConvo &&
+              <div>
+                <Link to="/chat"> Chat </Link>
+                <Route path="/chat" render={(props) => (
+                  <Chat myConversations={myConversations} showConvo={this.showConvo} uid={this.state.uid} />
+                )} />
+              </div>
+            }
+            {this.state.showConvo &&
+              myConversations.map((conversation, i) => {
+                let path = '/Conversation' + (i + 1);
+                let recieverUid;
+                conversation.contributors.forEach(function (curUid) {
+                  if (curUid !== uid) {
+                    recieverUid = curUid;
+                  }
+                })
+                if (recieverUid !== uid) {
+                  return (
+                    <div>
+                      <Route path={path} render={(props) => (
+                        <Conversation modal={true} uid={this.state.uid} recieverUid={recieverUid} />
+                      )} />
+                    </div>
+                  )
+                }
+              })
+            }
           </div>
         </Router>
-        <AddListing />
-
-
-
-      </div>
+      </div >
     )
   }
 }
