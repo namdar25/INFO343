@@ -8,7 +8,7 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter, UncontrolledCarouse
 
 
 
-class Conversation extends Component {
+export class Conversation extends Component {
     constructor(props) {
         super(props)
         this.submitMessage = this.submitMessage.bind(this);

@@ -7,7 +7,7 @@ import './App.css';
 
 
 
-class Chat extends Component {
+export class Chat extends Component {
     constructor(props) {
         super(props)
         this.state = ({
