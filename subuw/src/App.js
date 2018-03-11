@@ -92,7 +92,7 @@ class App extends Component {
                                 <Collapse isOpen={this.state.isOpen} navbar>
                                     <Nav className="ml-auto" navbar>
                                         <NavItem>
-                                            <NavLink className="logIn" to="/">Home</NavLink>
+                                            <Link className="logIn" to="/">Home</Link>
                                         </NavItem>
                                         <NavItem>
                                             <NavLink className="logIn" >Profile</NavLink>
@@ -101,7 +101,7 @@ class App extends Component {
                                             <NavLink className="logIn" >Host</NavLink>
                                         </NavItem>
                                         <NavItem>
-                                            <NavLink className="logIn" to="/about">About</NavLink>
+                                            <Link className="logIn" to="/About">About</Link>
                                         </NavItem>
                                         <NavItem>
                                             <NavLink className="logIn" onClick={() => { this.logout() }}>Log Out</NavLink>
@@ -112,7 +112,9 @@ class App extends Component {
                             <Route exact path="/" component={(props) => (
                                 <StartPage sendSearch={this.getSearch} />
                             )} />
-                            <Route path="/about" component={About} />
+                            <Route path="/About" component={(props) => (
+                                <About />
+                            )} />
                             {<Route path="/Main" component={(props) => (
                                 <Main search={this.state.search} />
                             )} />}
