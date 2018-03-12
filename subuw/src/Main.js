@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import Listing from './Listing';
 import Maps from './Maps';
-import './Main.css';
 import test from './testlisting.json';
 import * as SplitPane from "react-split-pane";
 import firebase from 'firebase';
+import './App.css'
 import {
     Navbar, NavbarBrand, NavbarToggler, Collapse, Nav, NavItem, NavLink, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem,
     InputGroup, InputGroupAddon, InputGroupText, Input, FormGroup, Label, Button
@@ -18,7 +18,7 @@ export class Main extends Component {
             isOpen: false,
             filters: {},
             listings: [],
-            filteredListings: []
+            filteredListings: [],
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -30,12 +30,15 @@ export class Main extends Component {
         let listingsRef = firebase.database().ref('Listings')
         listingsRef.on('value', (snapshot) => {
             let listings = snapshot.val()
-            listings = Object.values(listings)
-            // listings = listings.filter((x) => {
-            //     x.zip === this.props.search
-            // })
+            let keys = Object.keys(listings);
+            listings = Object.values(listings);
+            let listingsKey = []
+            listings.forEach((d, i) => {
+                d["key"] = keys[i]
+                listingsKey.push(d)
+            })
             this.setState({
-                listings: listings,
+                listings: listingsKey,
                 filteredListings: listings
             });
         })
@@ -62,15 +65,24 @@ export class Main extends Component {
             for (var key in params) {
                 if (key === 'rent' && item[key] > params[key]) {
                     return false;
+                } else if (key === "startDate") {
+                    let dateFilter = new Date(item[key]);
+                    let date = new Date(params[key]);
+                    if (dateFilter < date) {
+                        return false;
+                    }
+                } else if (key === "endDate") {
+                    let dateFilter = new Date(item[key]);
+                    let date = new Date(params[key]);
+                    if (dateFilter < date) {
+                        return false;
+                    }
                 } else if (item[key] === undefined || item[key] != params[key] && key !== "rent") {
                     return false;
                 }
             }
             return true;
         });
-        this.setState({
-            filteredListings: filteredListings
-        })
     }
 
     reset(event) {
@@ -83,7 +95,10 @@ export class Main extends Component {
     }
 
     render() {
-        console.log(this.props.search);
+        let search = 98105
+        if (this.props.search) {
+            let search = this.props.search
+        }
         return (
             <div>
                 {this.state.filteredListings &&
@@ -94,7 +109,7 @@ export class Main extends Component {
                         <Navbar color="white" light expand="md" className="vertical-nav">
                             <NavbarToggler onClick={this.toggle} />
                             <Nav className="ml-auto" id="verticalNav" navbar>
-                                <UncontrolledDropdown nav inNavbar>
+                                <UncontrolledDropdown direction="left" nav inNavbar>
                                     <DropdownToggle nav caret>
                                         Price
                                         </DropdownToggle>
@@ -109,7 +124,7 @@ export class Main extends Component {
                                             </DropdownItem>
                                     </DropdownMenu>
                                 </UncontrolledDropdown>
-                                <UncontrolledDropdown nav inNavbar>
+                                <UncontrolledDropdown direction="left" nav inNavbar>
                                     <DropdownToggle nav caret>
                                         Beds
                                         </DropdownToggle>
@@ -128,7 +143,7 @@ export class Main extends Component {
                                             </DropdownItem>
                                     </DropdownMenu>
                                 </UncontrolledDropdown>
-                                <UncontrolledDropdown nav inNavbar>
+                                <UncontrolledDropdown direction="left" nav inNavbar>
                                     <DropdownToggle nav caret>
                                         Baths
                                         </DropdownToggle>
@@ -147,7 +162,7 @@ export class Main extends Component {
                                             </DropdownItem>
                                     </DropdownMenu>
                                 </UncontrolledDropdown>
-                                <UncontrolledDropdown nav inNavbar>
+                                <UncontrolledDropdown direction="left" nav inNavbar>
                                     <DropdownToggle nav caret>
                                         Laundry
                                         </DropdownToggle>
@@ -164,7 +179,7 @@ export class Main extends Component {
                                             </DropdownItem>
                                     </DropdownMenu>
                                 </UncontrolledDropdown>
-                                <UncontrolledDropdown nav inNavbar>
+                                <UncontrolledDropdown direction="left" nav inNavbar>
                                     <DropdownToggle nav caret>
                                         Type
                                         </DropdownToggle>
@@ -181,7 +196,7 @@ export class Main extends Component {
                                             </DropdownItem>
                                     </DropdownMenu>
                                 </UncontrolledDropdown>
-                                <UncontrolledDropdown nav inNavbar>
+                                <UncontrolledDropdown direction="left" nav inNavbar>
                                     <DropdownToggle nav caret>
                                         Date Range
                                         </DropdownToggle>
@@ -190,7 +205,7 @@ export class Main extends Component {
                                             <Input placeholder="start-date" name="startDate" value={this.state.filters.start} onChange={this.handleChange} />
                                         </InputGroup>
                                         <InputGroup>
-                                            <Input placeholder="end-date" name="endDate" value={this.state.filters.end} />
+                                            <Input placeholder="end-date" name="endDate" value={this.state.filters.end} onChange={this.handleChange} />
                                         </InputGroup>
                                     </DropdownMenu>
                                 </UncontrolledDropdown>
@@ -208,7 +223,7 @@ export class Main extends Component {
                                 </div>
                             </div>
                             <div className="pane">
-                                <Maps listings={this.state.filteredListings} />
+                                <Maps listings={this.state.filteredListings} search={search} />
                             </div>
                         </SplitPane>
                     </div>
