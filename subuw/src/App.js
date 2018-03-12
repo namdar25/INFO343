@@ -127,6 +127,7 @@ class App extends Component {
                                 </Nav>
                             </Collapse>
                         </Navbar>
+                        <StartPage sendSearch={() => { this.sendSearch() }} />
                     </div>
                 }
                 {this.state.user &&
@@ -144,7 +145,7 @@ class App extends Component {
                                             <Link className="logIn" to="/">Profile</Link>
                                         </NavItem>
                                         <NavItem>
-                                            <Link className="logIn" to="/">Host</Link>
+                                            <Link className="logIn" to="/AddListing">Host</Link>
                                         </NavItem>
                                         <NavItem>
                                             <Link className="logIn" to="/about">About</Link>
@@ -153,7 +154,7 @@ class App extends Component {
                                             <Link className="logIn" to="/chat"> Chat </Link>
                                         </NavItem>
                                         <NavItem>
-                                            <button className="logIn" onClick={() => { this.logout() }}>Log Out</button>
+                                            <Link className="logIn" to="/" onClick={() => { this.logout() }}>Log Out</Link>
                                         </NavItem>
                                     </Nav>
                                 </Collapse>
@@ -162,6 +163,9 @@ class App extends Component {
                                 <StartPage sendSearch={this.getSearch} />
                             )} />
                             <Route path="/about" component={About} />
+                            <Route path="/AddListing" render={(props) => (
+                                <AddListing uid={this.state.uid} />
+                            )} />
                             {<Route path="/Main" component={(props) => (
                                 <Main search={this.state.search} />
                             )} />}
