@@ -9,13 +9,16 @@ import {
     Navbar, NavbarBrand, NavbarToggler, Collapse, Nav, NavItem, NavLink, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem,
     InputGroup, InputGroupAddon, InputGroupText, Input, FormGroup, Label, Button
 } from 'reactstrap';
+import { Conversation } from './Conversation';
 
 export class Main extends Component {
     constructor(props) {
         super(props)
         this.toggle = this.toggle.bind(this);
         this.state = {
+            uid: props.uid,
             isOpen: false,
+            modal2: false,
             filters: {},
             listings: [],
             filteredListings: [],
@@ -27,6 +30,7 @@ export class Main extends Component {
     }
 
     componentDidMount() {
+        console.log("WHY ARE YOU RERENDERING")
         let listingsRef = firebase.database().ref('Listings')
         listingsRef.on('value', (snapshot) => {
             let listings = snapshot.val()
@@ -94,6 +98,7 @@ export class Main extends Component {
         })
     }
 
+
     render() {
         let search = 98105
         if (this.props.search) {
@@ -105,8 +110,8 @@ export class Main extends Component {
                     <div>
                         {/* <button className="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Filters
                                 <span class="caret"></span>
-                            </button> */}
-                        <Navbar color="white" light expand="md" className="vertical-nav">
+                            </button> */}\
+                                <Navbar color="white" light expand="md" className="vertical-nav">
                             <NavbarToggler onClick={this.toggle} />
                             <Nav className="ml-auto" id="verticalNav" navbar>
                                 <UncontrolledDropdown direction="left" nav inNavbar>
@@ -217,7 +222,7 @@ export class Main extends Component {
                             <div className="pane">
                                 <div>
                                     {this.state.filteredListings.map((d) => {
-                                        return <Listing listings={d} />
+                                        return <Listing showConvo={this.showConvo} listings={d} uid={this.state.uid} />
                                     })
                                     }
                                 </div>
@@ -226,6 +231,7 @@ export class Main extends Component {
                                 <Maps listings={this.state.filteredListings} search={search} />
                             </div>
                         </SplitPane>
+
                     </div>
                 }
             </div>
