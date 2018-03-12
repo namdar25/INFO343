@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-//import { Nav, NavItem, MenuItem, Navbar, NavDropdown } from 'react-bootstrap';
-import { HashRouter as Router, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
     Button, Modal, ModalHeader, ModalBody, ModalFooter, Collapse,
     Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink
@@ -14,6 +13,7 @@ import { StartPage } from './StartPage';
 import { About } from './About';
 import { AddListing } from './AddListing.js';
 import firebase from 'firebase';
+import { Login } from './Login';
 import 'firebase/auth';
 import 'firebase/database';
 import './Main.css';
@@ -195,118 +195,4 @@ class App extends Component {
     }
 }
 
-class LogInPop extends Component {
-    render() {
-        return (
-            <div className="logInPopUp">
-                <div className="card-body">
-                    <p> Please Log in with one of the following options: </p>
-                </div>
-            </div>
-        )
-    }
-}
-
-class LogIn extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            modal: false
-        };
-        this.userRef = firebase.database().ref('Users');
-
-        this.toggle = this.toggle.bind(this);
-        this.loginFB = this.loginFB.bind(this);
-        this.loginG = this.loginG.bind(this);
-    }
-
-    toggle() {
-        this.setState({
-            modal: !this.state.modal
-        });
-    }
-
-    loginG() {
-        let provider = new firebase.auth.GoogleAuthProvider();
-        firebase.auth().signInWithPopup(provider)
-            .then((result) => {
-                const user = result.user;
-                console.log("result.user google: ", result.user);
-                if (user && user.uid) {
-                    this.setState({
-                        user: result.user,
-                        modal: false
-                    });
-
-                    let newUser = {
-                        userID: user.uid,
-                        displayName: user.displayName,
-                        email: user.email
-                    };
-
-                    let update = {};
-                    update[user.uid] = newUser;
-
-                    this.userRef.update(update);
-                }
-            });
-    }
-
-    loginFB() {
-        let provider = new firebase.auth.FacebookAuthProvider();
-        firebase.auth().signInWithPopup(provider)
-            .then((result) => {
-                const user = result.user;
-                console.log("result.user fb: ", result.user);
-                if (user && user.uid) {
-                    this.setState({
-                        user: result.user,
-                        modal: false
-                    });
-
-                    let newUser = {
-                        userID: user.uid,
-                        displayName: user.displayName,
-                        email: user.email
-                    };
-
-                    let update = {};
-                    update[user.uid] = newUser;
-
-                    this.userRef.update(update);
-                }
-            });
-    }
-
-
-    // <span onClick={this.logout}>Log Out</span>
-    render() {
-        console.log("user: ", this.state.user);
-        return (
-            <div>
-                <div>
-                    <Button className="logIn" onClick={this.toggle}>Log In</Button>
-                    <Modal isOpen={this.state.modal} toggle={this.toggle} >
-                        <ModalHeader toggle={this.toggle}>Log In options:</ModalHeader>
-                        <ModalBody>
-                            <div className="wrapper">
-                                {!this.state.user && <i onClick={this.loginG} className="fab fa-google"></i>
-                                }
-                            </div>
-                            <div className="wrapper">
-                                {!this.state.user && <i onClick={this.loginFB} className="fab fa-facebook-square"></i>
-                                }
-                            </div>
-                        </ModalBody>
-                        <ModalFooter>
-                            {/* <Button color="primary" onClick={this.toggle}>Do Something</Button> */}
-                            <Button color="secondary" onClick={this.toggle}>Cancel</Button>
-                        </ModalFooter>
-                    </Modal>
-                </div>
-            </div>
-
-        )
-    }
-}
 export default App;

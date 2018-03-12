@@ -22,6 +22,14 @@
     font-size: large;
 }
 
+body {
+    background: none;
+}
+
+body {
+    background: none;
+}
+
 .navbar {
     height: 4vh;
     width: 100vw;
@@ -80,6 +88,7 @@
 
 .mainAppDiv {
     transition: opacity 100ms;
+
 }
 
 @keyframes App-logo-spin {

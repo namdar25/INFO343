@@ -1,8 +1,14 @@
-.All {
-   background-image: url("testing2.png");
-   height: 100vh;
-   background-size: cover;
-   background-repeat: none;
+.startPageBackground {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background-image: url("testing2.png");
+    height: 100vh;
+    background-position: 0;
+    background-size: cover;
+    background-repeat: none;
+    z-index: -1;
 }
 
 i {
