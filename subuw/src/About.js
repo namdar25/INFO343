@@ -31,8 +31,8 @@ export class About extends Component {
                                 <img className="card-img-top" src={require("./imgs/raffi.jpg")} alt="Card image cap" />
                                 <div className="card-body">
                                     <h5 className="card-title">Raffi Gharakhanian</h5>
-                                    <p className="card-text">ENTER YOUR INFO HERE</p>
-                                    <a href="#" className="btn btn-primary">LinkedIn</a>
+                                    <p className="card-text">Experienced Marketing Analytics Consultant with a demonstrated history of working in the hospital and health care industry and flash memory. Skilled in R Programming, Web Development, Tableau, Data Analytics, and Microsoft Office . Strong analytics professional pursuing a Bachelor’s Degree in Economics and minors in Informatics and Political Science from University of Washington in Seattle.</p>
+                                    <a href="https://www.linkedin.com/in/rgharakhanian/" className="btn btn-primary">LinkedIn</a>
                                 </div>
                             </div>
                         </Col>
@@ -43,8 +43,8 @@ export class About extends Component {
                                 <img className="card-img-top" src={require("./imgs/jon.jpg")} alt="Card image cap" />
                                 <div className="card-body">
                                     <h5 className="card-title">Jon Cantle</h5>
-                                    <p className="card-text">ENTER YOUR INFO HERE</p>
-                                    <a href="#" className="btn btn-primary">LinkedIn</a>
+                                    <p className="card-text">I am a current Junior at the University of Washington. I pride myself on honesty and strong morals. I have an interest in data science and visualization. Both my interpersonal and programming skills combined make me a great candidate to connect the technical world to the real world.</p>
+                                    <a href="https://www.linkedin.com/in/jonathon-cantle-7452aa132/" className="btn btn-primary">LinkedIn</a>
                                 </div>
                             </div>
                         </Col>
@@ -53,8 +53,8 @@ export class About extends Component {
                                 <img className="card-img-top" src={require("./imgs/shawn.jpg")} alt="Card image cap" />
                                 <div className="card-body">
                                     <h5 className="card-title">Shawn Namdar</h5>
-                                    <p className="card-text">eNTER YOUR INFO HERE</p>
-                                    <a href="#" className="btn btn-primary">LinkedIn</a>
+                                    <p className="card-text">Senior in the informatics program and civil engineering.</p>
+                                    <a href="https://www.linkedin.com/in/shawnnamdar/" className="btn btn-primary">LinkedIn</a>
                                 </div>
                             </div>
                         </Col>
