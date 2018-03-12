@@ -3,7 +3,7 @@ import firebase from 'firebase';
 import 'firebase/auth';
 import 'firebase/database';
 import $ from 'jquery';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, UncontrolledCarousel } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, UncontrolledCarousel, Container, Row, Col } from 'reactstrap';
 
 
 
@@ -113,9 +113,9 @@ export class Conversation extends Component {
                 }
                 if (message.text !== null) {
                     return (
-                        <div class={person}>
-                            <div class="user-photo"></div>
-                            <p class='chat-message'>{message.text}</p>
+                        <div className={person + " message-container"}>
+                            <div className="user-photo"></div>
+                            <p className='chat-message'>{message.text}</p>
                         </div>)
                 }
             }
