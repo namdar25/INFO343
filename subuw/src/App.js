@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from "react-router-dom";
+import { HashRouter as Router, Route, Link } from "react-router-dom";
 import {
     Button, Modal, ModalHeader, ModalBody, ModalFooter, Collapse,
     Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink
@@ -122,7 +122,7 @@ class App extends Component {
                             <Collapse isOpen={this.state.isOpen} navbar>
                                 <Nav className="ml-auto" navbar>
                                     <NavItem>
-                                        <LogIn />
+                                        <Login />
                                     </NavItem>
                                 </Nav>
                             </Collapse>
