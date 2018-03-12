@@ -16,12 +16,9 @@ import firebase from 'firebase';
 import { Login } from './Login';
 import 'firebase/auth';
 import 'firebase/database';
-<<<<<<< HEAD
 import './Main.css';
 import { Main } from './Main';
 import { Conversation } from './Conversation.js';
-=======
->>>>>>> re-formmated
 
 class App extends Component {
     constructor(props) {

@@ -26,4 +26,5 @@ firebase.initializeApp(config);
 export default firebase;
 
 ReactDOM.render(<App />, document.getElementById('root'));
+
 registerServiceWorker();
