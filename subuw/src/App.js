@@ -138,22 +138,22 @@ class App extends Component {
                                 <Collapse isOpen={this.state.isOpen} navbar>
                                     <Nav className="ml-auto" navbar>
                                         <NavItem>
-                                            <NavLink className="logIn" to="/">Home</NavLink>
+                                            <Link className="logIn" to="/">Home</Link>
                                         </NavItem>
                                         <NavItem>
-                                            <NavLink className="logIn" >Profile</NavLink>
+                                            <Link className="logIn" to="/">Profile</Link>
                                         </NavItem>
                                         <NavItem>
-                                            <NavLink className="logIn" >Host</NavLink>
+                                            <Link className="logIn" to="/">Host</Link>
                                         </NavItem>
                                         <NavItem>
-                                            <NavLink className="logIn" to="/about">About</NavLink>
+                                            <Link className="logIn" to="/about">About</Link>
                                         </NavItem>
                                         <NavItem>
-                                            <NavLink className="logIn" to="/chat"> Chat </NavLink>
+                                            <Link className="logIn" to="/chat"> Chat </Link>
                                         </NavItem>
                                         <NavItem>
-                                            <NavLink className="logIn" onClick={() => { this.logout() }}>Log Out</NavLink>
+                                            <button className="logIn" onClick={() => { this.logout() }}>Log Out</button>
                                         </NavItem>
                                     </Nav>
                                 </Collapse>
