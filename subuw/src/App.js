@@ -161,7 +161,9 @@ class App extends Component {
                             <Route exact path="/" component={(props) => (
                                 <StartPage sendSearch={this.getSearch} />
                             )} />
-                            <Route path="/about" component={About} />
+                            <Route path="/About" component={(props) => (
+                                <About />
+                            )} />
                             {<Route path="/Main" component={(props) => (
                                 <Main search={this.state.search} />
                             )} />}
