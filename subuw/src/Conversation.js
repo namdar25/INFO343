@@ -81,6 +81,14 @@ export class Conversation extends Component {
         })
     }
 
+    getImgUrl(uid) {
+        let users = this.props.users;
+        let user = Object.values(users).filter(function (user) {
+            return user.userID === uid;
+        })
+        return user.length === 1 ? user[0].profilePicture : undefined;
+    }
+
     submitMessage(event) {
         event.preventDefault();
         const nextMessage = this.state.message;
@@ -109,17 +117,32 @@ export class Conversation extends Component {
         let output = Object.values(currentMessages).map((message, i) => {
             if (message.text !== undefined) {
                 let person;
+                let img;
                 if (message.sender === this.state.uid) {
                     person = 'chat self';
+                    img = this.getImgUrl(message.sender);
                 } else {
                     person = 'chat friend';
+                    img = this.getImgUrl(message.sender);
                 }
                 if (message.text !== null) {
+
                     return (
-                        <div class={person}>
-                            <div class="user-photo"></div>
-                            <p class='chat-message'>{message.text}</p>
-                        </div>)
+                        <div>
+                            {!img &&
+                                <div class={person}>
+                                    <div class="user-photo"></div>
+                                    <p class='chat-message'>{message.text}</p>
+                                </div>
+                            }
+                            {img &&
+                                <div class={person}>
+                                    <div class="user-photo"><img src={img} alt={"Profile Picture of" + img} /> </div>
+                                    <p class='chat-message'>{message.text}</p>
+                                </div>
+                            }
+                        </div>
+                    )
                 }
             }
         })

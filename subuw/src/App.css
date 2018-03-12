@@ -128,17 +128,17 @@
 .chatlogs {
   padding: 10px;
   width: 100%;
-  height: 450px;
+  height: 450px; /*THIS IS WHAT NEEDS TO STAY*/
   background: gray;
 overflow-x: hidden;
 overflow-y: scroll;
 }
 
-.chatlogs::-webkit-scrollbar {
+.chatlogs::-webkit-scrollbar { /*Keep?*/
   width: 10px;
 }
 
-.chatlogs::-webkit-scrollbar-thumb {
+.chatlogs::-webkit-scrollbar-thumb {/*Keep?*/
   border-radius: 5px;
   background: #fff;
 }
@@ -158,7 +158,7 @@ overflow-y: scroll;
 }
 
 .chat .chat-message {
-  width: 70%;
+  width: 31.75rem; /*KEEP*/
   padding: 15px;
   margin: 5px 10px 0;
   border-radius: 10px;

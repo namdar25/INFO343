@@ -100,7 +100,7 @@ export class Chat extends Component {
                                             <h5>Message {name} </h5>
                                         </Link> */}
                                         <p onClick={this.callConvo.bind(this, link)}> Message {name} </p>
-                                        <Conversation modal={this.state[link]} uid={this.state.uid} recieverUid={otherUid} closeConvo={this.closeConvo} convoLink={link} />
+                                        <Conversation users={this.props.users} modal={this.state[link]} uid={this.state.uid} recieverUid={otherUid} closeConvo={this.closeConvo} convoLink={link} />
                                     </DropdownItem>
                                 )
                             }
