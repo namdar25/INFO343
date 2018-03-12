@@ -1,38 +1,42 @@
 import _ from "lodash";
 import React, { Component } from 'react';
-import { compose, withProps } from "recompose";
+import { compose, withProps, withStateHandlers } from "recompose";
 import {
     withScriptjs,
     withGoogleMap,
     GoogleMap,
-    Marker
+    Marker,
+    InfoWindow,
 } from "react-google-maps";
 import GitHubForkRibbon from "react-github-fork-ribbon";
 import test from './testlisting.json';
+// import MapListing from './MapListing'
 
 const MyMapComponent = compose(
-    withProps({
-        googleMapURL:
-            "https://maps.googleapis.com/maps/api/js?key=AIzaSyDOMxiv80oiceTHg7NerU2705RKh13ryY8&v=3.exp&libraries=geometry,drawing,places",
-        loadingElement: <div style={{ height: `100%` }} />,
-        containerElement: <div style={{ height: `100vh` }} />,
-        mapElement: <div style={{ height: `100%` }} />,
-    }),
+    withStateHandlers(() => ({
+        isOpen: false,
+        currentMarker: {}
+    }), {
+            onToggleOpen: ({ isOpen }) => (d) => ({
+                isOpen: !isOpen
+            })
+        }),
     withScriptjs,
     withGoogleMap
 )(props => (
-    <GoogleMap defaultZoom={10} defaultCenter={{ lat: props.center.lat, lng: props.center.lng }}>
-        {props.listings.map((d) => {
+    <GoogleMap defaultZoom={12} defaultCenter={{ lat: props.center.lat, lng: props.center.lng }}>
+        {props.listings.map((d, i) => {
             return (
-                <Marker position={{ lat: d.lat, lng: d.long }} />
+                <Marker position={{ lat: d.lat, lng: d.long }} onClick={props.onToggleOpen} name={i}>
+                    {/* {props.isOpen &&
+                        <MapListing modal={true} listings={d} />
+                    } */}
+                </Marker>
             )
         })
         }
     </GoogleMap>
 ));
-
-const enhance = _.identity;
-
 
 export default class Maps extends Component {
     constructor(props) {
@@ -46,7 +50,7 @@ export default class Maps extends Component {
     getLatLong() {
         let baseURL = "https://maps.googleapis.com/maps/api/geocode/json?address=";
         let apiKey = "AIzaSyDOMxiv80oiceTHg7NerU2705RKh13ryY8";
-        let zip = "98105";
+        let zip = this.props.search
         let url = baseURL + zip + '&key=' + apiKey;
         fetch(url).then(function (response) {
             return response.json()
@@ -60,7 +64,13 @@ export default class Maps extends Component {
     render() {
         this.getLatLong()
         return (
-            <MyMapComponent key="map" listings={this.props.listings} center={this.state.center} />
+            <MyMapComponent key="map" googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4R6AN7SmujjPUIGKdyao2Kqitzr1kiRg&v=3.exp&libraries=geometry,drawing,places"
+                loadingElement={<div style={{ height: `100%` }} />}
+                containerElement={<div style={{ height: `100vh` }} />}
+                mapElement={<div style={{ height: `100%` }} />}
+                listings={this.props.listings}
+                center={this.state.center}
+                toggle={this.props.toggle} />
         )
     }
 }
