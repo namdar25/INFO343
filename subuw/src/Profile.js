@@ -25,7 +25,7 @@ constructor(props) {
 				let user = snapshot.val();
 				this.setState({posts:posts})
 			})
-			this.uLRef = firebase.database().ref('Posts');
+			this.uLRef = firebase.database().ref('Listings/');
 			this.uLRef.on('value', (snapshot) => {
 				let userListings = snapshot.val();
 				this.setState({userListings:userListings})
@@ -40,37 +40,57 @@ constructor(props) {
 
 	render() {
 
-		let userListingsList = this.state.userListings === null ? [] : Object.keys
-		(this.state.likedListings).map((x) => {
-			let userListing = userListingsList[x];
-			userListing.key = x;
-			return userListing;
-			});
+		if(this.state.user != null){
+			let userListingsList = this.state.userListings === null ? [] : Object.keys
+			(this.state.likedListings).map((x) => {
+				let userListing = userListingsList[x];
+				userListing.key = x;
+				return userListing;
+				});
 
-		let likedListingsList = this.state.likedListings === null ? [] : Object.keys
-		(this.state.likedListings).map((x) => {
-			let likedListing = likedListingsList[x];
-			likedListing.key = x;
-			return likedListing;
-			});
+			let likedListingsList = this.state.likedListings === null ? [] : Object.keys
+			(this.state.likedListings).map((x) => {
+				let likedListing = likedListingsList[x];
+				likedListing.key = x;
+				return likedListing;
+				});
 
-		return (
-			<div>
-				<EditProfile user={this.state.user}/>
+			return (
 				<div>
-					{likedListingsList.map((d,i) => {
-						return<EditListing key={i} listings={d}/>
-						})
-					}
+					<EditProfile user={this.state.user}/>
+					<div>
+						{likedListingsList.map((d,i) => {
+							return<EditListing key={i} listings={d}/>
+							})
+						}
+					</div>
+					<div>			
+						{likedListingsList.map((d,i) => {
+							return<Listing key={i} listings={d}/>
+							})
+						}
+					</div>
 				</div>
-				<div>			
-					{likedListingsList.map((d,i) => {
-						return<Listing key={i} listings={d}/>
-						})
-					}
+			)
+		} else {
+			return (
+				<div>
+					<EditProfile user={this.state.user}/>
+					<div>
+						{userListingsList.map((d,i) => {
+							return<EditListing key={i} listings={d}/>
+							})
+						}
+					</div>
+					<div>			
+						{likedListingsList.map((d,i) => {
+							return<Listing key={i} listings={d}/>
+							})
+						}
+					</div>
 				</div>
-			</div>
-		)
+			)
+		}
 	}
 
 }
