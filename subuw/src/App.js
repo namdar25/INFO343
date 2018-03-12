@@ -13,6 +13,7 @@ import { Chat } from './Chat.js';
 import { StartPage } from './StartPage';
 import { About } from './About';
 import { AddListing } from './AddListing.js';
+import { Profile } from './Profile.js';
 import firebase from 'firebase';
 import 'firebase/auth';
 import 'firebase/database';
@@ -141,7 +142,7 @@ class App extends Component {
                                             <Link className="logIn" to="/">Home</Link>
                                         </NavItem>
                                         <NavItem>
-                                            <Link className="logIn" to="/">Profile</Link>
+                                            <Link className="logIn" to="/profile">Profile</Link>
                                         </NavItem>
                                         <NavItem>
                                             <Link className="logIn" to="/">Host</Link>
@@ -161,7 +162,8 @@ class App extends Component {
                             <Route exact path="/" component={(props) => (
                                 <StartPage sendSearch={this.getSearch} />
                             )} />
-                            <Route path="/about" component={About} />
+                            <Route path="/profile" component={Profile} />
+							<Route path="/about" component={About} />
                             {<Route path="/Main" component={(props) => (
                                 <Main search={this.state.search} />
                             )} />}
