@@ -31,7 +31,7 @@ export class StartPage extends Component {
 
     render() {
         return (
-			<div className="startPageBackground">
+            <div className="startPageBackground">
                 <div className="search-input" >
                     <Router>
                         <InputGroup>
