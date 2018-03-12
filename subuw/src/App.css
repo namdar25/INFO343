@@ -240,11 +240,11 @@ input[type="submit"],
     overflow-y: scroll;
 }
 
-.chatlogs::-webkit-scrollbar {
+.chatlogs::-webkit-scrollbar { /*Keep?*/
   width: 10px;
 }
 
-.chatlogs::-webkit-scrollbar-thumb {
+.chatlogs::-webkit-scrollbar-thumb {/*Keep?*/
   border-radius: 5px;
   background: #fff;
 }
@@ -264,7 +264,7 @@ input[type="submit"],
 }
 
 .chat .chat-message {
-  width: 30rem;
+  width: 31.75rem;
   padding: 15px;
   margin: 5px 10px 0;
   border-radius: 10px;
