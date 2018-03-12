@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
-import ImageUploader from 'react-image-upload';
+//import {ImageUploader} from './node_modules/react-image-upload';
+import {firebase} from 'firebase';
+import {
+    Button, Modal, ModalHeader, ModalBody, ModalFooter, Collapse,
+    Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink
+} from 'reactstrap';
 
-export default class EditProfile extends Component {
+export class EditProfile extends Component {
 	constructor(props) {
         super(props)
 		this.editProfile = this.editProfile.bind(this);
         this.toggle = this.toggle.bind(this);
         this.state = {
-            modal: false
+            modal: false,
 			displayName : '',
 			photo: '',
             email: '',
@@ -18,13 +23,13 @@ export default class EditProfile extends Component {
     }
 
 	componentDidMount() {
-	this.setState(
+	this.setState({
 		displayName : this.props.user.displayName,
 		photo: this.props.user.photo,
         email: this.props.user.email,
         phoneNumber: this.props.user.phoneNumber,
 		userID : this.props.user.userID
-		)
+		})
 	}
 
     handleChange(propertyName, event) {
@@ -90,13 +95,13 @@ export default class EditProfile extends Component {
 										< div className="form-group">
 											<img className="card-img" src={this.props.user.image} alt="Profile Picture" />
 											<label>Profile Picture </label>
-											<ImageUploader
+											{/*<ImageUploader
 												withIcon={true}
 												buttonText='Choose Profile Picture'
 												onChange={this.handleChange.bind(this, 'photo')}
 												imgExtension={['.jpg', '.gif', '.png', '.gif']}
 												maxFileSize={5242880}
-											/>
+											/>*/}
 										</div>
 										< div className="form-group">
 											<label>email</label>
@@ -121,3 +126,5 @@ export default class EditProfile extends Component {
     }
 
 }
+
+export default EditProfile
