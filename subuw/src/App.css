@@ -141,8 +141,6 @@ body {
 .chatlogs {
     padding: 10px;
     width: 100%;
-    height: 450px;
-    background: gray;
     overflow-x: hidden;
     overflow-y: scroll;
 }
