@@ -108,7 +108,7 @@ export class EditProfile extends Component {
                 <Modal isOpen={this.state.modal} toggle={this.toggle} autoFocus={false} >
                     <ModalBody>
                         <div>
-                            <div className="card card-inverse" onClick={this.toggle}>
+                            <div className="" onClick={this.toggle}>
 								<img className="profile-img" src={this.props.user.profilePicture} alt="Profile Picture" />
 							</div>
                             <div className='editProfile' >
@@ -127,7 +127,7 @@ export class EditProfile extends Component {
 											<input type="text" className="form-control" id="phoneNumber" placeholder={this.props.user.phoneNumber} onChange={this.handleChange.bind(this, 'phoneNumber')} />
 										</div>
 									</div>
-									<input onClick={this.addListing} type="submit" value="apply" />
+									<input className="btn btn-primary" onClick={this.addListing} type="submit" value="apply" />
 								</form>
 							</div>
                         </div>

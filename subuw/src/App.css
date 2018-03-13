@@ -407,7 +407,7 @@ input[type="submit"],
 	position: absolute;
 	left: -25px;
 	left position right: 0;
-	top: -25px;
+	top: 1vh;
 	top position bottom: 0;
 	box-shadow: inset 0 0 0 50vw rgba(255,255,255,0.05);
 	filter: blur(12px);
@@ -419,11 +419,13 @@ input[type="submit"],
 	padding: 3vh;
 	height: 100%;
 	z-index: 2;
+	text-align:center;
 }
 
 .profile-img {
 	height: 100%;
 	width: 100%;
+
 }
 
 .editListings {
@@ -436,4 +438,9 @@ input[type="submit"],
 
 #editListingCard{
 	padding:2vh;
+}
+
+#listingHeader {
+	z-index: initial;
+	color:white;
 }

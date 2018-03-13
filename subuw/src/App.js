@@ -189,7 +189,7 @@ class App extends Component {
 							<Route path="/profile" component={Profile} />
                             <Route path="/about" component={About} />
                             <Route path="/AddListing" render={(props) => (
-                                <AddListing uid={this.state.uid} />
+							<AddListing uid={this.state.uid} listing={Object} listingKey={Object}/>
                             )} />
                             <Route path="/Main" component={(props) => (
                                 <Main search={this.state.search} uid={this.state.uid} />
