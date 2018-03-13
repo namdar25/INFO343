@@ -15,30 +15,24 @@ export class EditProfile extends Component {
         this.toggle = this.toggle.bind(this);
         this.state = {
             modal: false,
-			displayName : '',
-			photo: '',
-            email: '',
-            phoneNumber: '',
-			userID : ''
+			displayName: props.user.displayName,
+			email: props.user.email  || '',
+			phoneNumber: props.user.phoneNumber || '',
+			userID: props.user.userID,
+			url: props.user.profilePicture || ''
         };
 
     }
 
 	componentDidMount() {
-		this.setState({
-		displayName : this.props.user.displayName,
-		photo: this.props.user.photo,
-        email: this.props.user.email,
-        phoneNumber: this.props.user.phoneNumber,
-		userID : this.props.user.userID
-		})
 		
 		this.dataRef = firebase.database().ref('imgs/');
 		this.storageRef = firebase.storage().ref('imgs/');
+		console.log(this.state.userID);
 	}
 
 	fileChange(event) {
-		let profileRef = firebase.database().ref('Users/' + this.state.userID);
+		let profileRef = firebase.database().ref('Users/' + this.props.user.userID);
 		let name = event.target.files[0].name;
 		let file = event.target.files[0];
 		console.log(name, file)
@@ -46,10 +40,14 @@ export class EditProfile extends Component {
 		imgRef.put(file).then((snapshot) => {
 			let url = snapshot.downloadURL;
 			this.setState({
-				img: url
+				url: url
 			})
-			this.profileRef.set({
-				profilePicture : url
+			profileRef.set({
+				profilePicture: url,
+				displayName : this.state.displayName,
+				email: this.state.email,
+				phoneNumber: this.state.phoneNumber,
+				userID: this.state.userID,
 			})
 			this.dataRef.push({
 				imageurl: url
@@ -81,6 +79,7 @@ export class EditProfile extends Component {
             email: email,
             phoneNumber: phoneNumber,
 			userID: userID,
+			profilePicture:this.state.url
 			
 		}).catch(err => {
 			this.setState({ errorMessage: err.message })
@@ -99,7 +98,7 @@ export class EditProfile extends Component {
         return (
             <div>
 				<div className="card card-inverse" id="profileCard" onClick={this.toggle}>
-                    <img className="card-img" src={this.props.user.image} alt="Profile Picture" />
+					<img className="card-img" src={this.props.user.profilePicture} alt="Profile Picture" />
                     <div className="card-img-overlay" id='profile-card'>
                         <h4 className="card-title">{this.props.user.displayName}</h4>
                         <p className="card-text">{this.props.user.email}</p>
@@ -110,15 +109,9 @@ export class EditProfile extends Component {
                     <ModalBody>
                         <div>
                             <div className="card card-inverse" onClick={this.toggle}>
-								<img className="card-img" src={this.props.user.image} alt="Profile Picture" />
-								<div className="card-img-overlay" id='listing-card'>
-									<h4 className="card-title">{"$" + this.props.user.rent + '/mo'}</h4>
-									<p className="card-text">{this.props.user.beds + "bd . " + this.props.user.baths + "ba . " + this.props.user.sqft + "sqft"} <br />
-										{this.props.user.address + ', ' + this.props.user.city + ', ' + this.props.user.state}
-									</p>
-								</div>
+								<img className="card-img" src={this.props.user.profilePicture} alt="Profile Picture" />
 							</div>
-                            <div className='addListing' >
+                            <div className='editProfile' >
 								<form>
 									<div className="column">
 										<div className="form-group">

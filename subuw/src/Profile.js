@@ -79,6 +79,7 @@ constructor(props) {
 			}*/
 			return (
 				<div>
+					{console.log(this.state.user.userID)}
 					<EditProfile user={this.state.user}/>
 					<div>
 						{this.state.userListings != null &&
