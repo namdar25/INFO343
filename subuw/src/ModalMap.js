@@ -10,6 +10,8 @@ import {
 } from "react-google-maps";
 import GitHubForkRibbon from "react-github-fork-ribbon";
 
+
+
 const MyMapComponent = compose(
     withStateHandlers(() => ({
         isOpen: false,
@@ -22,19 +24,13 @@ const MyMapComponent = compose(
     withScriptjs,
     withGoogleMap
 )(props => (
-    <GoogleMap defaultZoom={12} defaultCenter={{ lat: props.center.lat, lng: props.center.lng }}>
-        {props.listings.map((d, i) => {
-            return (
-                <Marker position={{ lat: d.lat, lng: d.long }} onClick={props.onToggleOpen} name={i}>
-                    <InfoWindow onClick={props.onToggleOpen}><p>{i + 1}</p></InfoWindow>
-                </Marker>
-            )
-        })
-        }
+    <GoogleMap defaultZoom={12} defaultCenter={{ lat: props.listings.lat, lng: props.listings.long }}>
+        <Marker position={{ lat: props.listings.lat, lng: props.listings.long }} onClick={props.onToggleOpen}>
+        </Marker>
     </GoogleMap>
 ));
 
-export default class Maps extends Component {
+export default class ModalMap extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -62,11 +58,10 @@ export default class Maps extends Component {
         return (
             <MyMapComponent key="map" googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4R6AN7SmujjPUIGKdyao2Kqitzr1kiRg&v=3.exp&libraries=geometry,drawing,places"
                 loadingElement={<div style={{ height: `100%` }} />}
-                containerElement={<div style={{ height: `100vh` }} />}
+                containerElement={<div style={{ height: `300px` }} />}
                 mapElement={<div style={{ height: `100%` }} />}
                 listings={this.props.listings}
-                center={this.state.center}
-                toggle={this.props.toggle} />
+                center={this.state.center} />
         )
     }
 }
