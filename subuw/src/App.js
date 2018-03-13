@@ -22,8 +22,8 @@ import { Conversation } from './Conversation.js';
 
 class App extends Component {
   constructor(props) {
-    super(props);
-
+	  super(props);
+	  this.getSearch = this.getSearch.bind(this);
     this.state = {
       allConversations: {},
       currentItem: '',
@@ -123,6 +123,13 @@ class App extends Component {
       });
   }
 
+
+  getSearch(val) {
+	  this.setState({
+		  search:val
+	  })
+  }
+
     render() {
         let myConversations = this.getMyConversations();
         console.log(myConversations)
@@ -183,7 +190,7 @@ class App extends Component {
                                 <AddListing uid={this.state.uid} />
                             )} />
                             <Route path="/Main" component={(props) => (
-                                <Main search={this.state.search} />
+							<Main search={this.state.search} uid={this.state.uid} />
                             )} />
                         }
                     </div>

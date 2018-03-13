@@ -138,6 +138,13 @@ body {
     clear: both;
 }
 
+.chat {
+	display:flex;
+	flex-flow:row wrap;
+	align-items: flex-start;
+	margin-bottom:10px;
+}
+
 input[type="submit"],
 {
     position: relative;
@@ -250,10 +257,12 @@ input[type="submit"],
 }
 
 .chat {
-  display: flex;
-  flex-flow: row wrap;
-  align-items: flex-start;
-  margin-bottom: 10px;
+	display: flex;
+	flex-flow: row wrap;
+	align-items: flex-start;
+	margin-bottom: 10px;
+	max-width: 95vw;
+	max-height: 95vh;
 }
 
 .chat .user-photo {
@@ -264,7 +273,7 @@ input[type="submit"],
 }
 
 .chat .chat-message {
-  width: 31.75rem;
+  width: 70%;
   padding: 15px;
   margin: 5px 10px 0;
   border-radius: 10px;

@@ -164,7 +164,7 @@ export class Conversation extends Component {
         return (
             <div>
 
-                <Modal isOpen={this.props.modal} toggle={this.toggle} autoFocus={false} >
+                <Modal isOpen={this.props.modal} id="chatModal" toggle={this.toggle} autoFocus={false} >
                     <ModalHeader>
                         {this.props.closeConvo &&
                             <Button color="secondary" onClick={() => this.props.closeConvo(this.props.convoLink)}>Close</Button>
