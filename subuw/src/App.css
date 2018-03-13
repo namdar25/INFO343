@@ -138,12 +138,7 @@ body {
     clear: both;
 }
 
-.chat {
-	display:flex;
-	flex-flow:row wrap;
-	align-items: flex-start;
-	margin-bottom:10px;
-}
+
 
 input[type="submit"],
 {
@@ -261,8 +256,8 @@ input[type="submit"],
 	flex-flow: row wrap;
 	align-items: flex-start;
 	margin-bottom: 10px;
-	max-width: 95vw;
-	max-height: 95vh;
+	max-width: 85vw;
+	max-height: 85vh;
 }
 
 .chat .user-photo {
@@ -270,8 +265,12 @@ input[type="submit"],
   height: 60px;
   background: #ccc;
   border-radius: 50%;
+  overflow: hidden;
 }
 
+.chat .user-photo img{
+    width: 100%;
+}
 .chat .chat-message {
   width: 70%;
   padding: 15px;
@@ -335,9 +334,6 @@ input[type="submit"],
   background: gray;
 }
 
-.chat-form .mini {
-  height: 100px;
-}
 
 .chat-form button {
   background: #89cff0;
