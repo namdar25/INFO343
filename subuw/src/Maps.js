@@ -26,6 +26,9 @@ const MyMapComponent = compose(
         {props.listings.map((d, i) => {
             return (
                 <Marker position={{ lat: d.lat, lng: d.long }} onClick={props.onToggleOpen} name={i}>
+                    {props.isOpen &&
+                        <InfoWindow><p>{i + 1}</p></InfoWindow>
+                    }
                 </Marker>
             )
         })
