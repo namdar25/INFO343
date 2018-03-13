@@ -36,12 +36,6 @@ constructor(props) {
 				this.setState({ userListings: userListings })
 				
 			})
-			
-			/*this.lLRef = firebase.database().ref('Users/' + authUser.uid +'/LikedListings/');
-			this.lLRef.on('value', (snapshot) => {
-				let likedListings = snapshot.val();
-				this.setState({likedListings:likedListings})
-			})*/
 		}
 	}
 
@@ -67,46 +61,31 @@ constructor(props) {
 						return userListing;
 					});
 			}
-			/*let likedListingsList = null;
-			if (this.state.likedListings != null) {
-				console.log(this.state.likedListings);
-				likedListingsList = this.state.likedListings === null ? [] : Object.keys
-					(this.state.likedListings).map((x) => {
-						let likedListing = likedListingsList[x];
-						likedListing.key = x;
-						return likedListing;
-					});
-			}*/
 			return (
-				<div>
-					{console.log(this.state.user.userID)}
-					<EditProfile user={this.state.user}/>
-					<div>
-						{this.state.userListings != null &&
-							userListingsList.map((d, i) => {
-							return <EditListing key={i} listing={d} uid={this.state.authUser.uid}/>
-							})
-						}
-						{this.state.userListings == null &&
-								<p> Post A Sublease! </p>
-						}
-					</div>		
-					{/*<div>
-						{this.state.likedListings &&
-							likedListingsList.map((d, i) => {
-								return <AddListing key={i} listings={d} />
-							})
-						}
-						{!this.state.likedListings &&
-								<p> Post A Sublease! </p>
-						}
-					</div>*/}
+				<div className="profileBackground">
+					<div className="profileCard">
+						<div className="editProfile">
+							<EditProfile user={this.state.user} />
+						</div>
+						<div className="editListings">
+							<h3> Your Listings </h3>
+							{this.state.userListings != null &&
+
+								userListingsList.map((d, i) => {
+								return <EditListing key={i} listing={d} uid={this.state.authUser.uid}/>
+								})
+							}
+							{this.state.userListings == null &&
+									<h3> Post A Sublease! </h3>
+							}
+						</div>		
+					</div>
 				</div>
 			)
 		} else {
 			return (
 				<div>
-				<p>Login</p>
+				<h3>Login to view your profile</h3>
 				</div>
 			)
 		}

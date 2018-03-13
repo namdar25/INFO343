@@ -26,8 +26,8 @@ export class EditListing extends Component {
 
     render() {
         return (
-            <div>
-                <div className="card card-inverse" id="listingCard" onClick={this.toggle}>
+			<div id="editListingCard">
+                <div className="card card-inverse"  onClick={this.toggle}>
                     <img className="card-img" src={this.props.listing.imgs} alt="Listing Cover" />
                     <div className="card-img-overlay" id='listing-card'>
                         <h4 className="card-title">{"$" + this.props.listing.rent + '/mo'}</h4>

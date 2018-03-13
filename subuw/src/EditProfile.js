@@ -98,7 +98,7 @@ export class EditProfile extends Component {
         return (
             <div>
 				<div className="card card-inverse" id="profileCard" onClick={this.toggle}>
-					<img className="card-img" src={this.props.user.profilePicture} alt="Profile Picture" />
+					<img className="profile-img" src={this.props.user.profilePicture} alt="Profile Picture" />
                     <div className="card-img-overlay" id='profile-card'>
                         <h4 className="card-title">{this.props.user.displayName}</h4>
                         <p className="card-text">{this.props.user.email}</p>
@@ -109,14 +109,12 @@ export class EditProfile extends Component {
                     <ModalBody>
                         <div>
                             <div className="card card-inverse" onClick={this.toggle}>
-								<img className="card-img" src={this.props.user.profilePicture} alt="Profile Picture" />
+								<img className="profile-img" src={this.props.user.profilePicture} alt="Profile Picture" />
 							</div>
                             <div className='editProfile' >
 								<form>
-									<div className="column">
+									<div className="">
 										<div className="form-group">
-											<img className="card-img" src={this.props.user.image} alt="Profile Picture" />
-											<label>Profile Picture </label>
 											<label>Upload New Profile Picture</label>
 											<input type="file" onChange={(e) => this.fileChange(e)} multiple />
 										</div>
