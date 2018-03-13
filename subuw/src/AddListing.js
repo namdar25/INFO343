@@ -12,27 +12,27 @@ export class AddListing extends Component {
         super(props)
         this.addListing = this.addListing.bind(this);
         this.state = ({
-            address: props.address || '',
-            city: props.city || '',
-            state: props.state || '',
-            zip: props.zip || '',
-            type: props.type || 'apartment',
-            rent: props.rent || '',
-            startDate: props.startDate || '',
-            endDate: props.endDate || '',
-            bedrooms: props.bedrooms || '',
-            bathrooms: props.bathrooms || '',
-            handicap: props.handicap || 'no',
-            laundry: props.laundry || 'not available',
-            description: props.description || '',
-            lat: props.lat || '',
-            long: props.long || '',
-            sqrft: props.sqrft || '',
-            smoking: props.smoking || 'no',
-            pets: props.pets || 'None allowed',
-            parking: props.parking || 'none',
-            newListing: {},
-
+            address: props.listing.address || '',
+            city: props.listing.city || '',
+            state: props.listing.state || '',
+            zip: props.listing.zip || '',
+            type: props.listing.type || 'apartment',
+            rent: props.listing.rent || '',
+            startDate: props.listing.startDate || '',
+            endDate: props.listing.endDate || '',
+            bedrooms: props.listing.bedrooms || '',
+            bathrooms: props.listing.bathrooms || '',
+            handicap: props.listing.handicap || 'no',
+            laundry: props.listing.laundry || 'not available',
+            description: props.listing.description || '',
+            lat: props.listing.lat || '',
+            long: props.listing.long || '',
+            sqrft: props.listing.sqrft || '',
+            smoking: props.listing.smoking || 'no',
+            pets: props.listing.pets || 'None allowed',
+            parking: props.listing.parking || 'none',
+            imgs: [],
+            uid: props.uid || 'test'
         })
     }
 
