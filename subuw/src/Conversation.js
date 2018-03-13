@@ -186,9 +186,11 @@ export class Conversation extends Component {
                             </div>
                         }
                         {this.props.miniMessage &&
-                            <div class="chat-form">
-                                <textarea id="messageBox" className="mini" onChange={this.updateMessage}></textarea>
-                                <button onClick={this.submitMessage}>Send</button>
+                            <div class="chatbox">
+                                <div class="chat-form">
+                                    <textarea id="messageBox" className="mini" onChange={this.updateMessage}></textarea>
+                                    <button onClick={this.submitMessage}>Send</button>
+                                </div>
                             </div>
                         }
                     </ModalBody>

@@ -7,8 +7,9 @@ import firebase from 'firebase';
 import './App.css'
 import {
     Navbar, NavbarBrand, NavbarToggler, Collapse, Nav, NavItem, NavLink, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem,
-    InputGroup, InputGroupAddon, InputGroupText, Input, FormGroup, Label, Button
+    InputGroup, InputGroupAddon, InputGroupText, Input, FormGroup, Label, Button, ButtonDropdown
 } from 'reactstrap';
+
 import { Conversation } from './Conversation';
 
 export class Main extends Component {
@@ -120,7 +121,7 @@ export class Main extends Component {
                                 <Navbar color="white" light expand="md" className="vertical-nav">
                             <NavbarToggler onClick={this.toggle} />
                             <Nav className="ml-auto" id="verticalNav" navbar>
-                                <UncontrolledDropdown direction="left" nav inNavbar>
+                                <ButtonDropdown direction="left">
                                     <DropdownToggle nav caret>
                                         Price
                                         </DropdownToggle>
@@ -134,7 +135,7 @@ export class Main extends Component {
                                             Reset
                                             </DropdownItem>
                                     </DropdownMenu>
-                                </UncontrolledDropdown>
+                                </ButtonDropdown>
                                 <UncontrolledDropdown direction="left" nav inNavbar>
                                     <DropdownToggle nav caret>
                                         Beds

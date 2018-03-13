@@ -76,7 +76,7 @@ export class Chat extends Component {
             <div>
                 <ButtonDropdown direction="left" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
                     <DropdownToggle caret size="lg">
-                        Your Chats
+                        My Chats
                     </DropdownToggle >
                     <DropdownMenu>
                         {myConversations.map((conversation, i) => {

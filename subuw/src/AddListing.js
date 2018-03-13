@@ -40,14 +40,6 @@ export class AddListing extends Component {
     componentDidMount() {
         this.dataRef = firebase.database().ref('imgs/')
         this.storageRef = firebase.storage().ref('imgs/')
-
-        // When the database 'value' changes, change the state of `imgs`
-        // this.dataRef.on('value', (snapshot) => {
-        //     console.log('snapshot', snapshot.val())
-        //     this.setState({
-        //         imgs: snapshot.val() || {}
-        //     })
-        // })
     }
 
     fileChange(event) {
@@ -211,27 +203,27 @@ export class AddListing extends Component {
                         <div className="row">
                             <div className="column small">
                                 <label>Image 1:</label>
-                                <input type="file" onChange={(e) => this.fileChange(e)} multiple />
+                                <input type="file" onChange={(e) => this.fileChange(e)} />
                             </div>
                             <div className="column small">
                                 <label>Image 2:</label>
-                                <input type="file" onChange={(e) => this.fileChange(e)} multiple />
+                                <input type="file" onChange={(e) => this.fileChange(e)} />
                             </div>
                             <div className="column small">
                                 <label>Image 3:</label>
-                                <input type="file" onChange={(e) => this.fileChange(e)} multiple />
+                                <input type="file" onChange={(e) => this.fileChange(e)} />
                             </div>
                             <div className="column small">
                                 <label>Image 4:</label>
-                                <input type="file" onChange={(e) => this.fileChange(e)} multiple />
+                                <input type="file" onChange={(e) => this.fileChange(e)} />
                             </div>
                             <div className="column small">
                                 <label>Image 5:</label>
-                                <input type="file" onChange={(e) => this.fileChange(e)} multiple />
+                                <input type="file" onChange={(e) => this.fileChange(e)} />
                             </div>
                             <div className="column small">
                                 <label>Image 6:</label>
-                                <input type="file" onChange={(e) => this.fileChange(e)} multiple />
+                                <input type="file" onChange={(e) => this.fileChange(e)} />
                             </div>
                         </div>
                         <div className="row">

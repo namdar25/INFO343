@@ -139,7 +139,6 @@ body {
 }
 
 
-
 input[type="submit"],
 {
     position: relative;
@@ -216,7 +215,7 @@ input[type="submit"],
 
 
 #description { 
-  height: 127px;
+  height: 117px;
 }
 
 
@@ -356,5 +355,6 @@ input[type="submit"],
   background: gray;
 }
 
- .chatButton {
-} 
+.mini {
+    height: 95px;
+}
