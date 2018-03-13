@@ -3,8 +3,10 @@ import firebase from 'firebase';
 import 'firebase/auth';
 import 'firebase/database';
 import $ from 'jquery';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, UncontrolledCarousel, Container, Row, Col } from 'reactstrap';
-
+import {
+    Button, Modal, ModalHeader, ModalBody, ModalFooter, Collapse,
+    Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink
+} from 'reactstrap';
 
 
 
@@ -15,17 +17,10 @@ export class Conversation extends Component {
         this.updateMessage = this.updateMessage.bind(this);
         this.toggle = this.toggle.bind(this);
         this.state = ({
-            modal: props.modal,
             uid: props.uid,
             recieverUid: props.recieverUid,
             currentMessages: {}
 
-        })
-    }
-
-    toggle() {
-        this.setState({
-            modal: !this.state.modal
         })
     }
 
@@ -72,13 +67,26 @@ export class Conversation extends Component {
             })
         }
         console.log(this.state.chatId)
-        //$(".chatlogs").stop().animate({ scrollTop: $(".chatlogs")[0].scrollHeight }, 1000);
+        //console.log($('.chatlogs')[0].scrollHeight)
+        if ($(".chatlogs")[0] !== undefined) {
+            $(".chatlogs").stop().animate({ scrollTop: $(".chatlogs")[0].scrollHeight * 40 }, 500);
+        }
+        //$('.chatlogs').scrollTop(450);
+        // $('.chatlogs').scrollTop($('.chatlogs').prop("scrollHeight"));
     }
 
     updateMessage(event) {
         this.setState({
             message: event.target.value
         })
+    }
+
+    getImgUrl(uid) {
+        let users = this.props.users;
+        let user = Object.values(users).filter(function (user) {
+            return user.userID === uid;
+        })
+        return user.length === 1 ? user[0].profilePicture : undefined;
     }
 
     submitMessage(event) {
@@ -97,8 +105,11 @@ export class Conversation extends Component {
         this.setState({
             message: ''
         })
-        $(".chatlogs").stop().animate({ scrollTop: $(".chatlogs")[0].scrollHeight }, 1000);
+        if (!this.props.miniMessage) {
+            $(".chatlogs").stop().animate({ scrollTop: $(".chatlogs")[0].scrollHeight }, 1000);
+        }
         $('#messageBox').val('');
+
 
     }
 
@@ -106,54 +117,83 @@ export class Conversation extends Component {
         let output = Object.values(currentMessages).map((message, i) => {
             if (message.text !== undefined) {
                 let person;
+                let img;
                 if (message.sender === this.state.uid) {
                     person = 'chat self';
+                    img = this.getImgUrl(message.sender);
                 } else {
                     person = 'chat friend';
+                    img = this.getImgUrl(message.sender);
                 }
                 if (message.text !== null) {
+
                     return (
-                        <div className={person + " message-container"}>
-                            <div className="user-photo"></div>
-                            <p className='chat-message'>{message.text}</p>
-                        </div>)
+                        <div>
+                            {!img &&
+                                <div class={person}>
+                                    <div class="user-photo"></div>
+                                    <p class='chat-message'>{message.text}</p>
+                                </div>
+                            }
+                            {img &&
+                                <div class={person}>
+                                    <div class="user-photo"><img src={img} alt={"Profile Picture of" + img} /> </div>
+                                    <p class='chat-message'>{message.text}</p>
+                                </div>
+                            }
+                        </div>
+                    )
                 }
             }
         })
         return output;
     }
 
+    toggle() {
+        if (this.props.closeConvo) {
+            () => this.props.closeConvo(this.props.convoLink)
+        } else {
+            () => this.props.toggle2()
+        }
+    }
+
     render() {
         let currentMessages = this.state.currentMessages;
-        console.log(this.state.modal)
+        console.log(this.state.modal, this.props.modal)
+        console.log(this.state.uid, this.state.recieverUid)
         return (
             <div>
-                <div class="chatbox">
-                    <div class="chatlogs">
-                        {this.printMessages(currentMessages)}
-                    </div>
-                    <div class="chat-form">
-                        <textarea id="messageBox" onChange={this.updateMessage}></textarea>
-                        <button onClick={this.submitMessage}>Send</button>
-                    </div>
-                </div>
-                {/* <Modal isOpen={this.state.modal} toggle={this.toggle} autoFocus={false} >
+
+                <Modal isOpen={this.props.modal} toggle={this.toggle} autoFocus={false} >
                     <ModalHeader>
-                        <Button color="secondary" onClick={this.toggle}>Close</Button>
+                        {this.props.closeConvo &&
+                            <Button color="secondary" onClick={() => this.props.closeConvo(this.props.convoLink)}>Close</Button>
+                        }
+                        {!this.props.closeConvo &&
+                            <Button color="secondary" onClick={() => this.props.toggle2()}>Close</Button>
+                        }
                     </ModalHeader>
                     <ModalBody>
-                        <div class="chatbox">
-                            <div class="chatlogs">
-                                {this.printMessages(currentMessages)}
+                        {!this.props.miniMessage &&
+                            <div class="chatbox">
+                                <div class="chatlogs">
+                                    {this.printMessages(currentMessages)}
+                                </div>
+                                <div class="chat-form">
+                                    <textarea id="messageBox" onChange={this.updateMessage}></textarea>
+                                    <button onClick={this.submitMessage}>Send</button>
+                                </div>
                             </div>
+                        }
+                        {this.props.miniMessage &&
                             <div class="chat-form">
-                                <textarea id="messageBox" onChange={this.updateMessage}></textarea>
+                                <textarea id="messageBox" className="mini" onChange={this.updateMessage}></textarea>
                                 <button onClick={this.submitMessage}>Send</button>
                             </div>
-                        </div>
+                        }
                     </ModalBody>
-                </Modal> */}
-            </div>
+                </Modal>
+            </div >
         )
     }
 }

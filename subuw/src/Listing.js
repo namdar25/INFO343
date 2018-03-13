@@ -2,16 +2,20 @@ import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, UncontrolledCarousel } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import Carousel from './Carousel';
+import { Conversation } from './Conversation';
+
 
 export class Listing extends Component {
     constructor(props) {
         super(props)
-
-
         this.toggle = this.toggle.bind(this);
         this.state = {
-            modal: false
+            modal: false,
+            modal2: false,
+            listings: props.listings
         };
+        this.toggle2 = this.toggle2.bind(this);
+
 
     }
 
@@ -19,6 +23,13 @@ export class Listing extends Component {
         this.setState({
             modal: !this.state.modal
         });
+    }
+
+    toggle2() {
+        this.setState({
+            modal2: !this.state.modal2,
+            modal: !this.state.modal
+        })
     }
 
     render() {
@@ -64,9 +75,13 @@ export class Listing extends Component {
                         </div>
                     </ModalBody>
                     <ModalFooter>
+                        {this.props.uid !== this.props.listings.uid &&
+                            <Button color="primary" onClick={this.toggle2}>Contact Subletter</Button>
+                        }
                         <Button color="secondary" onClick={this.toggle}>Close</Button>
                     </ModalFooter>
                 </Modal>
+                < Conversation miniMessage={true} toggle2={this.toggle2} modal={this.state.modal2} uid={this.props.uid} recieverUid={this.props.listings.uid} />
             </div>
         )
     }
