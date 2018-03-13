@@ -26,7 +26,6 @@ const MyMapComponent = compose(
         {props.listings.map((d, i) => {
             return (
                 <Marker position={{ lat: d.lat, lng: d.long }} onClick={props.onToggleOpen} name={i}>
-                    <InfoWindow onClick={props.onToggleOpen}><p>{i + 1}</p></InfoWindow>
                 </Marker>
             )
         })
@@ -60,7 +59,7 @@ export default class Maps extends Component {
     render() {
         this.getLatLong()
         return (
-            <MyMapComponent key="map" googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4R6AN7SmujjPUIGKdyao2Kqitzr1kiRg&v=3.exp&libraries=geometry,drawing,places"
+            <MyMapComponent key="map" googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDOMxiv80oiceTHg7NerU2705RKh13ryY8&v=3.exp&libraries=geometry,drawing,places"
                 loadingElement={<div style={{ height: `100%` }} />}
                 containerElement={<div style={{ height: `100vh` }} />}
                 mapElement={<div style={{ height: `100%` }} />}
