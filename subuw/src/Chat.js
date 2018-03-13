@@ -74,7 +74,7 @@ export class Chat extends Component {
 
         return (
             <div>
-                <ButtonDropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+                <ButtonDropdown direction="left" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
                     <DropdownToggle caret size="lg">
                         Your Chats
                     </DropdownToggle >

@@ -69,7 +69,7 @@ export class Conversation extends Component {
         console.log(this.state.chatId)
         //console.log($('.chatlogs')[0].scrollHeight)
         if ($(".chatlogs")[0] !== undefined) {
-            $(".chatlogs").stop().animate({ scrollTop: $(".chatlogs")[0].scrollHeight * 40 }, 500);
+            $(".chatlogs").stop().animate({ scrollTop: $(".chatlogs")[0].scrollHeight * 40 }, 100);
         }
         //$('.chatlogs').scrollTop(450);
         // $('.chatlogs').scrollTop($('.chatlogs').prop("scrollHeight"));
@@ -106,11 +106,9 @@ export class Conversation extends Component {
             message: ''
         })
         if (!this.props.miniMessage) {
-            $(".chatlogs").stop().animate({ scrollTop: $(".chatlogs")[0].scrollHeight }, 1000);
+            $(".chatlogs").stop().animate({ scrollTop: $(".chatlogs")[0].scrollHeight }, 50);
         }
         $('#messageBox').val('');
-
-
     }
 
     printMessages(currentMessages) {

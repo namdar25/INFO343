@@ -22,6 +22,7 @@ export class Main extends Component {
             filters: {},
             listings: [],
             filteredListings: [],
+            isDesktop: false
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -30,7 +31,6 @@ export class Main extends Component {
     }
 
     componentDidMount() {
-        console.log("WHY ARE YOU RERENDERING")
         let listingsRef = firebase.database().ref('Listings')
         listingsRef.on('value', (snapshot) => {
             let listings = snapshot.val()
@@ -46,6 +46,11 @@ export class Main extends Component {
                 filteredListings: listings
             });
         })
+        if (window.innerWidth > 700) {
+            this.setState({
+                isDesktop: true
+            })
+        }
     }
 
     toggle() {
@@ -100,6 +105,7 @@ export class Main extends Component {
 
 
     render() {
+        const isDesktop = this.state.isDesktop;
         let search = 98105
         if (this.props.search) {
             let search = this.props.search
@@ -221,15 +227,21 @@ export class Main extends Component {
                         <SplitPane split="vertical" defaultSize={300} primary="first">
                             <div className="pane">
                                 <div>
-                                    {this.state.filteredListings.map((d) => {
-                                        return <Listing showConvo={this.showConvo} listings={d} uid={this.state.uid} />
+                                    {this.state.filteredListings.map((d, i) => {
+                                        return <Listing showConvo={this.showConvo} listings={d} uid={this.state.uid} index={i} />
                                     })
                                     }
                                 </div>
                             </div>
-                            <div className="pane">
-                                <Maps listings={this.state.filteredListings} search={search} />
-                            </div>
+                            {isDesktop &&
+                                <div className="pane">
+                                    <Maps listings={this.state.filteredListings} search={search} />
+                                </div>
+                            }
+                            {!isDesktop &&
+                                <div>
+                                </div>
+                            }
                         </SplitPane>
 
                     </div>
