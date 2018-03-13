@@ -17,6 +17,7 @@ export class Main extends Component {
         super(props)
         this.toggle = this.toggle.bind(this);
         this.state = {
+            search: props.search,
             uid: props.uid,
             isOpen: false,
             modal2: false,
@@ -108,9 +109,10 @@ export class Main extends Component {
     render() {
         const isDesktop = this.state.isDesktop;
         let search = 98105
-        if (this.props.search) {
-            let search = this.props.search
-        }
+        console.log(this.props.search)
+        search = this.state.search
+
+        console.log(this.props.search, search)
         return (
             <div>
                 {this.state.filteredListings &&
