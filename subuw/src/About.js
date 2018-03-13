@@ -21,7 +21,8 @@ export class About extends Component {
                                 <img className="card-img-top" src={require("./imgs/lee.png")} alt="Card image cap" />
                                 <div className="card-body">
                                     <h5 className="card-title">Lee Segal</h5>
-                                    <p className="card-text">Senior in the Informatics program with a focus in Cyber-Security. After graduation will be working at Starbucks full time. Currently taking INFO 343 learning client-side development.</p>
+                                    <p className="card-text">Senior in the Informatics program with a focus in Cyber-Security. After graduation will be working at Starbucks full time.
+                                     Currently taking INFO 343 learning client-side development.</p>
                                     <a href="https://www.linkedin.com/in/lee-segal/" className="btn btn-primary">LinkedIn</a>
                                 </div>
                             </div>
@@ -31,7 +32,10 @@ export class About extends Component {
                                 <img className="card-img-top" src={require("./imgs/raffi.jpg")} alt="Card image cap" />
                                 <div className="card-body">
                                     <h5 className="card-title">Raffi Gharakhanian</h5>
-                                    <p className="card-text">Experienced Marketing Analytics Consultant with a demonstrated history of working in the hospital and health care industry and flash memory. Skilled in R Programming, Web Development, Tableau, Data Analytics, and Microsoft Office . Strong analytics professional pursuing a Bachelor’s Degree in Economics and minors in Informatics and Political Science from University of Washington in Seattle.</p>
+                                    <p className="card-text">Experienced Marketing Analytics Consultant with a demonstrated history of working in the hospital
+                                     and health care industry and flash memory. Skilled in R Programming, Web Development, Tableau, Data Analytics,
+                                      and Microsoft Office . Strong analytics professional pursuing a Bachelor’s Degree in Economics and minors in
+                                       Informatics and Political Science from University of Washington in Seattle.</p>
                                     <a href="https://www.linkedin.com/in/rgharakhanian/" className="btn btn-primary">LinkedIn</a>
                                 </div>
                             </div>
@@ -43,7 +47,10 @@ export class About extends Component {
                                 <img className="card-img-top" src={require("./imgs/jon.jpg")} alt="Card image cap" />
                                 <div className="card-body">
                                     <h5 className="card-title">Jon Cantle</h5>
-                                    <p className="card-text">I am a current Junior at the University of Washington. I pride myself on honesty and strong morals. I have an interest in data science and visualization. Both my interpersonal and programming skills combined make me a great candidate to connect the technical world to the real world.</p>
+                                    <p className="card-text">I am a current Junior at the University of Washington. I pride myself on honesty and strong morals.
+                                     I have an interest in data analysis and visualization. Both my interpersonal and programming skills combined make me a
+                                      great candidate to connect the technical world with the real world. Experience in Data Structures & Algorithms and Front End Web
+                                      Development</p>
                                     <a href="https://www.linkedin.com/in/jonathon-cantle-7452aa132/" className="btn btn-primary">LinkedIn</a>
                                 </div>
                             </div>
