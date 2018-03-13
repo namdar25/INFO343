@@ -19,7 +19,8 @@ export class Conversation extends Component {
         this.state = ({
             uid: props.uid,
             recieverUid: props.recieverUid,
-            currentMessages: {}
+            currentMessages: {},
+            message: ''
 
         })
     }
@@ -123,6 +124,7 @@ export class Conversation extends Component {
                     person = 'chat friend';
                     img = this.getImgUrl(message.sender);
                 }
+                console.log(this.state.users)
                 if (message.text !== null) {
 
                     return (
@@ -135,7 +137,7 @@ export class Conversation extends Component {
                             }
                             {img &&
                                 <div class={person}>
-                                    <div class="user-photo"><img src={img} alt={"Profile Picture of" + img} /> </div>
+                                    <div class="user-photo"><img src={img} alt={"Profile Picture of"} /> </div>
                                     <p class='chat-message'>{message.text}</p>
                                 </div>
                             }
