@@ -28,14 +28,12 @@ export class EditProfile extends Component {
 		
 		this.dataRef = firebase.database().ref('imgs/');
 		this.storageRef = firebase.storage().ref('imgs/');
-		console.log(this.state.userID);
 	}
 
 	fileChange(event) {
 		let profileRef = firebase.database().ref('Users/' + this.props.user.userID);
 		let name = event.target.files[0].name;
 		let file = event.target.files[0];
-		console.log(name, file)
 		let imgRef = this.storageRef.child(name);
 		imgRef.put(file).then((snapshot) => {
 			let url = snapshot.downloadURL;
@@ -71,13 +69,11 @@ export class EditProfile extends Component {
         event.preventDefault();
 		let displayName = this.state.displayName;
         let email = this.state.city;
-        let phoneNumber = this.state.phoneNumber;
 		let userID = this.state.userID
 
         profileRef.set({
             displayName : displayName,
             email: email,
-            phoneNumber: phoneNumber,
 			userID: userID,
 			profilePicture:this.state.url
 			
@@ -102,7 +98,6 @@ export class EditProfile extends Component {
                     <div className="card-img-overlay" id='profile-card'>
                         <h4 className="card-title">{this.props.user.displayName}</h4>
                         <p className="card-text">{this.props.user.email}</p>
-						<p className="card-text">{this.props.user.phoneNumber}</p>
                     </div>
                 </div>
                 <Modal isOpen={this.state.modal} toggle={this.toggle} autoFocus={false} >
@@ -121,10 +116,6 @@ export class EditProfile extends Component {
 										<div className="form-group">
 											<label>email</label>
 											<input type="text" className="form-control" id="email" placeholder={this.props.user.email} onChange={this.handleChange.bind(this, 'email')} />
-										</div>
-										<div className="form-group">
-											<label>Phone Number</label>
-											<input type="text" className="form-control" id="phoneNumber" placeholder={this.props.user.phoneNumber} onChange={this.handleChange.bind(this, 'phoneNumber')} />
 										</div>
 									</div>
 									<input className="btn btn-primary" onClick={this.addListing} type="submit" value="apply" />
