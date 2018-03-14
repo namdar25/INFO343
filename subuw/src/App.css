@@ -187,7 +187,8 @@ input[type="submit"]
 
 .card-title {
 	margin: 0;
-	font-size: 2.5rem;
+    font-size: 2.5rem;
+    color :	#1E90FF
 }
 
 .Pane {
@@ -394,7 +395,8 @@ input[type="submit"]
 	position: relative;
 	border-radius: 2px;
 	margin: auto;
-	z-index: 0;
+    z-index: 0;
+    /* cursor: pointer; */
 }
 
 
