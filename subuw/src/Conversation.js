@@ -26,56 +26,43 @@ export class Conversation extends Component {
     }
 
     componentDidMount() {
-        if (this.props.modal) {
-            let front;
-            let back;
-            let chats = firebase.database().ref('conversations/');
-            let uid = this.state.uid;
-            let recieverUid = this.state.recieverUid;
-            console.log(uid, recieverUid)
-            if (uid !== recieverUid) {
-                chats.on('value', function (snapshot) { //only goes in here for first set up, I want to go in every time a messaged is added(seems to skip it)
-                    front = snapshot.hasChild(uid + "-" + recieverUid);
-                    back = snapshot.hasChild(recieverUid + "-" + uid);
-                    console.log(front, back)
-                    console.log(!front || !back)
-                    if (!front && !back) {
-                        console.log(snapshot)
-                        chats.child(uid + '-' + recieverUid).set({
-                            contributors: [uid, recieverUid]
-                        })
-                        front = true;
-                        console.log(front, back)
-                    }
-                });
-                console.log(front, back)
-                let child;
-                if (front) {
-                    child = this.state.uid + "-" + this.state.recieverUid;
-                } else {
-                    child = this.state.recieverUid + "-" + this.state.uid;
+        let front;
+        let back;
+        let chats = firebase.database().ref('conversations/');
+        let uid = this.state.uid;
+        let recieverUid = this.state.recieverUid;
+        if (uid !== recieverUid) {
+            chats.on('value', function (snapshot) { //only goes in here for first set up, I want to go in every time a messaged is added(seems to skip it)
+                front = snapshot.hasChild(uid + "-" + recieverUid);
+                back = snapshot.hasChild(recieverUid + "-" + uid);
+                if (!front && !back) {
+                    chats.child(uid + '-' + recieverUid).set({
+                        contributors: [uid, recieverUid]
+                    })
+                    front = true;
                 }
-                console.log(child)
-                this.setState({
-                    chatId: child
-                })
-                firebase.database().ref('conversations/' + child).on('value', (snapshot) => {
-                    const currentMessages = snapshot.val()
-                    if (currentMessages != null) {
-                        this.setState({
-                            currentMessages: currentMessages
-                        })
-                    }
-                })
+            });
+            let child;
+            if (front) {
+                child = this.state.uid + "-" + this.state.recieverUid;
+            } else {
+                child = this.state.recieverUid + "-" + this.state.uid;
             }
-            console.log(this.state.chatId)
-            //console.log($('.chatlogs')[0].scrollHeight)
-            if ($(".chatlogs")[0] !== undefined) {
-                $(".chatlogs").stop().animate({ scrollTop: $(".chatlogs")[0].scrollHeight * 40 }, 100);
-            }
+            this.setState({
+                chatId: child
+            })
+            firebase.database().ref('conversations/' + child).on('value', (snapshot) => {
+                const currentMessages = snapshot.val()
+                if (currentMessages != null) {
+                    this.setState({
+                        currentMessages: currentMessages
+                    })
+                }
+            })
         }
-        //$('.chatlogs').scrollTop(450);
-        // $('.chatlogs').scrollTop($('.chatlogs').prop("scrollHeight"));
+        if ($(".chatlogs")[0] !== undefined) {
+            $(".chatlogs").stop().animate({ scrollTop: $(".chatlogs")[0].scrollHeight * 40 }, 100);
+        }
     }
 
     updateMessage(event) {
@@ -95,14 +82,12 @@ export class Conversation extends Component {
     submitMessage(event) {
         event.preventDefault();
         const nextMessage = this.state.message;
-        console.log(this.state.chatId)
         if (nextMessage != '') {
             let message = {
                 sender: this.state.uid,
                 text: nextMessage
             }
             let conversation = firebase.database().ref('conversations/' + this.state.chatId);
-            console.log(conversation, message)
             conversation.push(message);
         }
         this.setState({
@@ -126,21 +111,20 @@ export class Conversation extends Component {
                     person = 'chat friend';
                     img = this.getImgUrl(message.sender);
                 }
-                console.log(this.state.users)
                 if (message.text !== null) {
 
                     return (
                         <div>
                             {!img &&
-                                <div class={person}>
-                                    <div class="user-photo"></div>
-                                    <p class='chat-message'>{message.text}</p>
+                                <div className={person}>
+                                    <div className="user-photo"></div>
+                                    <p className='chat-message'>{message.text}</p>
                                 </div>
                             }
                             {img &&
-                                <div class={person}>
-                                    <div class="user-photo"><img src={img} alt={"Profile Picture of"} /> </div>
-                                    <p class='chat-message'>{message.text}</p>
+                                <div className={person}>
+                                    <div className="user-photo"><img src={img} alt={"Profile Picture of"} /> </div>
+                                    <p className='chat-message'>{message.text}</p>
                                 </div>
                             }
                         </div>
@@ -161,8 +145,6 @@ export class Conversation extends Component {
 
     render() {
         let currentMessages = this.state.currentMessages;
-        console.log(this.state.modal, this.props.modal)
-        console.log(this.state.uid, this.state.recieverUid)
         return (
             <div>
 
@@ -177,19 +159,19 @@ export class Conversation extends Component {
                     </ModalHeader>
                     <ModalBody>
                         {!this.props.miniMessage &&
-                            <div class="chatbox">
-                                <div class="chatlogs">
+                            <div className="chatbox">
+                                <div className="chatlogs">
                                     {this.printMessages(currentMessages)}
                                 </div>
-                                <div class="chat-form">
+                                <div className="chat-form">
                                     <textarea id="messageBox" onChange={this.updateMessage}></textarea>
                                     <button onClick={this.submitMessage}>Send</button>
                                 </div>
                             </div>
                         }
                         {this.props.miniMessage &&
-                            <div class="chatbox">
-                                <div class="chat-form">
+                            <div className="chatbox">
+                                <div className="chat-form">
                                     <textarea id="messageBox" className="mini" onChange={this.updateMessage}></textarea>
                                     <button onClick={this.submitMessage}>Send</button>
                                 </div>

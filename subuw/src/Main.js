@@ -94,6 +94,9 @@ export class Main extends Component {
             }
             return true;
         });
+        this.setState({
+            filteredListings: filteredListings
+        })
     }
 
     reset(event) {
@@ -123,7 +126,7 @@ export class Main extends Component {
                                 <Navbar color="white" light expand="md" className="vertical-nav">
                             <NavbarToggler onClick={this.toggle} />
                             <Nav className="ml-auto" id="verticalNav" navbar>
-                                <ButtonDropdown direction="left">
+                                <UncontrolledDropdown nav inNavbar>
                                     <DropdownToggle nav caret>
                                         Price
                                         </DropdownToggle>
@@ -137,7 +140,7 @@ export class Main extends Component {
                                             Reset
                                             </DropdownItem>
                                     </DropdownMenu>
-                                </ButtonDropdown>
+                                </UncontrolledDropdown>
                                 <UncontrolledDropdown direction="left" nav inNavbar>
                                     <DropdownToggle nav caret>
                                         Beds

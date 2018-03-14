@@ -37,13 +37,10 @@ export class Chat extends Component {
         let user = Object.values(users).filter(function (user) {
             return user.userID === uid;
         })
-        console.log("the user", user)
-        console.log(user.length === 1 ? user[0].displayName : undefined)
         return user.length === 1 ? user[0].displayName : undefined;
     }
 
     toggle() {
-        console.log('co')
         this.setState({
             dropdownOpen: !this.state.dropdownOpen
         });
@@ -52,25 +49,20 @@ export class Chat extends Component {
     callConvo(conversation) {
         var change = {};
         change[conversation] = true;
-        console.log(conversation)
         this.setState(change)
     }
 
     closeConvo(conversation) {
         var change = {};
         change[conversation] = false;
-        console.log(conversation)
         this.setState(change)
     }
 
 
     render() {
-        console.log(this.props.myConversations)
-        console.log(this.props.users)
         let myConversations = [];
         myConversations = this.props.myConversations;
         let uid = this.state.uid;
-        console.log(this.state.Conversation1)
 
         return (
             <div>
@@ -80,31 +72,29 @@ export class Chat extends Component {
                     </DropdownToggle >
                     <DropdownMenu>
                         {myConversations.map((conversation, i) => {
-                            console.log(conversation)
-                            console.log(conversation.contributors)
-
-                            let otherUid;
-                            conversation.contributors.forEach(function (d) {
-                                if (d !== uid) {
-                                    otherUid = d;
-                                }
-                            })
-
-                            let name = this.getNameFromUid.call(this, otherUid);
-                            console.log(uid, otherUid)
-                            let link = "Conversation" + (i + 1);
-                            if (uid !== otherUid) {
-                                return (
-                                    <DropdownItem Action >
-                                        {/* <Link onClick={() => this.props.showConvo()} to={link}>
+                            if (Object.values(conversation).length > 1) {
+                                let otherUid;
+                                conversation.contributors.forEach(function (d) {
+                                    if (d !== uid) {
+                                        otherUid = d;
+                                    }
+                                })
+                                let name = this.getNameFromUid.call(this, otherUid);
+                                let link = "Conversation" + (i + 1);
+                                if (uid !== otherUid) {
+                                    return (
+                                        <DropdownItem Action >
+                                            {/* <Link onClick={() => this.props.showConvo()} to={link}>
                                             <h5>Message {name} </h5>
                                         </Link> */}
-                                        <p onClick={this.callConvo.bind(this, link)}> Message {name} </p>
-                                        <Conversation users={this.props.users} modal={this.state[link]} uid={this.state.uid} recieverUid={otherUid} closeConvo={this.closeConvo} convoLink={link} />
-                                    </DropdownItem>
-                                )
+                                            <p onClick={this.callConvo.bind(this, link)}> Message {name} </p>
+                                            <Conversation users={this.props.users} modal={this.state[link]} uid={this.state.uid} recieverUid={otherUid} closeConvo={this.closeConvo} convoLink={link} />
+                                        </DropdownItem>
+                                    )
+                                }
                             }
                         })}
+
                     </DropdownMenu>
                 </ButtonDropdown>
 

@@ -49,7 +49,8 @@ export class Login extends Component {
                     let newUser = {
                         userID: user.uid,
                         displayName: user.displayName,
-                        email: user.email
+                        email: user.email,
+                        profilePicture: 'https://firebasestorage.googleapis.com/v0/b/subuw-j420m.appspot.com/o/imgs%2Fuser-1633249_960_720.png?alt=media&token=8c1558ac-d0c7-41d2-a1ac-0bdd08f5ee5e'
                     };
 
                     let update = {};
@@ -75,7 +76,8 @@ export class Login extends Component {
                     let newUser = {
                         userID: user.uid,
                         displayName: user.displayName,
-                        email: user.email
+                        email: user.email,
+                        profilePicture: 'https://firebasestorage.googleapis.com/v0/b/subuw-j420m.appspot.com/o/imgs%2Fuser-1633249_960_720.png?alt=media&token=8c1558ac-d0c7-41d2-a1ac-0bdd08f5ee5e'
                     };
 
                     let update = {};
