@@ -1,7 +1,6 @@
 
 import React, { Component } from 'react';
 import { Container, Col, Row } from 'reactstrap';
-import './About.css';
 
 export class About extends Component {
     render() {
