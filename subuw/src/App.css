@@ -527,6 +527,9 @@ input[type="submit"]
 	padding-top:20vh;
 	text-align: center;
 }
+h2 {
+    color: black;
+}
 
 .submitButton {
 	width: auto;
