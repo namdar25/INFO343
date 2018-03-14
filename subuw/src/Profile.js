@@ -30,15 +30,17 @@ constructor(props) {
 			this.uLRef = firebase.database().ref('Listings/');
 			this.uLRef.on('value', (snapshot) => {	
 				let userListings = snapshot.val();
-				let userListingKeys = Object.keys(userListings);
-				userListings = Object.values(userListings);
-				userListings = userListings.map((d, i) => {
-					let id = userListingKeys[i]
-					userListings[i].lid = id
-					return userListings[i];
-				})
-				userListings = userListings.filter(listing => listing.uid === authUser.uid);
-				this.setState({ userListings: userListings })
+				if (userListings != null) {
+					let userListingKeys = Object.keys(userListings);
+					userListings = Object.values(userListings);
+					userListings = userListings.map((d, i) => {
+						let id = userListingKeys[i]
+						userListings[i].lid = id
+						return userListings[i];
+					})
+					userListings = userListings.filter(listing => listing.uid === authUser.uid);
+					this.setState({ userListings: userListings })
+				}
 				
 			})
 		}
