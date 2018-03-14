@@ -188,9 +188,9 @@ export class Main extends Component {
                                     <DropdownMenu right>
                                         <FormGroup>
                                             <Input type="select" name="laundry" id="exampleSelect" value={this.state.filters.laundry} onChange={this.handleChange} >
-                                                <option>In-Unit</option>
-                                                <option>In-Building</option>
-                                                <option>Not Available</option>
+                                                <option>In Unit</option>
+                                                <option>In Building</option>
+                                                <option>not available</option>
                                             </Input>
                                         </FormGroup>
                                         <DropdownItem name="laundry" value={this.state.filters.laundry} onClick={this.reset}>
@@ -205,9 +205,9 @@ export class Main extends Component {
                                     <DropdownMenu right>
                                         <FormGroup>
                                             <Input type="select" name="type" id="exampleSelect" value={this.state.filters.type} onChange={this.handleChange} >
-                                                <option>Apartment</option>
-                                                <option>House</option>
-                                                <option>Condo</option>
+                                                <option>apartment</option>
+                                                <option>house</option>
+                                                <option>condo</option>
                                             </Input>
                                         </FormGroup>
                                         <DropdownItem name="type" value={this.state.filters.type} onClick={this.reset}>
