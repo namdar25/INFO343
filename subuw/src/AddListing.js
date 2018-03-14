@@ -4,6 +4,7 @@ import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
 import firebase from 'firebase';
 import 'firebase/auth';
 import 'firebase/database';
+import { HashRouter as Router, Route, Link, Redirect } from "react-router-dom";
 
 import $ from 'jquery';
 
@@ -33,7 +34,8 @@ export class AddListing extends Component {
             parking: props.listing.parking || 'none',
             imgs: props.listing.imgs || [],
             uid: props.uid || 'test',
-            listingid: props.listing.lid
+            listingid: props.listing.lid,
+            submit: false
         })
     }
 
@@ -152,6 +154,9 @@ export class AddListing extends Component {
             this.setState({ errorMessage: "Invalid Address" })
         });
         $('.listing').val('');
+        this.setState({
+            submit: true
+        })
     }
 
     render() {
@@ -274,6 +279,7 @@ export class AddListing extends Component {
                                 </div >
                                 <div className="submitButton">
                                     <input className="btn btn-primary" onClick={this.addListing} type="submit" value="Submit Listing" />
+                                    {this.state.submit && <Redirect to="/Main" />}
                                 </div>
                             </div>
                         </div >
