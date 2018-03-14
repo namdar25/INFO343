@@ -1,7 +1,6 @@
 //start page
 import React, { Component } from 'react';
 import firebase from 'firebase';
-import './StartPage.css';
 import { Container, Row, Col, Grid, FormControl, FormGroup } from 'react-bootstrap';
 import { InputGroup, InputGroupText, InputGroupAddon, Input } from 'reactstrap';
 import { HashRouter as Router, Route, Link } from "react-router-dom";

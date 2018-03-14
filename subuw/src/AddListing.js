@@ -199,81 +199,83 @@ export class AddListing extends Component {
 									<label>Description: </label>
 									<textarea className="listing" id="description" placeholder={this.props.listing == null ? "Enter Description" : this.state.description} onChange={this.handleChange.bind(this, 'description')} />
 								</div>
-								<div className="row">
-									<div className="column small">
+								<div className="inputContainer">
+									<div className="card-item">
 										<label>Image 1:</label>
 										<input type="file" onChange={(e) => this.fileChange(e)} />
 									</div>
-									<div className="column small">
+									<div className="card-item">
 										<label>Image 2:</label>
 										<input type="file" onChange={(e) => this.fileChange(e)} />
 									</div>
-									<div className="column small">
+									<div className="card-item">
 										<label>Image 3:</label>
 										<input type="file" onChange={(e) => this.fileChange(e)} />
 									</div>
-									<div className="column small">
+									<div className="card-item">
 										<label>Image 4:</label>
 										<input type="file" onChange={(e) => this.fileChange(e)} />
 									</div>
-									<div className="column small">
+									<div className="card-item">
 										<label>Image 5:</label>
 										<input type="file" onChange={(e) => this.fileChange(e)} />
 									</div>
-									<div className="column small">
+									<div className="card-item">
 										<label>Image 6:</label>
 										<input type="file" onChange={(e) => this.fileChange(e)} />
 									</div>
 								</div>
-								<div className="row">
-									<div className="column small">
+								<div className="inputContainer">
+									<div className="card-item">
 										<label>Type</label>
-										<select className="type" placeholder={this.props.listing == null ? "Type" : this.state.type} onChange={this.handleChange.bind(this, 'type')}>
+										<select className="selector type" placeholder={this.props.listing == null ? "Type" : this.state.type} onChange={this.handleChange.bind(this, 'type')}>
 											<option value='apartment'>Apartment </option>
 											<option value='house'>House</option>
 											<option value='condo'>Condo</option>
 										</select>
 									</div>
-									<div className="column small">
+									<div className="card-item">
 										<label>Handicap</label>
-										<select className="handicap" placeholder={this.props.listing == null ? "Handicap" : this.state.handicap} onChange={this.handleChange.bind(this, 'handicap')}>
+										<select className="selector handicap" placeholder={this.props.listing == null ? "Handicap" : this.state.handicap} onChange={this.handleChange.bind(this, 'handicap')}>
 											<option value='yes'>Yes </option>
 											<option value='no'>No</option>
 										</select>
 									</div>
-									<div className="column small">
+									<div className="card-item">
 										<label>Laundry</label>
-										<select className="laundry" placeholder={this.props.listing == null ? "laundry" : this.state.laundry} onChange={this.handleChange.bind(this, 'laundry')}>
+										<select className="selector laundry" placeholder={this.props.listing == null ? "laundry" : this.state.laundry} onChange={this.handleChange.bind(this, 'laundry')}>
 											<option value='Not Available'>Not Available </option>
 											<option value='In Unit'>In Unit</option>
 											<option value='In Building'>In Building</option>
 										</select>
 									</div>
-									<div className="column small">
+									<div className="card-item">
 										<label>Smoking Allowed</label>
-										<select className="smoking" placeholder={this.props.listing == null ? "smoking" : this.state.placeholder} onChange={this.handleChange.bind(this, 'smoking')}>
+										<select className="selector smoking" placeholder={this.props.listing == null ? "smoking" : this.state.placeholder} onChange={this.handleChange.bind(this, 'smoking')}>
 											<option value='yes'>Yes </option>
 											<option value='no'>No</option>
 										</select>
 									</div>
-									<div className="column small">
+									<div className="card-item">
 										<label>Pets</label>
-										<select className="pets" placeholder={this.props.listing == null ? "pets" : this.state.pets} onChange={this.handleChange.bind(this, 'pets')}>
+										<select className="selector pets" placeholder={this.props.listing == null ? "pets" : this.state.pets} onChange={this.handleChange.bind(this, 'pets')}>
 											<option value='all'>All allowed</option>
 											<option value='none'>None allowed</option>
 											<option value='no large pets'>No Large Pets</option>
 										</select>
 									</div>
-									<div className="column small">
+									<div className="card-item">
 										<label>Parking</label>
-										<select className="parking" placeholder={this.props.listing == null ? "parking" : this.state.parking} onChange={this.handleChange.bind(this, 'parking')}>
+										<select className="selector parking" placeholder={this.props.listing == null ? "parking" : this.state.parking} onChange={this.handleChange.bind(this, 'parking')}>
 											<option value='none'>None</option>
 											<option value='paid'>Paid</option>
 											<option value='free'>Free</option>
 										</select>
 									</div>
 								</div >
-								<input className="listing" onClick={this.addListing} type="submit" value="Submit Listing" />
+								<div className="submitButton">
+									<input className="btn btn-primary" onClick={this.addListing} type="submit" value="Submit Listing" />
+								</div>
 							</div>
 						</div >
 					</div>

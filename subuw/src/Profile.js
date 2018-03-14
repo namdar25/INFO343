@@ -22,7 +22,6 @@ constructor(props) {
 			this.userRef = firebase.database().ref('Users/' + authUser.uid);
 			this.userRef.on('value', (snapshot) => {
 				let user = snapshot.val();
-				console.log(user);
 				this.setState({ user: user });
 				this.setState({ authUser: authUser });
 			})
@@ -38,9 +37,7 @@ constructor(props) {
 					userListings[i].lid = id
 					return userListings[i];
 				})
-				console.log(userListings);
 				userListings = userListings.filter(listing => listing.uid === authUser.uid);
-				console.log(userListings);
 				this.setState({ userListings: userListings })
 				
 			})
