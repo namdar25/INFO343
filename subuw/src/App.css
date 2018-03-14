@@ -183,9 +183,12 @@ input[type="submit"] {
     width: 100%;
     height: 175px;
     overflow: hidden;
+    cursor: pointer;
 }
 
-.card-img-overlay {}
+.card-img-overlay {
+    cursor: pointer;
+}
 
 .card-title {
     margin: 0;

@@ -7,7 +7,7 @@ import {
     Button, Modal, ModalHeader, ModalBody, ModalFooter, Collapse,
     Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink
 } from 'reactstrap';
-import { HashRouter as Router, Route, Link, Redirect } from "react-router-dom";
+
 
 
 
