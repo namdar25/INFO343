@@ -20,7 +20,7 @@ export class About extends Component {
 						<div className="inputContainer">
 							<div className="card-item">
 								<div className="card" >
-									<img className="card-img-top" src={require("./imgs/raffi.jpg")} alt="Card image cap" />
+									<img className="card-img-top" src="https://firebasestorage.googleapis.com/v0/b/subuw-j420m.appspot.com/o/imgs%2Fraffi.jpg?alt=media&token=40fb6b7f-68a9-49bb-976d-691273563a12" alt="Card image cap" />
 									<div className="card-body">
 										<h5 className="card-title">Raffi Gharakhanian</h5>
 										<p className="card-text">Experienced Marketing Analytics Consultant with a demonstrated history of working in the hospital
@@ -33,7 +33,7 @@ export class About extends Component {
 							</div>
 							<div className="card-item">
 								<div className="card" >
-									<img className="card-img-top" src={require("./imgs/jon.jpg")} alt="Card image cap" />
+									<img className="card-img-top" src="https://firebasestorage.googleapis.com/v0/b/subuw-j420m.appspot.com/o/imgs%2Fjon.jpg?alt=media&token=b8b551fc-caa0-4b20-a717-7c44945e95e3" alt="Card image cap" />
 									<div className="card-body">
 										<h5 className="card-title">Jon Cantle</h5>
 										<p className="card-text">I am a current Junior at the University of Washington. I pride myself on honesty and strong morals.
@@ -46,7 +46,7 @@ export class About extends Component {
 							</div>
 							<div className="card-item">
 								<div className="card" >
-									<img className="card-img-top" src={require("./imgs/lee.png")} alt="Card image cap" />
+									<img className="card-img-top" src="https://firebasestorage.googleapis.com/v0/b/subuw-j420m.appspot.com/o/imgs%2Flee.png?alt=media&token=ad53b62d-f93f-4d78-92a5-303cda99dcc7" alt="Card image cap" />
 									<div className="card-body">
 										<h5 className="card-title">Lee Segal</h5>
 										<p className="card-text">Senior in the Informatics program with a focus in Cyber-Security. After graduation will be working at Starbucks full time.
@@ -57,7 +57,7 @@ export class About extends Component {
 							</div>
 						<div className="card-item">
 							<div className="card" >
-								<img className="card-img-top" src={require("./imgs/shawn.jpg")} alt="Card image cap" />
+									<img className="card-img-top" src="https://firebasestorage.googleapis.com/v0/b/subuw-j420m.appspot.com/o/imgs%2FLightroomEdited-2995.jpg?alt=media&token=2f221d4c-3118-4c8e-952e-5a660fa253cf" alt="Card image cap" />
 								<div className="card-body">
 									<h5 className="card-title">Shawn Namdar</h5>
 									<p className="card-text">Senior in the informatics and civil engineering programs with extensive professional experience in construction management,
