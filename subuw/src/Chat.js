@@ -63,39 +63,51 @@ export class Chat extends Component {
         let myConversations = [];
         myConversations = this.props.myConversations;
         let uid = this.state.uid;
-
+        let noConvos = true;
+        let ConvoCount = myConversations.map((conversation, i) => {
+            if (Object.values(conversation).length > 1) {
+                noConvos = false;
+            }
+        })
         return (
             <div>
                 <ButtonDropdown direction="left" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
                     <DropdownToggle caret size="lg">
                         My Chats
                     </DropdownToggle >
-                    <DropdownMenu>
-                        {myConversations.map((conversation, i) => {
-                            if (Object.values(conversation).length > 1) {
-                                let otherUid;
-                                conversation.contributors.forEach(function (d) {
-                                    if (d !== uid) {
-                                        otherUid = d;
-                                    }
-                                })
-                                let name = this.getNameFromUid.call(this, otherUid);
-                                let link = "Conversation" + (i + 1);
-                                if (uid !== otherUid) {
-                                    return (
-                                        <DropdownItem Action >
-                                            {/* <Link onClick={() => this.props.showConvo()} to={link}>
+                    {!noConvos &&
+                        <DropdownMenu>
+                            {myConversations.map((conversation, i) => {
+                                if (Object.values(conversation).length > 1) {
+                                    let otherUid;
+                                    conversation.contributors.forEach(function (d) {
+                                        if (d !== uid) {
+                                            otherUid = d;
+                                        }
+                                    })
+                                    let name = this.getNameFromUid.call(this, otherUid);
+                                    let link = "Conversation" + (i + 1);
+                                    if (uid !== otherUid) {
+                                        return (
+                                            <DropdownItem Action >
+                                                {/* <Link onClick={() => this.props.showConvo()} to={link}>
                                             <h5>Message {name} </h5>
                                         </Link> */}
-                                            <p onClick={this.callConvo.bind(this, link)}> Message {name} </p>
-                                            <Conversation users={this.props.users} modal={this.state[link]} uid={this.state.uid} recieverUid={otherUid} closeConvo={this.closeConvo} convoLink={link} />
-                                        </DropdownItem>
-                                    )
+                                                <p onClick={this.callConvo.bind(this, link)}> Message {name} </p>
+                                                <Conversation users={this.props.users} modal={this.state[link]} uid={this.state.uid} recieverUid={otherUid} closeConvo={this.closeConvo} convoLink={link} />
+                                            </DropdownItem>
+                                        )
+                                    }
                                 }
-                            }
-                        })}
+                            })}
 
-                    </DropdownMenu>
+                        </DropdownMenu>
+                    }
+                    {noConvos &&
+                        <DropdownMenu>
+                            <p> No Messages :-(</p>
+                        </DropdownMenu>
+                    }
                 </ButtonDropdown>
 
             </div >
