@@ -122,8 +122,8 @@ export class Main extends Component {
                     <div>
                         {/* <button className="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Filters
                                 <span class="caret"></span>
-                            </button> */}\
-                                <Navbar color="white" light expand="md" className="vertical-nav">
+                            </button> */}
+                        <Navbar color="white" light expand="md" className="vertical-nav">
                             <NavbarToggler onClick={this.toggle} />
                             <Nav className="ml-auto" id="verticalNav" navbar>
                                 <UncontrolledDropdown nav inNavbar>
