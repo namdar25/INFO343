@@ -33,7 +33,7 @@ export class AddListing extends Component {
             parking: props.listing.parking || 'none',
             imgs: props.listing.imgs || [],
             uid: props.uid || 'test',
-            listingid: props.listing.lid || 'test'
+            listingid: props.listing.lid
         })
     }
 
@@ -141,7 +141,7 @@ export class AddListing extends Component {
                 imgs: imgs,
                 uid: uid
             }
-            if (this.props.listing == null) {
+            if (this.props.listing.id == null) {
                 let listingsRef = firebase.database().ref('Listings');
                 listingsRef.push(listing);
             } else {
