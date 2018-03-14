@@ -38,7 +38,7 @@ export class EditListing extends Component {
                 </div>
                 <Modal isOpen={this.state.modal} toggle={this.toggle} autoFocus={false} >
 					<ModalBody>
-						<AddListing listing={this.props.listing} listingKey={this.props.listingKey} uid = { this.props.uid } />
+						<AddListing listing={this.props.listing} uid = { this.props.uid } />
                     </ModalBody>
                     <ModalFooter>
                         <Button color="secondary" onClick={this.toggle}>Close</Button>
