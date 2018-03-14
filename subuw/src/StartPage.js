@@ -3,14 +3,14 @@ import React, { Component } from 'react';
 import firebase from 'firebase';
 import './StartPage.css';
 import { Container, Row, Col, Grid, FormControl, FormGroup } from 'react-bootstrap';
-import { InputGroup, InputGroupText, InputGroupAddon, Input } from 'reactstrap';
+import { InputGroup, InputGroupText, InputGroupAddon, Input, Button } from 'reactstrap';
 import { HashRouter as Router, Route, Link } from "react-router-dom";
 
 export class StartPage extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            search: ""
+            search: "98105"
         }
 
         this.passSearch = this.passSearch.bind(this);
@@ -32,16 +32,15 @@ export class StartPage extends Component {
     render() {
         return (
             <div className="startPageBackground">
-                <div className="search-input" >
-                    <Router>
-                        <InputGroup>
-                            <Input onChange={(event) => { this.updateSearch(event) }} value={this.state.search} name="search" className="search-input-tag" placeholder="Enter city or zip code..." />
-                            <InputGroupAddon addonType="append">
-                                <InputGroupText><Link to="/Main" onClick={this.passSearch}><i className="fas fa-search"></i></Link></InputGroupText>
-                            </InputGroupAddon>
-                        </InputGroup>
-                    </Router>
-                </div>
+                {this.props.user &&
+                    <div className="search-input" >
+                        <Router>
+                            <InputGroup>
+                                <Button color="secondary" size="lg" onClick={this.passSearch} block><Link to="/Main"><i className="fas fa-search"></i>Start your search!</Link> </Button>
+                            </InputGroup>
+                        </Router>
+                    </div>
+                }
             </div>
         )
 

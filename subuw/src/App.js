@@ -81,9 +81,6 @@ class App extends Component {
     this.setState({
       myConversations: myConversations
     })
-
-
-
   }
 
   getMyConversations() {
@@ -115,6 +112,7 @@ class App extends Component {
     })
   }
 
+
   logout() {
     firebase.auth().signOut()
       .then(() => {
@@ -136,7 +134,6 @@ class App extends Component {
     console.log(myConversations)
     let uid = this.state.uid;
     console.log(this.state.showConvo)
-    console.log(this.state.search)
     return (
       <div className="mainAppDiv" style={{ opacity: this.state.opacity }}>
         {!this.state.user &&
@@ -152,7 +149,7 @@ class App extends Component {
                 </Nav>
               </Collapse>
             </Navbar>
-            <StartPage sendSearch={() => { this.sendSearch() }} />
+            <StartPage sendSearch={() => { this.getSearch() }} user={this.state.user} />
           </div>
         }
         {this.state.user &&
@@ -185,12 +182,12 @@ class App extends Component {
                 </Collapse>
               </Navbar>
               <Route exact path="/" component={(props) => (
-                <StartPage sendSearch={this.getSearch} />
+                <StartPage sendSearch={this.getSearch} user={this.state.user} />
               )} />
               <Route path="/profile" component={Profile} />
               <Route path="/about" component={About} />
               <Route path="/AddListing" render={(props) => (
-                <AddListing uid={this.state.uid} />
+                <AddListing uid={this.state.uid} listing={Object} listingKey={Object} />
               )} />
               <Route path="/Main" component={(props) => (
                 <Main search={this.state.search} uid={this.state.uid} />

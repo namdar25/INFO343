@@ -26,51 +26,53 @@ export class Conversation extends Component {
     }
 
     componentDidMount() {
-        let front;
-        let back;
-        let chats = firebase.database().ref('conversations/');
-        let uid = this.state.uid;
-        let recieverUid = this.state.recieverUid;
-        console.log(uid, recieverUid)
-        if (uid !== recieverUid) {
-            chats.on('value', function (snapshot) { //only goes in here for first set up, I want to go in every time a messaged is added(seems to skip it)
-                front = snapshot.hasChild(uid + "-" + recieverUid);
-                back = snapshot.hasChild(recieverUid + "-" + uid);
-                console.log(front, back)
-                console.log(!front || !back)
-                if (!front && !back) {
-                    console.log(snapshot)
-                    chats.child(uid + '-' + recieverUid).set({
-                        contributors: [uid, recieverUid]
-                    })
-                    front = true;
+        if (this.props.modal) {
+            let front;
+            let back;
+            let chats = firebase.database().ref('conversations/');
+            let uid = this.state.uid;
+            let recieverUid = this.state.recieverUid;
+            console.log(uid, recieverUid)
+            if (uid !== recieverUid) {
+                chats.on('value', function (snapshot) { //only goes in here for first set up, I want to go in every time a messaged is added(seems to skip it)
+                    front = snapshot.hasChild(uid + "-" + recieverUid);
+                    back = snapshot.hasChild(recieverUid + "-" + uid);
                     console.log(front, back)
+                    console.log(!front || !back)
+                    if (!front && !back) {
+                        console.log(snapshot)
+                        chats.child(uid + '-' + recieverUid).set({
+                            contributors: [uid, recieverUid]
+                        })
+                        front = true;
+                        console.log(front, back)
+                    }
+                });
+                console.log(front, back)
+                let child;
+                if (front) {
+                    child = this.state.uid + "-" + this.state.recieverUid;
+                } else {
+                    child = this.state.recieverUid + "-" + this.state.uid;
                 }
-            });
-            console.log(front, back)
-            let child;
-            if (front) {
-                child = this.state.uid + "-" + this.state.recieverUid;
-            } else {
-                child = this.state.recieverUid + "-" + this.state.uid;
+                console.log(child)
+                this.setState({
+                    chatId: child
+                })
+                firebase.database().ref('conversations/' + child).on('value', (snapshot) => {
+                    const currentMessages = snapshot.val()
+                    if (currentMessages != null) {
+                        this.setState({
+                            currentMessages: currentMessages
+                        })
+                    }
+                })
             }
-            console.log(child)
-            this.setState({
-                chatId: child
-            })
-            firebase.database().ref('conversations/' + child).on('value', (snapshot) => {
-                const currentMessages = snapshot.val()
-                if (currentMessages != null) {
-                    this.setState({
-                        currentMessages: currentMessages
-                    })
-                }
-            })
-        }
-        console.log(this.state.chatId)
-        //console.log($('.chatlogs')[0].scrollHeight)
-        if ($(".chatlogs")[0] !== undefined) {
-            $(".chatlogs").stop().animate({ scrollTop: $(".chatlogs")[0].scrollHeight * 40 }, 100);
+            console.log(this.state.chatId)
+            //console.log($('.chatlogs')[0].scrollHeight)
+            if ($(".chatlogs")[0] !== undefined) {
+                $(".chatlogs").stop().animate({ scrollTop: $(".chatlogs")[0].scrollHeight * 40 }, 100);
+            }
         }
         //$('.chatlogs').scrollTop(450);
         // $('.chatlogs').scrollTop($('.chatlogs').prop("scrollHeight"));

@@ -33,6 +33,7 @@ constructor(props) {
 				let userListings = snapshot.val();
 				userListings = Object.values(userListings);
 				userListings = userListings.filter(listing => listing.uid === authUser.uid);
+				console.log(userListings);
 				this.setState({ userListings: userListings })
 				
 			})
@@ -68,11 +69,11 @@ constructor(props) {
 							<EditProfile user={this.state.user} />
 						</div>
 						<div className="editListings">
-							<h3> Your Listings </h3>
+							<h3 id="listingHeader"> Your Listings </h3>
 							{this.state.userListings != null &&
 
 								userListingsList.map((d, i) => {
-								return <EditListing key={i} listing={d} uid={this.state.authUser.uid}/>
+								return <EditListing key={i} listing={d} listingKey={i} uid={this.state.authUser.uid}/>
 								})
 							}
 							{this.state.userListings == null &&

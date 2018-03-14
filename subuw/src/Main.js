@@ -109,9 +109,9 @@ export class Main extends Component {
     render() {
         const isDesktop = this.state.isDesktop;
         let search = 98105
-        console.log(this.props.search)
-        search = this.state.search
-
+        if (this.state.search) {
+            search = this.state.search
+        }
         console.log(this.props.search, search)
         return (
             <div>
