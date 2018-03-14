@@ -15,7 +15,6 @@ import { Conversation } from './Conversation';
 export class Main extends Component {
     constructor(props) {
         super(props)
-        this.toggle = this.toggle.bind(this);
         this.state = {
             search: props.search,
             uid: props.uid,
@@ -57,12 +56,6 @@ export class Main extends Component {
         }
     }
 
-    toggle() {
-        this.setState({
-            dropdownOpen: !this.state.dropdownOpen
-        });
-    }
-
     handleChange(event) {
         let change = this.state.filters;
         change[event.target.name] = event.target.value;
@@ -71,6 +64,8 @@ export class Main extends Component {
         })
     }
 
+
+    //Filters listings rendered based on user input
     filter() {
         let params = this.state.filters;
         let filteredListings = this.state.listings;
@@ -101,6 +96,7 @@ export class Main extends Component {
         })
     }
 
+    //resets filters applied to listings
     reset(event) {
         let change = this.state.filters;
         delete change[event.target.name]

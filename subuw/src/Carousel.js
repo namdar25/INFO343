@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+
+//Renders a carousel of images that the user lists for each listing
 export default class Carousel extends Component {
     render() {
         return (

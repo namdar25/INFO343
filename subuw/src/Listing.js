@@ -5,6 +5,8 @@ import Carousel from './Carousel';
 import { Conversation } from './Conversation';
 import ModalMap from './ModalMap';
 
+
+//Renders a listing based on firebase data aboout each listing posted by users
 export class Listing extends Component {
     constructor(props) {
         super(props)
@@ -19,12 +21,14 @@ export class Listing extends Component {
 
     }
 
+    //Toggles modal containing detailed info
     toggle() {
         this.setState({
             modal: !this.state.modal
         });
     }
 
+    //Toggles modal containing converstaion
     toggle2() {
         this.setState({
             modal2: !this.state.modal2,
