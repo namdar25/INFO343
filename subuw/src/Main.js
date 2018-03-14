@@ -34,19 +34,21 @@ export class Main extends Component {
 
     componentDidMount() {
         let listingsRef = firebase.database().ref('Listings')
-        listingsRef.on('value', (snapshot) => {
-            let listings = snapshot.val()
-            let keys = Object.keys(listings);
-            listings = Object.values(listings);
-            let listingsKey = []
-            listings.forEach((d, i) => {
-                d["key"] = keys[i]
-                listingsKey.push(d)
-            })
-            this.setState({
-                listings: listingsKey,
-                filteredListings: listings
-            });
+		listingsRef.on('value', (snapshot) => {
+			let listings = snapshot.val()
+			if (listings != null) {
+				let keys = Object.keys(listings);
+				listings = Object.values(listings);
+				let listingsKey = []
+				listings.forEach((d, i) => {
+					d["key"] = keys[i]
+					listingsKey.push(d)
+				})
+				this.setState({
+					listings: listingsKey,
+					filteredListings: listings
+				});
+			}
         })
         if (window.innerWidth > 700) {
             this.setState({
