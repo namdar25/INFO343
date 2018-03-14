@@ -434,7 +434,7 @@ input[type="submit"]
 	height: 100%;
 	background: inherit;
 	position: absolute;
-	left: -25px;
+	left: 0;
 	left position right: 0;
 	top: 1vh;
 	top position bottom: 0;
@@ -480,6 +480,7 @@ input[type="submit"]
 .inputContainer {
 	display: flex;
 	flex-wrap: wrap;
+	padding: 3vw;
 
 }
 
@@ -496,6 +497,7 @@ input[type="submit"]
 }
 
 .submitButton {
+	margin:auto;
 	padding:3vh;
 	text-align:center;
 	width:100%;
@@ -535,3 +537,34 @@ h2 {
 	text-align: center;
 	font-size: 2.5vh;
 }
+
+.about {
+	margin-top: 3vh;
+	font-size: 2vh;
+	text-align:center;
+}
+
+
+.aboutHeader {
+	width:90vw;
+	padding:2vh;
+	margin:auto;
+}
+
+@media only screen and (min-width: 768px) {
+	.aboutHeader {
+		width: 100%; 
+		padding:2vh;
+		margin: auto;
+	}
+}
+
+.aboutContainer {
+	display: -ms-flexbox;
+	-ms-flex-direction: column;
+	-ms-flex-wrap: wrap;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+}
+
