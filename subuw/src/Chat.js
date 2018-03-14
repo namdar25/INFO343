@@ -104,8 +104,8 @@ export class Chat extends Component {
                         </DropdownMenu>
                     }
                     {noConvos &&
-                        <DropdownMenu>
-                            <p> No Messages :-(</p>
+                        <DropdownMenu className="chatDropdown">
+                            <p>No Messages</p>
                         </DropdownMenu>
                     }
                 </ButtonDropdown>

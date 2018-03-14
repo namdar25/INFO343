@@ -42,7 +42,7 @@ export class Listing extends Component {
                 <div className="card card-inverse" onClick={this.toggle}>
                     <img className="card-img" src={this.props.listings.imgs} alt="Listing Cover" />
                     <div className="card-img-overlay" id='listing-card'>
-                        <h4 className="card-title">{'#' + (this.props.index + 1) + " $" + this.props.listings.rent + '/mo'}</h4>
+                        <h4 className="card-title-listing">{'#' + (this.props.index + 1) + " $" + this.props.listings.rent + '/mo'}</h4>
                         <p className="card-text">{this.props.listings.bedrooms + "bd . " + this.props.listings.bathrooms + "ba . " + this.props.listings.sqrft + "sqft"} <br />
                             {this.props.listings.address + ', ' + this.props.listings.city + ', ' + this.props.listings.state}
                         </p>

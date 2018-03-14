@@ -76,12 +76,6 @@ body {
     float: left;
 }
 
-
-/* .navbar>.container,
-.navbar>.container-fluid {
-flex-wrap: nowrap !important;
-} */
-
 .wrapper {
     text-align: center;
 }
@@ -179,34 +173,68 @@ input[type="submit"] {
     margin: 0;
 }
 
-.card-img {
+.card-img{
     width: 100%;
     height: 175px;
     overflow: hidden;
     cursor: pointer;
+    opacity: 0.7;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 250px;
 }
 
 .card-img-overlay {
     cursor: pointer;
 }
 
+.sub {
+    /* color: rgb(243, 221, 76); */
+    color: rgb(232,211,162);
+}
+
+.uw {
+    color: rgb(51,0,111);
+}
+
+.card-img-overlay:hover .tooltiptext {
+    visibility: visible;
+}
+
+.card-img-overlay .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+}
+
 .card-title {
     margin: 0;
     font-size: 2.5rem;
-    color: #1E90FF
+    color: #1E90FF;
+    font-weight: bold;
 }
+
+.card-title-listing {
+    margin: 0;
+    font-size: 2.5rem;
+    color: #2F4F4F;
+    font-weight: bold;
+} 
 
 .Pane {
     overflow-y: scroll;
 }
 
-#listing-card {
-    padding: 0;
-    bottom: 0;
-    left: 0;
-    margin-top: 95px;
-    vertical-align: bottom;
-}
 
 .zip {
     height: 50%;
@@ -214,13 +242,10 @@ input[type="submit"] {
     margin-top: 10px;
 }
 
-.nav-item {
-    width: 120px;
-    margin-top: 10px;
-}
 
 .card-text {
-    font-size: 1.5rem
+    font-size: 1.5rem;
+    font-weight: bold;
 }
 
 .listing-modal {
@@ -400,6 +425,7 @@ input[type="submit"] {
     border-radius: 2px;
     margin: auto;
     z-index: 0;
+    padding: 0 3rem;
     /* cursor: pointer; */
 }
 
@@ -436,11 +462,14 @@ input[type="submit"] {
     background: inherit;
     position: absolute;
     left: 0;
-    left position right: 0;
-    top: 1vh;
-    top position bottom: 0;
+    /* top: 1%; */
     box-shadow: inset 0 0 0 50vw rgba(255, 255, 255, 0.05);
     filter: blur(12px);
+    z-index: -1;
+}
+
+.card.aboutHeader {
+    margin-top: 3rem;
 }
 
 .editProfile {
@@ -482,7 +511,7 @@ input[type="submit"] {
 .inputContainer {
     display: flex;
     flex-wrap: wrap;
-    padding: 3vw;
+    padding: 0 3rem 3rem 3rem;
 }
 
 .card-item {
@@ -495,6 +524,7 @@ input[type="submit"] {
     border-radius: 6px;
     box-shadow: 01px 3px rgba(0, 0, 0, 0.16);
     text-align: center;
+    /* height: 440px; */
 }
 
 .submitButton {
@@ -523,10 +553,13 @@ input[type="submit"] {
 
 .search-input {
     width: 100%;
-    height: 100%;
-    padding-top: 20vh;
+    margin: auto;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
     text-align: center;
 }
+
 
 h2 {
     color: black;
@@ -538,10 +571,12 @@ h2 {
     padding: 3vh;
     text-align: center;
     font-size: 2.5vh;
+    background: white;
+    border-radius: 5px;
 }
 
 .about {
-    margin-top: 3vh;
+    /* margin-top: 3vh; */
     font-size: 2vh;
     text-align: center;
 }
@@ -550,6 +585,15 @@ h2 {
     width: 90vw;
     padding: 2vh;
     margin: auto;
+}
+
+.chatDropdown {
+    padding: 1rem;
+}
+
+.chatDropdown p {
+    margin: 0;
+    text-align: center;
 }
 
 @media only screen and (min-width: 768px) {
@@ -567,4 +611,5 @@ h2 {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+    margin-top: 0;
 }

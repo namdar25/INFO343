@@ -120,10 +120,11 @@ export class Main extends Component {
                     <div>
                         {/* <button className="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Filters
                                 <span class="caret"></span>
-                            </button> */}\
-                            <Navbar color="white" light expand="md" className="vertical-nav">
+                            </button> */}
+                            {/* <Navbar color="white" light expand="md" className="vertical-nav">
                             <NavbarToggler onClick={this.toggle} />
-                            <Nav className="ml-auto" id="verticalNav" navbar>
+                            <Nav className="ml-auto" id="verticalNav" navbar> */}
+                            <div className="filterContainer">
                                 <UncontrolledDropdown direction="left">
                                     <DropdownToggle nav caret>
                                         Price
@@ -153,6 +154,7 @@ export class Main extends Component {
                                                 <option>5</option>
                                             </Input>
                                         </FormGroup>
+                                        <DropdownItem divider />    
                                         <DropdownItem name="bedrooms" value={this.state.filters.bedrooms} onClick={this.reset}>
                                             Reset
                                             </DropdownItem>
@@ -172,6 +174,8 @@ export class Main extends Component {
                                                 <option>5</option>
                                             </Input>
                                         </FormGroup>
+                                        <DropdownItem divider />
+                                        
                                         <DropdownItem name="bathrooms" value={this.state.filters.bathrooms} onClick={this.reset}>
                                             Reset
                                             </DropdownItem>
@@ -189,6 +193,8 @@ export class Main extends Component {
                                                 <option>not available</option>
                                             </Input>
                                         </FormGroup>
+                                        <DropdownItem divider />
+                                        
                                         <DropdownItem name="laundry" value={this.state.filters.laundry} onClick={this.reset}>
                                             Reset
                                             </DropdownItem>
@@ -206,6 +212,8 @@ export class Main extends Component {
                                                 <option>condo</option>
                                             </Input>
                                         </FormGroup>
+                                        <DropdownItem divider />
+                                        
                                         <DropdownItem name="type" value={this.state.filters.type} onClick={this.reset}>
                                             Reset
                                             </DropdownItem>
@@ -219,15 +227,17 @@ export class Main extends Component {
                                         <InputGroup>
                                             <Input placeholder="start-date" name="startDate" value={this.state.filters.start} onChange={this.handleChange} />
                                         </InputGroup>
+                                        <DropdownItem divider />                                        
                                         <InputGroup>
                                             <Input placeholder="end-date" name="endDate" value={this.state.filters.end} onChange={this.handleChange} />
                                         </InputGroup>
                                     </DropdownMenu>
                                 </UncontrolledDropdown>
-                                <Button color="primary" onClick={this.filter}>Filter</Button>
-                                <Button color="primary" onClick={this.reset}>Reset</Button>
-                            </Nav>
-                        </Navbar>
+                                <Button className="filterBtns" color="primary" onClick={this.filter}>Filter</Button>
+                                <Button className="filterBtns" color="primary" onClick={this.reset}>Reset</Button>
+                                </div>
+                            {/* </Nav>
+                        </Navbar> */}
                         <SplitPane split="vertical" defaultSize={300} primary="first">
                             <div className="pane">
                                 <div>

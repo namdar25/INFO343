@@ -20,6 +20,8 @@ import 'firebase/database';
 import './Main.css';
 import { Main } from './Main';
 import { Conversation } from './Conversation.js';
+import { LogInStartpage } from './LogInStartpage.js';
+
 
 class App extends Component {
   constructor(props) {
@@ -138,7 +140,7 @@ class App extends Component {
       <div className="mainAppDiv" style={{ opacity: this.state.opacity }}>
         {!this.state.user &&
           <div>
-            <Navbar color="white" light expand="md">
+            {/* <Navbar className="mainNavbar" color="white" light expand="md">
               <NavbarBrand href="/" className="navbarBrand">SUBUW</NavbarBrand>
               <NavbarToggler onClick={this.toggle} />
               <Collapse isOpen={this.state.isOpen} navbar>
@@ -149,13 +151,15 @@ class App extends Component {
                 </Nav>
               </Collapse>
             </Navbar>
-            <StartPage sendSearch={() => { this.getSearch() }} user={this.state.user} />
+            <StartPage sendSearch={() => { this.getSearch() }} user={this.state.user} /> */}
+            <LogInStartpage />
+
           </div>
         }
         {this.state.user &&
           <Router>
             <div>
-              <Navbar color="white" light expand="md">
+              <Navbar className="mainNavbar" color="white" light expand="md">
                 <NavbarBrand className="navbarBrand">SUBUW</NavbarBrand>
                 <NavbarToggler onClick={this.toggle} />
                 <Collapse isOpen={this.state.isOpen} navbar>
@@ -192,8 +196,7 @@ class App extends Component {
               <Route path="/Main" component={(props) => (
                 <Main search={this.state.search} uid={this.state.uid} />
               )} />
-              }
-                    </div>
+            </div>
           </Router>}
       </div >
     );

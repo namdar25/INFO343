@@ -68,6 +68,7 @@ export class Profile extends Component {
                         return userListing;
                     });
             }
+            
             return (
                 <div className="profileBackground">
                     <div className="profileCard">
@@ -75,15 +76,15 @@ export class Profile extends Component {
                             <EditProfile user={this.state.user} listings={this.state.userListings} />
                         </div>
                         <div className="editListings">
-                            <h3 id="listingHeader"> Your Listings </h3>
+                            <h3 id="listingHeader">Your Listings</h3>
                             {this.state.userListings != null &&
 
                                 userListingsList.map((d, i) => {
                                     return <EditListing key={i} listing={d} uid={this.state.authUser.uid} />
                                 })
                             }
-                            {this.state.userListings == null &&
-                                <h3> Post A Sublease! </h3>
+                            {!this.state.userListings &&
+                                <h3>Post A Sublease!</h3>
                             }
                         </div>
                     </div>

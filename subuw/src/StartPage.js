@@ -34,7 +34,7 @@ export class StartPage extends Component {
                 {this.props.user &&
                     <div className="search-input" >
                         <Router>
-                            <Link type="button" className="btn btn-secondary submitButton" to="/Main"> <h2>Start Searching!</h2></Link>
+                            <Link className="submitButton" to="/Main">Start Searching!</Link>
                         </Router>
                     </div>
                 }

@@ -31,10 +31,11 @@ export class EditListing extends Component {
                 <div className="card card-inverse" onClick={this.toggle}>
                     <img className="card-img" src={this.props.listing.imgs} alt="Listing Cover" />
                     <div className="card-img-overlay" id='listing-card'>
-                        <h4 className="card-title">{"$" + this.props.listing.rent + '/mo'}</h4>
+                        <h4 className="card-title-listing">{"$" + this.props.listing.rent + '/mo'}</h4>
                         <p className="card-text">{this.props.listing.bedrooms + "bd . " + this.props.listing.bathrooms + "ba . " + this.props.listing.sqrft + "sqft"} <br />
                             {this.props.listing.address + ', ' + this.props.listing.city + ', ' + this.props.listing.state}
                         </p>
+                        <span class="tooltiptext">Click to edit listing</span>
                     </div>
                 </div>
                 <Modal isOpen={this.state.modal} toggle={this.toggle} autoFocus={false} >
