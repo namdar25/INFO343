@@ -9,6 +9,7 @@ import {
     Navbar, NavbarBrand, NavbarToggler, Collapse, Nav, NavItem, NavLink, Dropdown, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem,
     InputGroup, InputGroupAddon, InputGroupText, Input, FormGroup, Label, Button
 } from 'reactstrap';
+
 import { Conversation } from './Conversation';
 
 export class Main extends Component {
@@ -16,6 +17,7 @@ export class Main extends Component {
         super(props)
         this.toggle = this.toggle.bind(this);
         this.state = {
+            search: props.search,
             uid: props.uid,
             modal2: false,
             filters: {},
@@ -34,17 +36,19 @@ export class Main extends Component {
         let listingsRef = firebase.database().ref('Listings')
         listingsRef.on('value', (snapshot) => {
             let listings = snapshot.val()
-            let keys = Object.keys(listings);
-            listings = Object.values(listings);
-            let listingsKey = []
-            listings.forEach((d, i) => {
-                d["key"] = keys[i]
-                listingsKey.push(d)
-            })
-            this.setState({
-                listings: listingsKey,
-                filteredListings: listings
-            });
+            if (listings != null) {
+                let keys = Object.keys(listings);
+                listings = Object.values(listings);
+                let listingsKey = []
+                listings.forEach((d, i) => {
+                    d["key"] = keys[i]
+                    listingsKey.push(d)
+                })
+                this.setState({
+                    listings: listingsKey,
+                    filteredListings: listings
+                });
+            }
         })
         if (window.innerWidth > 700) {
             this.setState({
@@ -92,6 +96,9 @@ export class Main extends Component {
             }
             return true;
         });
+        this.setState({
+            filteredListings: filteredListings
+        })
     }
 
     reset(event) {
@@ -107,9 +114,10 @@ export class Main extends Component {
     render() {
         const isDesktop = this.state.isDesktop;
         let search = 98105
-        if (this.props.search) {
-            let search = this.props.search
+        if (this.state.search) {
+            search = this.state.search
         }
+        console.log(this.props.search, search)
         return (
             <div>
                 {this.state.filteredListings &&

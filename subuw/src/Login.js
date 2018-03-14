@@ -45,11 +45,22 @@ export class Login extends Component {
                         user: result.user,
                         modal: false
                     });
-
+                    // Accessed our personal made user to find if they have a profile picture, set as their profile pic, and if not, set as a default pic
+                    let userForPic = firebase.auth().currentUser;
+                    userForPic = firebase.database().ref('Users/' + userForPic.uid);
+                    let pic;
+                    userForPic.on('value', (snapshot) => {
+                        let currentUser = snapshot.val();
+                        pic = currentUser.profilePicture;
+                    })
+                    if (pic === undefined) {
+                        pic = 'https://firebasestorage.googleapis.com/v0/b/subuw-j420m.appspot.com/o/imgs%2Fuser-1633249_960_720.png?alt=media&token=8c1558ac-d0c7-41d2-a1ac-0bdd08f5ee5e'
+                    }
                     let newUser = {
                         userID: user.uid,
                         displayName: user.displayName,
-                        email: user.email
+                        email: user.email,
+                        profilePicture: pic
                     };
 
                     let update = {};
@@ -71,11 +82,24 @@ export class Login extends Component {
                         user: result.user,
                         modal: false
                     });
+                    // Accessed our personal made user to find if they have a profile picture, set as their profile pic, and if not, set as a default pic
+
+                    let userForPic = firebase.auth().currentUser;
+                    userForPic = firebase.database().ref('Users/' + userForPic.uid);
+                    let pic;
+                    userForPic.on('value', (snapshot) => {
+                        let currentUser = snapshot.val();
+                        pic = currentUser.profilePicture;
+                    })
+                    if (pic === undefined) {
+                        pic = 'https://firebasestorage.googleapis.com/v0/b/subuw-j420m.appspot.com/o/imgs%2Fuser-1633249_960_720.png?alt=media&token=8c1558ac-d0c7-41d2-a1ac-0bdd08f5ee5e'
+                    }
 
                     let newUser = {
                         userID: user.uid,
                         displayName: user.displayName,
-                        email: user.email
+                        email: user.email,
+                        profilePicture: pic
                     };
 
                     let update = {};
