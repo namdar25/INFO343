@@ -1,0 +1,32 @@
+.card-body {
+    text-align: center;
+    font-size: 2rem;
+    color: white;
+    font-weight: bold;
+}
+
+.card {
+    width: 60%;
+    margin: 0 auto;
+    float: none;
+    margin-bottom: 10px;
+    background:rgba(0,0,0,0.1);
+}
+
+h1 {
+    width: 60%;
+    margin: 0 auto;
+    float: none;
+    margin-bottom: 10px; 
+    text-align: center;
+    font-size: 3rem;
+    color: white;
+    font-weight: bold;
+    padding-top:10%;
+}
+
+
+
+.container {
+    padding-top:5%;
+}
