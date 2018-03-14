@@ -22,7 +22,7 @@ const MyMapComponent = compose(
     withScriptjs,
     withGoogleMap
 )(props => (
-    <GoogleMap defaultZoom={12} defaultCenter={{ lat: props.center.lat, lng: props.center.lng }}>
+    <GoogleMap defaultZoom={12} defaultCenter={{ lat: 47.655548, lng: -122.303200 }}>
         {props.listings.map((d, i) => {
             return (
                 <Marker position={{ lat: d.lat, lng: d.long }} onClick={props.onToggleOpen} name={i}>
@@ -42,32 +42,15 @@ export default class Maps extends Component {
         this.state = {
             center: {}
         }
-        this.getLatLong.bind(this)
-    }
-
-    getLatLong() {
-        let baseURL = "https://maps.googleapis.com/maps/api/geocode/json?address=";
-        let apiKey = "AIzaSyDOMxiv80oiceTHg7NerU2705RKh13ryY8";
-        let zip = this.props.search
-        let url = baseURL + zip + '&key=' + apiKey;
-        fetch(url).then(function (response) {
-            return response.json()
-        }).then((result) => {
-            this.setState({
-                center: { lat: result.results[0].geometry.location.lat, lng: result.results[0].geometry.location.lng }
-            })
-        })
     }
 
     render() {
-        this.getLatLong()
         return (
             <MyMapComponent key="map" googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDOMxiv80oiceTHg7NerU2705RKh13ryY8&v=3.exp&libraries=geometry,drawing,places"
                 loadingElement={<div style={{ height: `100%` }} />}
                 containerElement={<div style={{ height: `100vh` }} />}
                 mapElement={<div style={{ height: `100%` }} />}
                 listings={this.props.listings}
-                center={this.state.center}
                 toggle={this.props.toggle} />
         )
     }

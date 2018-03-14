@@ -6,7 +6,7 @@ import * as SplitPane from "react-split-pane";
 import firebase from 'firebase';
 import './App.css'
 import {
-    Navbar, NavbarBrand, NavbarToggler, Collapse, Nav, NavItem, NavLink, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem,
+    Navbar, NavbarBrand, NavbarToggler, Collapse, Nav, NavItem, NavLink, Dropdown, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem,
     InputGroup, InputGroupAddon, InputGroupText, Input, FormGroup, Label, Button
 } from 'reactstrap';
 import { Conversation } from './Conversation';
@@ -17,12 +17,12 @@ export class Main extends Component {
         this.toggle = this.toggle.bind(this);
         this.state = {
             uid: props.uid,
-            isOpen: false,
             modal2: false,
             filters: {},
             listings: [],
             filteredListings: [],
-            isDesktop: false
+            isDesktop: false,
+            dropdownOpen: false
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -55,7 +55,7 @@ export class Main extends Component {
 
     toggle() {
         this.setState({
-            isOpen: !this.state.isOpen
+            dropdownOpen: !this.state.dropdownOpen
         });
     }
 
@@ -117,10 +117,10 @@ export class Main extends Component {
                         {/* <button className="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Filters
                                 <span class="caret"></span>
                             </button> */}\
-                                <Navbar color="white" light expand="md" className="vertical-nav">
+                            <Navbar color="white" light expand="md" className="vertical-nav">
                             <NavbarToggler onClick={this.toggle} />
                             <Nav className="ml-auto" id="verticalNav" navbar>
-                                <UncontrolledDropdown direction="left" nav inNavbar>
+                                <UncontrolledDropdown direction="left">
                                     <DropdownToggle nav caret>
                                         Price
                                         </DropdownToggle>
@@ -135,7 +135,7 @@ export class Main extends Component {
                                             </DropdownItem>
                                     </DropdownMenu>
                                 </UncontrolledDropdown>
-                                <UncontrolledDropdown direction="left" nav inNavbar>
+                                <UncontrolledDropdown direction="left">
                                     <DropdownToggle nav caret>
                                         Beds
                                         </DropdownToggle>
@@ -154,7 +154,7 @@ export class Main extends Component {
                                             </DropdownItem>
                                     </DropdownMenu>
                                 </UncontrolledDropdown>
-                                <UncontrolledDropdown direction="left" nav inNavbar>
+                                <UncontrolledDropdown direction="left">
                                     <DropdownToggle nav caret>
                                         Baths
                                         </DropdownToggle>
@@ -173,7 +173,7 @@ export class Main extends Component {
                                             </DropdownItem>
                                     </DropdownMenu>
                                 </UncontrolledDropdown>
-                                <UncontrolledDropdown direction="left" nav inNavbar>
+                                <UncontrolledDropdown direction="left">
                                     <DropdownToggle nav caret>
                                         Laundry
                                         </DropdownToggle>
@@ -190,7 +190,7 @@ export class Main extends Component {
                                             </DropdownItem>
                                     </DropdownMenu>
                                 </UncontrolledDropdown>
-                                <UncontrolledDropdown direction="left" nav inNavbar>
+                                <UncontrolledDropdown direction="left">
                                     <DropdownToggle nav caret>
                                         Type
                                         </DropdownToggle>
@@ -207,7 +207,7 @@ export class Main extends Component {
                                             </DropdownItem>
                                     </DropdownMenu>
                                 </UncontrolledDropdown>
-                                <UncontrolledDropdown direction="left" nav inNavbar>
+                                <UncontrolledDropdown direction="left">
                                     <DropdownToggle nav caret>
                                         Date Range
                                         </DropdownToggle>
