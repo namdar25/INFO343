@@ -30,11 +30,11 @@ export class StartPage extends Component {
 
     render() {
         return (
-			<div className="profileBackground">
+            <div className="profileBackground">
                 {this.props.user &&
                     <div className="search-input" >
                         <Router>
-                                <Link type="button" className="btn btn-secondary submitButton" to="/Main"> Start Searching!</Link>
+                            <Link type="button" className="btn btn-secondary submitButton" to="/Main"> <h2>Start Searching!</h2></Link>
                         </Router>
                     </div>
                 }
