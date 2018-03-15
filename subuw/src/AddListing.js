@@ -153,12 +153,9 @@ export class AddListing extends Component {
                 listingsRef.set(listing);
             }
         }).catch(err => {
-            this.setState({ errorMessage: "Invalid Address" })
+            this.setState({ errorMessage: err.message })
         });
         $('.listing').val('');
-        this.setState({
-            submit: true
-        })
     }
 
     render() {
