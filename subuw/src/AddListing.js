@@ -95,6 +95,7 @@ export class AddListing extends Component {
         let sqrft = this.state.sqrft;
         let imgs = this.state.imgs;
         let uid = this.state.uid;
+        let parking = this.state.parking;
         let baseURL = "https://maps.googleapis.com/maps/api/geocode/json?address=";
         let apiKey = "AIzaSyDOMxiv80oiceTHg7NerU2705RKh13ryY8";
         let newAdd = ""
@@ -141,7 +142,8 @@ export class AddListing extends Component {
                 lat: lat,
                 long: lng,
                 imgs: imgs,
-                uid: uid
+                uid: uid,
+                parking: parking
             }
             if (this.props.listing.id == null) {
                 let listingsRef = firebase.database().ref('Listings');
