@@ -77,7 +77,7 @@ export class Listing extends Component {
                                 <li>{"Handicap Accessibility: " + this.props.listings.handicap}</li>
                             </ul>
                         </div>
-                        <ModalMap listings={this.props.listings} />
+                        {/* <ModalMap listings={this.props.listings} /> */}
                     </ModalBody>
                     <ModalFooter>
                         {this.props.uid !== this.props.listings.uid &&
