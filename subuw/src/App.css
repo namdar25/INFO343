@@ -175,7 +175,7 @@ input[type="submit"] {
 
 .card-img{
     width: 100%;
-    height: 175px;
+    height: 100%S;
     overflow: hidden;
     cursor: pointer;
     opacity: 0.7;
@@ -183,7 +183,7 @@ input[type="submit"] {
 
 .card-img-top {
     width: 100%;
-    height: 250px;
+    height: auto;
 }
 
 .card-img-overlay {
@@ -582,7 +582,7 @@ h2 {
 }
 
 .aboutHeader {
-    width: 90vw;
+    width: 100%;
     padding: 2vh;
     margin: auto;
 }
