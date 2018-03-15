@@ -14,6 +14,7 @@ import firebase from 'firebase';
 import 'firebase/auth';
 import 'firebase/database';
 
+//This page deals with Google and FaceBook autentication
 export class Login extends Component {
     constructor(props) {
         super(props);
@@ -110,6 +111,7 @@ export class Login extends Component {
             });
     }
 
+    //puts both choices on a modal for design
     render() {
         console.log("user: ", this.state.user);
         return (
