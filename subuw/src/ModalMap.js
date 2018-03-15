@@ -47,7 +47,7 @@ export default class ModalMap extends Component {
         fetch(url).then(function (response) {
             return response.json()
         }).then((result) => {
-            if(!result.error_message) {
+            if (!result.error_message) {
                 this.setState({
                     center: { lat: result.results[0].geometry.location.lat, lng: result.results[0].geometry.location.lng }
                 });

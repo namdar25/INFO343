@@ -5,6 +5,7 @@ import { Container, Row, Col, Grid, FormControl, FormGroup } from 'react-bootstr
 import { InputGroup, InputGroupText, InputGroupAddon, Input, Button } from 'reactstrap';
 import { HashRouter as Router, Route, Link } from "react-router-dom";
 
+//This is the home page for the application, leads to the main page for searching
 export class StartPage extends Component {
     constructor(props) {
         super(props)

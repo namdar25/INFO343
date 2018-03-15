@@ -7,6 +7,7 @@ import { HashRouter as Router, Route, Link } from "react-router-dom";
 import { Login } from './Login';
 import './LogInStartpage.css';
 
+//Start page before a user logs in
 export class LogInStartpage extends Component {
     render() {
         return (
