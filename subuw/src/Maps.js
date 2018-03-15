@@ -23,7 +23,7 @@ const MyMapComponent = compose(
     withGoogleMap
 )(props => (
     <GoogleMap defaultZoom={12} defaultCenter={{ lat: 47.655548, lng: -122.303200 }}>
-        {props.listings.map((d, i) => {
+        {/* {props.listings.map((d, i) => {
             return (
                 <Marker position={{ lat: d.lat, lng: d.long }} onClick={props.onToggleOpen} name={i}>
                     {props.isOpen &&
@@ -32,7 +32,8 @@ const MyMapComponent = compose(
                 </Marker>
             )
         })
-        }
+        } */}
+        <Marker position={{ lat: props.listings.lat, lng: props.listings.long }} />
     </GoogleMap>
 ));
 

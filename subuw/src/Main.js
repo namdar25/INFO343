@@ -23,12 +23,14 @@ export class Main extends Component {
             listings: [],
             filteredListings: [],
             isDesktop: false,
-            dropdownOpen: false
+            dropdownOpen: false,
+            currentListing: { lat: 47.6604606, lng: -122.3200445 }
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.filter = this.filter.bind(this);
         this.reset = this.reset.bind(this);
+        this.getCurrentListing = this.getCurrentListing.bind(this);
     }
 
     componentDidMount() {
@@ -106,6 +108,11 @@ export class Main extends Component {
         })
     }
 
+    getCurrentListing(val) {
+        this.setState({
+            currentListing: val
+        })
+    }
 
     render() {
         const isDesktop = this.state.isDesktop;
@@ -113,7 +120,7 @@ export class Main extends Component {
         if (this.state.search) {
             search = this.state.search
         }
-        console.log(this.props.search, search)
+        console.log(this.state.currentListing);
         return (
             <div>
                 {this.state.filteredListings &&
@@ -236,20 +243,20 @@ export class Main extends Component {
                             <Button className="filterBtns" color="primary" onClick={this.filter}>Filter</Button>
                             <Button className="filterBtns" color="primary" onClick={this.reset}>Reset</Button>
                         </div>
-                        {/* </Nav>
-                        </Navbar> */}
                         <SplitPane split="vertical" defaultSize={300} primary="first">
                             <div className="pane">
                                 <div>
                                     {this.state.filteredListings.map((d, i) => {
-                                        return <Listing showConvo={this.showConvo} listings={d} uid={this.state.uid} index={i} />
+                                        return <Listing showConvo={this.showConvo} listings={d} uid={this.state.uid} index={i} setCurrentListing={this.getCurrentListing} />
                                     })
                                     }
                                 </div>
                             </div>
                             {isDesktop &&
                                 <div className="pane">
-                                    <Maps listings={this.state.filteredListings} search={search} />
+                                    {this.state.currentListing &&
+                                        <Maps listings={this.state.currentListing} search={search} />
+                                    }
                                 </div>
                             }
                             {!isDesktop &&

@@ -17,7 +17,7 @@ export class Listing extends Component {
             listings: props.listings
         };
         this.toggle2 = this.toggle2.bind(this);
-
+        this.passSelected = this.passSelected.bind(this);
 
     }
 
@@ -36,10 +36,14 @@ export class Listing extends Component {
         })
     }
 
+    passSelected() {
+        this.props.setCurrentListing(this.state.listings);
+    }
+
     render() {
         return (
             <div>
-                <div className="card card-inverse" onClick={this.toggle}>
+                <div className="card card-inverse" onClick={this.toggle} onMouseOver={this.passSelected}>
                     <img className="card-img" src={this.props.listings.imgs} alt="Listing Cover" />
                     <div className="card-img-overlay" id='listing-card'>
                         <h4 className="card-title-listing">{'#' + (this.props.index + 1) + " $" + this.props.listings.rent + '/mo'}</h4>

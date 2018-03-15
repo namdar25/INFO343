@@ -25,7 +25,6 @@ export class StartPage extends Component {
 
 
     passSearch() {
-        console.log(this.state.search);
         this.props.sendSearch(this.state.search);
     }
 
